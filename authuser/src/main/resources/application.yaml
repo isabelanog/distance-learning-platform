@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/ead-authuser
+    url: jdbc:mysql://localhost:3306/authuser-ead
     username: root
     password: root
   jpa:
