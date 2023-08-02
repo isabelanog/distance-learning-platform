@@ -12,6 +12,7 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Objects;
 import java.util.UUID;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL) //serialização de objeto java para json (ignora os atributos que nao tiver valor)
@@ -64,4 +65,16 @@ public class UserModel implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss")
     private LocalDateTime lastUpdateDate;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof UserModel)) return false;
+        UserModel userModel = (UserModel) o;
+        return Objects.equals(getPassword(), userModel.getPassword());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getPassword());
+    }
 }
