@@ -9,7 +9,8 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
-      dialect: org.hibernate.dialect.PostgreSQLDialect
+      dialect: org.hibernate.dialect.MySQL5Dialect
+      id.new_generator_mappings: true
       jdbc:
         lob.non-contextual-creation: true
     properties:
