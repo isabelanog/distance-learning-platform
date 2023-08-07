@@ -7,4 +7,6 @@ import java.util.UUID;
 
 public interface CourseRepository extends JpaRepository<CourseModel, UUID> {
 
+    CourseModel save(CourseModel courseModel);
+
 }
