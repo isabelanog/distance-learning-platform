@@ -24,7 +24,7 @@ public class ModuleModel implements Serializable {
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(columnDefinition = "BINARY(16)")
-    private UUID moduldeId;
+    private UUID moduleId;
 
     @Column(nullable = false, length = 150)
     private String title;
