@@ -5,6 +5,9 @@ import com.ead.authuser.models.UserModel;
 import com.ead.authuser.service.UserService;
 import com.ead.authuser.specification.SpecificationTemplate;
 import com.fasterxml.jackson.annotation.JsonView;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,7 +38,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 // * permite que esse endpoint seja acessado em qualquer lugar. maxAge = 3600 segundos
 @RequestMapping("/users")
 public class UserController {
-
+    Logger logger = LogManager.getLogger(AuthenticationController.class);
     @Autowired
     UserService userService;
 
@@ -47,19 +50,21 @@ public class UserController {
 
         if (!userModelPage.isEmpty()) {
             for (UserModel user : userModelPage.toList()) {
-                user.add(linkTo(methodOn(UserController.class).getOneUser(user.getUserId())).withSelfRel());
+                user.add(linkTo(methodOn(UserController.class).getUserById(user.getUserId())).withSelfRel());
             }
         }
+
         return ResponseEntity.status(HttpStatus.OK).body(userModelPage);
     }
 
     @GetMapping("/{userId}")
-    public ResponseEntity<Object> getOneUser(@PathVariable(value = "userId") UUID userId) {
+    public ResponseEntity<Object> getUserById(@PathVariable(value = "userId") UUID userId) {
         Optional<UserModel> userModelOptional = userService.findById(userId);
 
-        if (!userModelOptional.isPresent()) {
+        if (userModelOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         } else {
+            logger.info(userModelOptional.get().toString());
             return ResponseEntity.status(HttpStatus.OK).body(userModelOptional.get());
         }
     }
@@ -72,6 +77,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         } else {
             userService.delete(optionalUserModel.get());
+            logger.info("User {} deleted successfully", userId);
             return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully");
         }
     }
@@ -84,7 +90,7 @@ public class UserController {
 
         Optional<UserModel> optionalUserModel = userService.findById(userId);
 
-        if (!optionalUserModel.isPresent()) {
+        if (optionalUserModel.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         } else {
 
@@ -95,6 +101,7 @@ public class UserController {
             userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
 
             userService.save(userModel);
+            logger.info("User {} updated successfully", userId);
 
             return ResponseEntity.status(HttpStatus.OK).body(userModel);
         }
@@ -108,7 +115,7 @@ public class UserController {
 
         Optional<UserModel> optionalUserModel = userService.findById(userId);
 
-        if (!optionalUserModel.isPresent()) {
+        if (optionalUserModel.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
         if (optionalUserModel.get().getPassword().equals(userDto.getOldPassword())) {
@@ -120,20 +127,21 @@ public class UserController {
             userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
 
             userService.save(userModel);
+            logger.info("Password for user {} updated successfully", userId);
 
             return ResponseEntity.status(HttpStatus.OK).body("Password updated successfully");
         }
     }
 
     @PutMapping("/{userId}/image")
-    public ResponseEntity<Object> updateImage(@PathVariable(value = "userId") UUID userId,
+    public ResponseEntity<Object> updateUserImage(@PathVariable(value = "userId") UUID userId,
                                               @RequestBody
                                               @Validated(UserDto.UserView.ImagePut.class)
                                               @JsonView(UserDto.UserView.ImagePut.class) UserDto userDto) {
 
         Optional<UserModel> optionalUserModel = userService.findById(userId);
 
-        if (!optionalUserModel.isPresent()) {
+        if (optionalUserModel.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         } else {
 
@@ -142,7 +150,7 @@ public class UserController {
             userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
 
             userService.save(userModel);
-
+            logger.info("Image for user {} updated successfully", userId);
             return ResponseEntity.status(HttpStatus.OK).body(userModel);
         }
     }
