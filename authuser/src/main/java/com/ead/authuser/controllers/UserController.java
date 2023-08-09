@@ -43,10 +43,10 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    public ResponseEntity<Page<UserModel>> getAllUsers(SpecificationTemplate.UserSpec spec,
+    public ResponseEntity<Page<UserModel>> getAllUsers(SpecificationTemplate.UserSpec userSpecification,
             @PageableDefault(page = 0, size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable) {
 
-        Page<UserModel> userModelPage = userService.findAll(spec, pageable);
+        Page<UserModel> userModelPage = userService.findAll(userSpecification, pageable);
 
         if (!userModelPage.isEmpty()) {
             for (UserModel user : userModelPage.toList()) {
@@ -62,6 +62,7 @@ public class UserController {
         Optional<UserModel> userModelOptional = userService.findById(userId);
 
         if (userModelOptional.isEmpty()) {
+            logger.warn("User not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         } else {
             logger.info(userModelOptional.get().toString());
@@ -73,7 +74,8 @@ public class UserController {
     public ResponseEntity<Object> deleteUser(@PathVariable(value = "userId") UUID userId) {
         Optional<UserModel> optionalUserModel = userService.findById(userId);
 
-        if (!optionalUserModel.isPresent()) {
+        if (optionalUserModel.isEmpty()) {
+            logger.warn("User not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         } else {
             userService.delete(optionalUserModel.get());
@@ -91,6 +93,7 @@ public class UserController {
         Optional<UserModel> optionalUserModel = userService.findById(userId);
 
         if (optionalUserModel.isEmpty()) {
+            logger.warn("User not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         } else {
 
@@ -116,6 +119,7 @@ public class UserController {
         Optional<UserModel> optionalUserModel = userService.findById(userId);
 
         if (optionalUserModel.isEmpty()) {
+            logger.warn("User not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
         if (optionalUserModel.get().getPassword().equals(userDto.getOldPassword())) {
@@ -142,6 +146,7 @@ public class UserController {
         Optional<UserModel> optionalUserModel = userService.findById(userId);
 
         if (optionalUserModel.isEmpty()) {
+            logger.warn("User not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         } else {
 

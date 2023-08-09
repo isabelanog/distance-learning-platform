@@ -35,10 +35,12 @@ public class AuthenticationController {
                                                @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto) {
 
         if (userService.existsByUsername(userDto.getUsername())) {
+            logger.warn("Error. Username is already taken.");
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Error. Username is already taken.");
         }
 
         if (userService.existsByEmail(userDto.getEmail())) {
+            logger.warn("Error. Email is already taken.");
             return ResponseEntity.status(HttpStatus.CONFLICT).body("Error. Email is already taken.");
         }
 
