@@ -54,6 +54,7 @@ public class CourseModel implements Serializable {
     private CourseLevel courseLevel;
     
     @Column(nullable = false)
+    @Type(type = "uuid-char")
     private UUID userInstructor;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
