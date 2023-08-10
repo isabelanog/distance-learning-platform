@@ -16,14 +16,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -35,26 +28,31 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
-// * permite que esse endpoint seja acessado em qualquer lugar. maxAge = 3600 segundos
 @RequestMapping("/users")
 public class UserController {
     Logger logger = LogManager.getLogger(AuthenticationController.class);
+
     @Autowired
     UserService userService;
 
     @GetMapping
-    public ResponseEntity<Page<UserModel>> getAllUsers(SpecificationTemplate.UserSpec userSpecification,
-            @PageableDefault(page = 0, size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable) {
+    public ResponseEntity<Page<UserModel>> getUsers(SpecificationTemplate.UserSpecification userSpecification,
+                                                    @PageableDefault(page = 0, size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
+                                                    @RequestParam(required = false) UUID courseId) {
+        Page<UserModel> users;
 
-        Page<UserModel> userModelPage = userService.findAll(userSpecification, pageable);
+        if (courseId != null) {
+            users = userService.getUsers(SpecificationTemplate.getUsersByCourseId(courseId).and(userSpecification), pageable);
+        } else {
+            users = userService.getUsers(userSpecification, pageable);
+        }
 
-        if (!userModelPage.isEmpty()) {
-            for (UserModel user : userModelPage.toList()) {
+        if (!users.isEmpty()) {
+            for (UserModel user : users.toList()) {
                 user.add(linkTo(methodOn(UserController.class).getUserById(user.getUserId())).withSelfRel());
             }
         }
-
-        return ResponseEntity.status(HttpStatus.OK).body(userModelPage);
+        return ResponseEntity.status(HttpStatus.OK).body(users);
     }
 
     @GetMapping("/{userId}")
