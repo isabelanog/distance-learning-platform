@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.springframework.hateoas.RepresentationModel;
 
 import javax.persistence.*;
@@ -24,9 +24,8 @@ public class UserModel extends RepresentationModel<UserModel> implements Seriali
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-    @Column(columnDefinition = "BINARY(16)")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Type(type = "uuid-char")
     private UUID userId;
 
     @Column(nullable = false, unique = true, length = 50)
@@ -43,7 +42,7 @@ public class UserModel extends RepresentationModel<UserModel> implements Seriali
     private String fullName;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING) //salva como uma string no banco de dados
+    @Enumerated(EnumType.STRING) //persist in database as String
     private UserStatus userStatus;
 
     @Column(nullable = false)
