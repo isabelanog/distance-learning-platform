@@ -16,5 +16,5 @@ public interface CourseService {
 
     Optional<CourseModel> findById(UUID courseId);
 
-    Page<CourseModel> getAllCourses(Specification<CourseModel> courseSpecification, Pageable pageable);
+    Page<CourseModel> getCourses(Specification<CourseModel> courseSpecification, Pageable pageable);
 }

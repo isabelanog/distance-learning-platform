@@ -77,15 +77,19 @@ public class CourseController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<CourseModel>> getAllCourses(SpecificationTemplate.CourseSpecification courseSpecification,
-                                                           @PageableDefault(page = 0, size = 10, sort = "courseId",
-                                                                   direction = Sort.Direction.ASC) Pageable pageable) {
-
-        return ResponseEntity.status(HttpStatus.OK).body(courseService.getAllCourses(courseSpecification, pageable));
+    public ResponseEntity<Page<CourseModel>> getCourses(SpecificationTemplate.CourseSpecification courseSpecification,
+                                                        @PageableDefault(page = 0, size = 10, sort = "courseId",
+                                                                direction = Sort.Direction.ASC) Pageable pageable,
+                                                        @RequestParam(required = false) UUID userId) {
+        if (userId != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(courseService.getCourses(
+                    SpecificationTemplate.getCoursesByUserId(userId).and(courseSpecification), pageable));
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(courseService.getCourses(courseSpecification, pageable));
     }
 
     @GetMapping("/{courseId}")
-    public ResponseEntity<Object> getOneCourses(@PathVariable(value = "courseId") UUID courseId) {
+    public ResponseEntity<Object> gerCourseById(@PathVariable(value = "courseId") UUID courseId) {
 
         Optional<CourseModel> courseModelOptional = courseService.findById(courseId);
 
