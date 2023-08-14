@@ -7,7 +7,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.UUID;
+
 @Log4j2
 @Component
 public class UserClient {
@@ -27,20 +27,24 @@ public class UserClient {
     @Autowired
     UtilService utilService;
 
-    String REQUEST_URI = "http://localhost:8082";
+    String REQUEST_URL_COURSE = "http://localhost:8082";
+
     public Page<CourseDto> getCoursesByUser(UUID userId, Pageable pageable) {
 
-        List<CourseDto> courseDtoList = null;
+        ResponseEntity<ResponsePageDto<CourseDto>> responseEntity = null;
 
-        String url = utilService.createURL(userId, pageable);
+        List<CourseDto> courseDtoList;
+
+        String url = REQUEST_URL_COURSE + utilService.createUrlGetCoursesByUser(userId, pageable);
 
         log.debug("Request URL : {} ", url);
         log.info("Request URL : {} ", url);
 
         try {
-            ParameterizedTypeReference<ResponsePageDto<CourseDto>> responseType = new ParameterizedTypeReference<ResponsePageDto<CourseDto>>(){};
+            ParameterizedTypeReference<ResponsePageDto<CourseDto>> responseType = new ParameterizedTypeReference<ResponsePageDto<CourseDto>>() {
+            };
 
-            ResponseEntity<ResponsePageDto<CourseDto>> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, responseType);
+            responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, responseType);
 
             courseDtoList = responseEntity.getBody().getContent();
 
@@ -52,6 +56,7 @@ public class UserClient {
 
         log.info("Ending request / courses userId {} ", userId);
 
-        return new PageImpl<>(courseDtoList);
+        return responseEntity.getBody();
     }
+
 }
