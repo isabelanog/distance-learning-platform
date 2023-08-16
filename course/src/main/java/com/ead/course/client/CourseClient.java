@@ -7,7 +7,6 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -27,11 +26,10 @@ public class CourseClient {
     @Autowired
     UtilService utilService;
 
-
     public Page<UserDto> getUsersByCourse(UUID courseId, Pageable pageable) {
 
         List<UserDto> userDtoList = null;
-
+        ResponseEntity<ResponsePageDto<UserDto>> responseEntity = null;
         String url = utilService.createURL(courseId, pageable);
 
         log.debug("Request URL : {} ", url);
@@ -41,18 +39,18 @@ public class CourseClient {
             ParameterizedTypeReference<ResponsePageDto<UserDto>> responseType = new ParameterizedTypeReference<ResponsePageDto<UserDto>>() {
             };
 
-            ResponseEntity<ResponsePageDto<UserDto>> responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, responseType);
+            responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, responseType);
 
             userDtoList = responseEntity.getBody().getContent();
 
             log.debug("Number of elements in Response: {} ", userDtoList.size());
 
         } catch (HttpStatusCodeException e) {
-            log.error("Error request / courses {} ", e);
+            log.error("Error request /users {} ", e);
         }
 
-        log.info("Ending request / courses userId {} ", courseId);
+        log.info("Ending request /users userId {} ", courseId);
 
-        return new PageImpl<>(userDtoList);
+        return responseEntity.getBody();
     }
 }
