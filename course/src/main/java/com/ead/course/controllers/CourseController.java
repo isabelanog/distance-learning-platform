@@ -36,7 +36,7 @@ public class CourseController {
         courseModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
         courseModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-       courseService.save(courseModel);
+       courseService.saveCourse(courseModel);
 
        return ResponseEntity.status(HttpStatus.CREATED).body(courseModel);
     }
@@ -44,7 +44,7 @@ public class CourseController {
     @DeleteMapping("/{courseId}")
     public ResponseEntity<Object> deleteCourse(@PathVariable(value = "courseId") UUID courseId) {
 
-        Optional<CourseModel> courseModelOptional = courseService.findById(courseId);
+        Optional<CourseModel> courseModelOptional = courseService.getCourseById(courseId);
 
         if (courseModelOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
@@ -57,7 +57,7 @@ public class CourseController {
     @PutMapping("/{courseId}")
     public ResponseEntity<Object> updateCourse(@PathVariable(value = "courseId") UUID courseId,
                                                @RequestBody @Valid CourseDto courseDto) {
-        Optional<CourseModel> courseModelOptional = courseService.findById(courseId);
+        Optional<CourseModel> courseModelOptional = courseService.getCourseById(courseId);
 
         if (courseModelOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
@@ -71,7 +71,7 @@ public class CourseController {
         courseModel.setCourseLevel(courseDto.getCourseLevel());
         courseModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-        courseService.save(courseModel);
+        courseService.saveCourse(courseModel);
 
         return ResponseEntity.status(HttpStatus.OK).body("Course updated successfully");
     }
@@ -91,7 +91,7 @@ public class CourseController {
     @GetMapping("/{courseId}")
     public ResponseEntity<Object> getCourseById(@PathVariable(value = "courseId") UUID courseId) {
 
-        Optional<CourseModel> courseModelOptional = courseService.findById(courseId);
+        Optional<CourseModel> courseModelOptional = courseService.getCourseById(courseId);
 
         if (courseModelOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");

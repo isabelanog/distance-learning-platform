@@ -12,9 +12,9 @@ import java.util.UUID;
 public interface CourseService {
     void deleteCourse(CourseModel courseModel);
 
-    CourseModel save(CourseModel courseModel);
+    CourseModel saveCourse(CourseModel courseModel);
 
-    Optional<CourseModel> findById(UUID courseId);
+    Optional<CourseModel> getCourseById(UUID courseId);
 
     Page<CourseModel> getCourses(Specification<CourseModel> courseSpecification, Pageable pageable);
 }

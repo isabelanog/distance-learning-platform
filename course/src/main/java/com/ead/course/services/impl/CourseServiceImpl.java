@@ -51,12 +51,12 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public CourseModel save(CourseModel courseModel) {
+    public CourseModel saveCourse(CourseModel courseModel) {
         return courseRepository.save(courseModel);
     }
 
     @Override
-    public Optional<CourseModel> findById(UUID courseId) {
+    public Optional<CourseModel> getCourseById(UUID courseId) {
         return courseRepository.findById(courseId);
     }
 
