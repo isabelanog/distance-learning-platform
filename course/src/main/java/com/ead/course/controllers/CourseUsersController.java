@@ -1,6 +1,6 @@
 package com.ead.course.controllers;
 
-import com.ead.course.client.CourseClient;
+import com.ead.course.clients.CourseClient;
 import com.ead.course.dtos.UserDto;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,6 @@ import java.util.UUID;
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class CourseUsersController {
-
     @Autowired
     CourseClient courseClient;
 
