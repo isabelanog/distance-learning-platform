@@ -89,14 +89,13 @@ public class CourseController {
     }
 
     @GetMapping("/{courseId}")
-    public ResponseEntity<Object> gerCourseById(@PathVariable(value = "courseId") UUID courseId) {
+    public ResponseEntity<Object> getCourseById(@PathVariable(value = "courseId") UUID courseId) {
 
         Optional<CourseModel> courseModelOptional = courseService.findById(courseId);
 
         if (courseModelOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
         }
-
         return ResponseEntity.status(HttpStatus.OK).body(courseModelOptional.get());
     }
 }
