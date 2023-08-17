@@ -37,7 +37,7 @@ public class ModuleController {
     public ResponseEntity<Object> saveModule(@PathVariable(value = "courseId") UUID courseId,
                                              @RequestBody @Valid ModuleDto moduleDto) {
 
-        Optional<CourseModel> courseModelOptional = courseService.findById(courseId);
+        Optional<CourseModel> courseModelOptional = courseService.getCourseById(courseId);
 
         if (courseModelOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
