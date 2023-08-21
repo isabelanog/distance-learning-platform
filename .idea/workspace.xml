@@ -5,16 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cc17b24-bcba-4a18-8cbd-60e9f28dcf74" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/service/impl/UserCoursesServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/controllers/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/models/UserCourseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/models/UserCoursesModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/models/UserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/models/UserModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/repositories/UserCourseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/repositories/UserCoursesRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/service/UserCourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/service/UserCoursesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/service/impl/UserCourseServiceImpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/ead/course/models/CourseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/ead/course/models/CourseModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/ead/course/models/CourseUsersModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/ead/course/models/CoursesUsersModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/ead/course/repositories/CourseUsersRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/ead/course/repositories/CourseUsersRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/ead/course/controllers/CourseUsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/ead/course/controllers/CourseUsersController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,25 +40,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/me/Documents/Personal/Cursos/Decoder Project",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "spring.configuration.checksum": "2f57c6125b3e8092a27b87f6f0ea9d6f",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/me/Documents/Personal/Cursos/API Restful com Spring boot/workshop&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;147603311881c1cd1c930fe0d0dd8fb4&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/course/src/main/java/com/ead/course/enums" />
+      <recent name="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/enums" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ead.course.config" />
+      <recent name="com.ead.course.dtos" />
+      <recent name="com.ead.course.services.impl" />
+      <recent name="com.ead.course.services" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
@@ -74,7 +79,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.AuthuserApplication">
+  <component name="RunManager" selected="Spring Boot.CourseApplication">
     <configuration default="true" type="LiferayDockerServerConfiguration" factoryName="Liferay Docker Server">
       <option name="passParentEnvironments" value="true" />
       <option name="workspaceLocation" value="$PROJECT_DIR$" />
@@ -91,8 +96,8 @@
       <option name="vmParameters" value="-Xmx2560m -XX:MaxMetaspaceSize=768m -XX:MetaspaceSize=768m" />
       <envs>
         <env name="PATH" value="$USER_HOME$/.jdks/openjdk-18.0.2.1/bin:$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/bin:$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/var/lib/snapd/snap/bin:$USER_HOME$/bin" />
-        <env name="INVOCATION_ID" value="90b3a680713443ed822764247972855e" />
-        <env name="XAUTHORITY" value="/run/user/1000/.mutter-Xwaylandauth.1PAO91" />
+        <env name="INVOCATION_ID" value="b979f910f71b4a99b5494d935aa83e96" />
+        <env name="XAUTHORITY" value="/run/user/1000/.mutter-Xwaylandauth.V8Q291" />
         <env name="HISTCONTROL" value="ignoredups" />
         <env name="XMODIFIERS" value="@im=ibus" />
         <env name="GDMSESSION" value="gnome" />
@@ -103,12 +108,12 @@
         <env name="SNAP_USER_COMMON" value="$USER_HOME$/snap/intellij-idea-ultimate/common" />
         <env name="SNAP_REVISION" value="442" />
         <env name="XDG_CURRENT_DESKTOP" value="GNOME" />
-        <env name="JOURNAL_STREAM" value="8:57942" />
+        <env name="JOURNAL_STREAM" value="8:50305" />
         <env name="MAIL" value="/var/spool/mail/me" />
         <env name="USERNAME" value="me" />
-        <env name="SESSION_MANAGER" value="local/unix:@/tmp/.ICE-unix/3365,unix/unix:/tmp/.ICE-unix/3365" />
+        <env name="SESSION_MANAGER" value="local/unix:@/tmp/.ICE-unix/3195,unix/unix:/tmp/.ICE-unix/3195" />
         <env name="LOGNAME" value="me" />
-        <env name="MANAGERPID" value="3181" />
+        <env name="MANAGERPID" value="3047" />
         <env name="PWD" value="$USER_HOME$" />
         <env name="INFOPATH" value="$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/share/info:" />
         <env name="S_COLORS" value="auto" />
@@ -122,7 +127,7 @@
         <env name="SSH_ASKPASS" value="/usr/libexec/openssh/gnome-ssh-askpass" />
         <env name="DEBUGINFOD_URLS" value="https://debuginfod.fedoraproject.org/ " />
         <env name="SNAP_ARCH" value="amd64" />
-        <env name="SYSTEMD_EXEC_PID" value="3395" />
+        <env name="SYSTEMD_EXEC_PID" value="3225" />
         <env name="SNAP_LIBRARY_PATH" value="/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void" />
         <env name="GNOME_SETUP_DISPLAY" value=":1" />
         <env name="XDG_SESSION_DESKTOP" value="gnome" />
@@ -149,10 +154,10 @@
         <env name="DESKTOP_SESSION" value="gnome" />
         <env name="SNAP" value="/snap/intellij-idea-ultimate/442" />
         <env name="USER" value="me" />
-        <env name="DESKTOP_STARTUP_ID" value="gnome-shell/IntelliJ IDEA Ultimate Edition/3395-1-nuc10-i7-c2c10_TIME5067567" />
+        <env name="DESKTOP_STARTUP_ID" value="gnome-shell/IntelliJ IDEA Ultimate Edition/3225-2-nuc10-i7-c2c10_TIME1301823" />
         <env name="SNAP_REAL_HOME" value="$USER_HOME$" />
         <env name="XDG_MENU_PREFIX" value="gnome-" />
-        <env name="GIO_LAUNCHED_DESKTOP_FILE_PID" value="10355" />
+        <env name="GIO_LAUNCHED_DESKTOP_FILE_PID" value="8369" />
         <env name="GJS_DEBUG_OUTPUT" value="stderr" />
         <env name="SSH_AUTH_SOCK" value="/run/user/1000/keyring/ssh" />
         <env name="EDITOR" value="/usr/bin/nano" />
@@ -198,7 +203,20 @@
       <workItem from="1691595004830" duration="166000" />
       <workItem from="1691595177200" duration="43000" />
       <workItem from="1691595226965" duration="3764000" />
-      <workItem from="1691604056508" duration="8309000" />
+      <workItem from="1691604056508" duration="17483000" />
+      <workItem from="1692018839093" duration="1856000" />
+      <workItem from="1692024263717" duration="2974000" />
+      <workItem from="1692029266559" duration="32000" />
+      <workItem from="1692029304899" duration="104000" />
+      <workItem from="1692029414799" duration="913000" />
+      <workItem from="1692030334755" duration="7526000" />
+      <workItem from="1692037868011" duration="8622000" />
+      <workItem from="1692190333507" duration="8403000" />
+      <workItem from="1692277300501" duration="5472000" />
+      <workItem from="1692283434015" duration="16466000" />
+      <workItem from="1692363691404" duration="42000" />
+      <workItem from="1692364172238" duration="12701000" />
+      <workItem from="1692625114018" duration="11576000" />
     </task>
     <servers />
   </component>
@@ -215,5 +233,21 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/course/src/main/java/com/ead/course/clients/CourseClient.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="SpringBootApplicationConfigurationType">
+        <watch expression="coursesUsersModel.course.name" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

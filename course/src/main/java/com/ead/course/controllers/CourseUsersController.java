@@ -1,6 +1,6 @@
 package com.ead.course.controllers;
 
-import com.ead.course.clients.CourseClient;
+import com.ead.course.clients.AuthUserClient;
 import com.ead.course.dtos.SubscriptionDto;
 import com.ead.course.dtos.UserDto;
 import com.ead.course.models.CourseModel;
@@ -27,7 +27,7 @@ import java.util.UUID;
 public class CourseUsersController {
 
     @Autowired
-    CourseClient courseClient;
+    AuthUserClient authUserClient;
 
     @Autowired
     CourseService courseService;
@@ -39,18 +39,18 @@ public class CourseUsersController {
     public ResponseEntity<Page<UserDto>> getUsersByCourse(@PageableDefault(page = 0, size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
                                                           @PathVariable(value = "courseId") UUID courseId) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(courseClient.getUsersByCourse(courseId, pageable));
+        return ResponseEntity.status(HttpStatus.OK).body(authUserClient.getUsersByCourse(courseId, pageable));
     }
 
     @PostMapping("/courses/{courseId}/users/subscription")
-    public ResponseEntity<Object> userSubscriptionInCourse(@PathVariable UUID courseId,
+    public ResponseEntity<Object> subscribeUserInCourse(@PathVariable UUID courseId,
                                                            @RequestBody @Valid SubscriptionDto subscriptionDto) {
         UUID userId = subscriptionDto.getUserId();
 
         Optional<CourseModel> course = courseService.getCourseById(courseId);
 
         if (course.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course   not found");
         }
 
         if (courseUsersService.isUserSubscribedToCourse(course.get(), subscriptionDto.getUserId())) {
@@ -62,7 +62,7 @@ public class CourseUsersController {
         CoursesUsersModel coursesUsersModel = course.get().convertToCoursesUsersModel(userId);
 
         courseUsersService.addUserToCourse(coursesUsersModel);
-//
+
         return ResponseEntity.status(HttpStatus.OK).body("User " + userId
                 + " subscribed in course " + courseId + " successfully");
 
