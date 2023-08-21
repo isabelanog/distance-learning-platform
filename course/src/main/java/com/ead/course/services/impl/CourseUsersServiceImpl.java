@@ -17,8 +17,9 @@ public class CourseUsersServiceImpl implements CourseUsersService {
 
     @Override
     public boolean isUserSubscribedToCourse(CourseModel course, UUID userId) {
-        return courseUsersRepository.existsByCourseAndUserId(course, userId);
+        return courseUsersRepository.existsByCourseIdAndUserId(course.getCourseId(), userId);
     }
+
     @Override
     public void addUserToCourse(CoursesUsersModel coursesUsersModel) {
         courseUsersRepository.save(coursesUsersModel);
