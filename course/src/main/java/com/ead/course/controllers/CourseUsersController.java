@@ -75,11 +75,9 @@ public class CourseUsersController {
             }
         }
 
-        CoursesUsersModel coursesUsersModel = course.get().convertToCoursesUsersModel(userId);
+        CoursesUsersModel coursesUsersModel = courseUsersService.addUserToCourse(course.get().convertToCoursesUsersModel(userId));
 
-        courseUsersService.addUserToCourse(coursesUsersModel);
-
-        return ResponseEntity.status(HttpStatus.OK).body(course);
+        return ResponseEntity.status(HttpStatus.CREATED).body(coursesUsersModel);
 
     }
 }
