@@ -15,6 +15,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
+
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
@@ -52,17 +53,21 @@ public class CourseModel implements Serializable {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private CourseLevel courseLevel;
-    
+
     @Column(nullable = false)
     @Type(type = "uuid-char")
     private UUID userInstructor;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     private Set<ModuleModel> modules;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
     private Set<CoursesUsersModel> coursesUsers;
+
+    public CoursesUsersModel convertToCoursesUsersModel(UUID userId) {
+        return new CoursesUsersModel(null, userId, this);
+    }
 }
