@@ -3,6 +3,7 @@ package com.ead.course.controllers;
 import com.ead.course.clients.AuthUserClient;
 import com.ead.course.dtos.SubscriptionDto;
 import com.ead.course.dtos.UserDto;
+import com.ead.course.enums.UserStatus;
 import com.ead.course.models.CourseModel;
 import com.ead.course.models.CoursesUsersModel;
 import com.ead.course.services.CourseService;
@@ -16,6 +17,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpStatusCodeException;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -44,13 +46,14 @@ public class CourseUsersController {
 
     @PostMapping("/courses/{courseId}/users/subscription")
     public ResponseEntity<Object> subscribeUserInCourse(@PathVariable UUID courseId,
-                                                           @RequestBody @Valid SubscriptionDto subscriptionDto) {
+                                                        @RequestBody @Valid SubscriptionDto subscriptionDto) {
         UUID userId = subscriptionDto.getUserId();
+        ResponseEntity<UserDto> userResponse;
 
         Optional<CourseModel> course = courseService.getCourseById(courseId);
 
         if (course.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course   not found");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
         }
 
         if (courseUsersService.isUserSubscribedToCourse(course.get(), subscriptionDto.getUserId())) {
@@ -58,13 +61,25 @@ public class CourseUsersController {
                     + " is already subscribed in course " + courseId);
         }
 
-        //TODO: user verification
+        try {
+            userResponse = authUserClient.getUserById(userId);
+
+            if (userResponse.getBody().getUserStatus().equals(UserStatus.BLOCKED)) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("User " + userId + "  is blocked");
+            }
+
+        } catch (HttpStatusCodeException e) {
+
+            if (e.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            }
+        }
+
         CoursesUsersModel coursesUsersModel = course.get().convertToCoursesUsersModel(userId);
 
         courseUsersService.addUserToCourse(coursesUsersModel);
 
-        return ResponseEntity.status(HttpStatus.OK).body("User " + userId
-                + " subscribed in course " + courseId + " successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(course);
 
     }
 }
