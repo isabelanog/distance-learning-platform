@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.UUID;
 
 public interface UserCoursesRepository extends JpaRepository<UserCoursesModel, UUID> {
-
+    boolean existsByCourseIdAndAndUserId(UUID courseId, UUID userId);
 }
