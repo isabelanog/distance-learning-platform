@@ -75,7 +75,7 @@ public class CourseUsersController {
             }
         }
 
-        CoursesUsersModel coursesUsersModel = courseUsersService.addUserToCourse(course.get().convertToCoursesUsersModel(userId));
+        CoursesUsersModel coursesUsersModel = courseUsersService.saveAndSendUserSubscriptionInCourseToAuthUserMicroservice(course.get().convertToCoursesUsersModel(userId));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(coursesUsersModel);
 
