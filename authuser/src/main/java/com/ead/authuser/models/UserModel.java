@@ -5,7 +5,6 @@ import com.ead.authuser.enums.UserType;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 import org.springframework.hateoas.RepresentationModel;
@@ -14,10 +13,10 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.Set;
 import java.util.UUID;
+
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL) //serialização de objeto java para json (ignora os atributos que nao tiver valor)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "TB_USERS")
 public class UserModel extends RepresentationModel<UserModel> implements Serializable {
@@ -42,7 +41,7 @@ public class UserModel extends RepresentationModel<UserModel> implements Seriali
     private String fullName;
 
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING) //persist in database as String
+    @Enumerated(EnumType.STRING)
     private UserStatus userStatus;
 
     @Column(nullable = false)
@@ -66,9 +65,9 @@ public class UserModel extends RepresentationModel<UserModel> implements Seriali
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'")
     private LocalDateTime lastUpdateDate;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private Set<UserCoursesModel> usersCourses;
+    public UserCoursesModel convertToUserCourseModel(UUID courseId) {
+        return new UserCoursesModel(null, courseId, this.getUserId());
+    }
 
     @Override
     public boolean equals(Object o) {
