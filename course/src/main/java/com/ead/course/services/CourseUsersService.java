@@ -8,6 +8,8 @@ import java.util.UUID;
 public interface CourseUsersService {
     boolean isUserSubscribedToCourse(CourseModel course, UUID userId);
 
-    void addUserToCourse(CoursesUsersModel coursesUsersModel);
+    CoursesUsersModel addUserToCourse(CoursesUsersModel coursesUsersModel);
+
+    CoursesUsersModel saveAndSendUserSubscriptionInCourseToAuthUserMicroservice(CoursesUsersModel coursesUsersModel);
 
 }

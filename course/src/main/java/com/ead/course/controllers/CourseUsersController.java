@@ -8,6 +8,7 @@ import com.ead.course.models.CourseModel;
 import com.ead.course.models.CoursesUsersModel;
 import com.ead.course.services.CourseService;
 import com.ead.course.services.CourseUsersService;
+import com.ead.course.services.exception.ResponseHandler;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -53,29 +54,30 @@ public class CourseUsersController {
         Optional<CourseModel> course = courseService.getCourseById(courseId);
 
         if (course.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
+            return ResponseHandler.generateResponse("Course not found", HttpStatus.NOT_FOUND, null);
         }
 
         if (courseUsersService.isUserSubscribedToCourse(course.get(), subscriptionDto.getUserId())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("User " + userId
-                    + " is already subscribed in course " + courseId);
+            return ResponseHandler.generateResponse("User is already subscribed", HttpStatus.CONFLICT, null);
         }
 
         try {
             userResponse = authUserClient.getUserById(userId);
 
             if (userResponse.getBody().getUserStatus().equals(UserStatus.BLOCKED)) {
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("User " + userId + "  is blocked");
+                return ResponseHandler.generateResponse("User " + userId + "  is blocked", HttpStatus.CONFLICT, null);
             }
 
         } catch (HttpStatusCodeException e) {
 
             if (e.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+                return ResponseHandler.generateResponse("User not found", HttpStatus.NOT_FOUND, null);
             }
         }
 
-        CoursesUsersModel coursesUsersModel = courseUsersService.saveAndSendUserSubscriptionInCourseToAuthUserMicroservice(course.get().convertToCoursesUsersModel(userId));
+        CoursesUsersModel coursesUsersModel = courseUsersService.addUserToCourse(course.get().convertToCoursesUsersModel(userId));
+
+        courseUsersService.saveAndSendUserSubscriptionInCourseToAuthUserMicroservice(coursesUsersModel);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(coursesUsersModel);
 
