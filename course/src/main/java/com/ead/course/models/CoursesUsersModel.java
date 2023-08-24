@@ -4,16 +4,10 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
@@ -23,12 +17,12 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "COURSES_USER")
-@IdClass(CoursesUsersModel.class)
 public class CoursesUsersModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Type(type = "uuid-char")
     private UUID id;
 
@@ -36,7 +30,7 @@ public class CoursesUsersModel implements Serializable {
     @Type(type = "uuid-char")
     private UUID userId;
 
-    @JoinColumn(name = "course_id", referencedColumnName = "courseId")
-    @Type(type = "uuid-char")
-    private UUID courseId;
+    @ManyToOne
+    @JoinColumn(name = "course_id")
+    private CourseModel course;
 }
