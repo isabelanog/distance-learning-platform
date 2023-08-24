@@ -16,6 +16,11 @@ spring:
     properties:
       hibernate:
         show_sql: true
+logging:
+  level:
+    com.ead: TRACE
+    root: INFO
+    prg.springframework.web: DEBUG
 ead:
   api:
     url:
