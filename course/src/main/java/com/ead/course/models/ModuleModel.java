@@ -3,7 +3,6 @@ package com.ead.course.models;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Data;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -12,10 +11,9 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
-@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
-@Table(name = "TB_MODULES")
+@Table(name = "MODULES")
 public class ModuleModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,4 +40,64 @@ public class ModuleModel implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "module", fetch = FetchType.LAZY)
     private Set<LessonModel> lessons;
+
+    public ModuleModel() {
+    }
+
+    public ModuleModel(UUID moduleId, String title, String description, LocalDateTime creationDate, CourseModel course, Set<LessonModel> lessons) {
+        this.moduleId = moduleId;
+        this.title = title;
+        this.description = description;
+        this.creationDate = creationDate;
+        this.course = course;
+        this.lessons = lessons;
+    }
+
+    public UUID getModuleId() {
+        return moduleId;
+    }
+
+    public void setModuleId(UUID moduleId) {
+        this.moduleId = moduleId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public CourseModel getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseModel course) {
+        this.course = course;
+    }
+
+    public Set<LessonModel> getLessons() {
+        return lessons;
+    }
+
+    public void setLessons(Set<LessonModel> lessons) {
+        this.lessons = lessons;
+    }
 }
