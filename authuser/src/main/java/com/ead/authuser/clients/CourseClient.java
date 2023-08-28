@@ -49,10 +49,10 @@ public class CourseClient {
             log.debug("Number of elements in Response: {} ", courseDtoList.size());
 
         } catch (HttpStatusCodeException e) {
-            log.error("Error request / courses {} ", e);
+            log.error("Error request /courses {} ", e.getMessage());
         }
 
-        log.info("Ending request / courses userId {} ", userId);
+        log.info("Ending request /courses userId {} ", userId);
 
         return responseEntity.getBody();
     }
