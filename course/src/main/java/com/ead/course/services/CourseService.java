@@ -13,7 +13,7 @@ import java.util.UUID;
 public interface CourseService {
     void deleteCourse(CourseModel courseModel);
 
-    CourseModel saveCourse(CourseModel courseModel);
+    CourseModel createCourse(CourseModel courseModel);
 
     Optional<CourseModel> getCourseById(UUID courseId);
 
