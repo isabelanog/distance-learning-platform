@@ -47,7 +47,7 @@ public class UserCourseController {
     public ResponseEntity<Object> subscribeUserInCourse(@PathVariable(value = "userId") UUID userId,
                                                         @RequestBody @Valid UserCourseDto userCourseDto) {
 
-        Optional<UserModel> userModelOptional = userService.findById(userId);
+        Optional<UserModel> userModelOptional = userService.getUserById(userId);
 
         if (userModelOptional.isEmpty()) {
             log.warn("User not found");
@@ -63,6 +63,7 @@ public class UserCourseController {
 
         UserCoursesModel userCoursesModel = userCoursesService.addUserToCourse(userModelOptional.get().convertToUserCourseModel(courseId));
 
+        log.info("Instructor created sucessfully");
         return ResponseEntity.status(HttpStatus.CREATED).body(userCoursesModel);
     }
 }

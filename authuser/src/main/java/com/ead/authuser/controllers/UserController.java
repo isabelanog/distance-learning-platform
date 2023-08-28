@@ -57,7 +57,7 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<Object> getUserById(@PathVariable(value = "userId") UUID userId) {
-        Optional<UserModel> userModelOptional = userService.findById(userId);
+        Optional<UserModel> userModelOptional = userService.getUserById(userId);
 
         if (userModelOptional.isEmpty()) {
             logger.warn("User not found");
@@ -70,7 +70,7 @@ public class UserController {
 
     @DeleteMapping("/{userId}")
     public ResponseEntity<Object> deleteUser(@PathVariable(value = "userId") UUID userId) {
-        Optional<UserModel> optionalUserModel = userService.findById(userId);
+        Optional<UserModel> optionalUserModel = userService.getUserById(userId);
 
         if (optionalUserModel.isEmpty()) {
             logger.warn("User not found");
@@ -88,7 +88,7 @@ public class UserController {
                                              @Validated(UserDto.UserView.UserPut.class)
                                              @JsonView(UserDto.UserView.UserPut.class) UserDto userDto) {
 
-        Optional<UserModel> optionalUserModel = userService.findById(userId);
+        Optional<UserModel> optionalUserModel = userService.getUserById(userId);
 
         if (optionalUserModel.isEmpty()) {
             logger.warn("User not found");
@@ -114,7 +114,7 @@ public class UserController {
                                                  @Validated(UserDto.UserView.PasswordPut.class)
                                                  @JsonView(UserDto.UserView.PasswordPut.class) UserDto userDto) {
 
-        Optional<UserModel> optionalUserModel = userService.findById(userId);
+        Optional<UserModel> optionalUserModel = userService.getUserById(userId);
 
         if (optionalUserModel.isEmpty()) {
             logger.warn("User not found");
@@ -141,7 +141,7 @@ public class UserController {
                                               @Validated(UserDto.UserView.ImagePut.class)
                                               @JsonView(UserDto.UserView.ImagePut.class) UserDto userDto) {
 
-        Optional<UserModel> optionalUserModel = userService.findById(userId);
+        Optional<UserModel> optionalUserModel = userService.getUserById(userId);
 
         if (optionalUserModel.isEmpty()) {
             logger.warn("User not found");
