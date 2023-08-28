@@ -63,7 +63,7 @@ public class UserCourseController {
 
         UserCoursesModel userCoursesModel = userCoursesService.addUserToCourse(userModelOptional.get().convertToUserCourseModel(courseId));
 
-        log.info("Instructor created sucessfully");
+        log.info("Instructor created successfully");
         return ResponseEntity.status(HttpStatus.CREATED).body(userCoursesModel);
     }
 }
