@@ -1,9 +1,11 @@
 package com.ead.authuser.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -16,13 +18,13 @@ import java.util.UUID;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "USERS_COURSES")
-@IdClass(UserCoursesModel.class)
 public class UserCoursesModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
     @Type(type = "uuid-char")
     private UUID id;
 
@@ -30,8 +32,9 @@ public class UserCoursesModel implements Serializable {
     @Column(nullable = false)
     private UUID courseId;
 
-    @JoinColumn(name = "user_id", referencedColumnName = "userId")
-    @Type(type = "uuid-char")
-    private UUID userId;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private UserModel user;
 
 }
