@@ -57,7 +57,7 @@ public class CourseModel implements Serializable {
 
     @Column(nullable = false)
     @Type(type = "uuid-char")
-    private UUID userInstructor;
+    private UUID userInstructorId;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
@@ -84,7 +84,7 @@ public class CourseModel implements Serializable {
         this.lastUpdateDate = lastUpdateDate;
         this.courseStatus = courseStatus;
         this.courseLevel = courseLevel;
-        this.userInstructor = userInstructor;
+        this.userInstructorId = userInstructor;
         this.modules = modules;
         this.coursesUsersModels = coursesUsersModels;
     }
@@ -164,12 +164,12 @@ public class CourseModel implements Serializable {
         this.courseLevel = courseLevel;
     }
 
-    public UUID getUserInstructor() {
-        return userInstructor;
+    public UUID getUserInstructorId() {
+        return userInstructorId;
     }
 
-    public void setUserInstructor(UUID userInstructor) {
-        this.userInstructor = userInstructor;
+    public void setUserInstructorId(UUID userInstructor) {
+        this.userInstructorId = userInstructor;
     }
 
     public Set<ModuleModel> getModules() {
