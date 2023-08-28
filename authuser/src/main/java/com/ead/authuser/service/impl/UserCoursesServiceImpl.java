@@ -1,6 +1,7 @@
 package com.ead.authuser.service.impl;
 
 import com.ead.authuser.models.UserCoursesModel;
+import com.ead.authuser.models.UserModel;
 import com.ead.authuser.repositories.UserCoursesRepository;
 import com.ead.authuser.service.UserCoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +16,12 @@ public class UserCoursesServiceImpl implements UserCoursesService {
     UserCoursesRepository userCoursesRepository;
 
     @Override
-    public boolean isUserSubscribedToCourse(UUID courseId, UUID userId) {
-        return userCoursesRepository.existsByCourseIdAndAndUserId(courseId, userId);
+    public UserCoursesModel addUserToCourse(UserCoursesModel userCoursesModel) {
+        return userCoursesRepository.save(userCoursesModel);
     }
 
     @Override
-    public UserCoursesModel addUserToCourse(UserCoursesModel userCoursesModel) {
-        return userCoursesRepository.save(userCoursesModel);
+    public boolean isUserSubscribedInCourse(UserModel userModel, UUID courseId) {
+        return userCoursesRepository.existsByUserAndCourseId(userModel, courseId);
     }
 }
