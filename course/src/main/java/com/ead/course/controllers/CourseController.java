@@ -4,7 +4,7 @@ import com.ead.course.dtos.CourseDto;
 import com.ead.course.models.CourseModel;
 import com.ead.course.services.CourseService;
 import com.ead.course.specifications.SpecificationTemplate;
-import org.apache.catalina.connector.Response;
+import com.ead.course.validation.CourseValidator;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -29,16 +30,26 @@ public class CourseController {
     @Autowired
     CourseService courseService;
 
+    @Autowired
+    CourseValidator courseValidator;
+
     @PostMapping
-    public ResponseEntity<Object> saveCourse(@RequestBody @Valid CourseDto courseDto) {
+    public ResponseEntity<Object> createCourse(@RequestBody CourseDto courseDto, Errors errors) {
+
+        courseValidator.validate(courseDto, errors);
+
+        if (errors.hasErrors()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors.getAllErrors());
+        }
 
         var courseModel = new CourseModel();
         BeanUtils.copyProperties(courseDto, courseModel);
         courseModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
         courseModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-       courseService.saveCourse(courseModel);
-       return ResponseEntity.status(HttpStatus.CREATED).body(courseModel);
+        courseService.createCourse(courseModel);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(courseModel);
     }
 
     @DeleteMapping("/{courseId}")
@@ -71,7 +82,7 @@ public class CourseController {
         courseModel.setCourseLevel(courseDto.getCourseLevel());
         courseModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-        courseService.saveCourse(courseModel);
+        courseService.createCourse(courseModel);
 
         return ResponseEntity.status(HttpStatus.OK).body("Course updated successfully");
     }
