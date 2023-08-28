@@ -74,10 +74,7 @@ public class CourseUsersController {
                 return ResponseHandler.generateResponse("User not found", HttpStatus.NOT_FOUND, null);
             }
         }
-
-        CoursesUsersModel coursesUsersModel = courseUsersService.addUserToCourse(course.get().convertToCoursesUsersModel(userId));
-
-        courseUsersService.saveAndSendUserSubscriptionInCourseToAuthUserMicroservice(coursesUsersModel);
+        CoursesUsersModel coursesUsersModel = courseUsersService.saveAndSendUserSubscriptionInCourseToAuthUserMicroservice(course.get().convertToCoursesUsersModel(userId));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(coursesUsersModel);
 

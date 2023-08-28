@@ -33,10 +33,10 @@ public class CourseUsersServiceImpl implements CourseUsersService {
     @Override
     public CoursesUsersModel saveAndSendUserSubscriptionInCourseToAuthUserMicroservice(CoursesUsersModel coursesUsersModel) {
 
+        coursesUsersModel = courseUsersRepository.save(coursesUsersModel);
+
         UUID userId = coursesUsersModel.getUserId();
         UUID courseId = coursesUsersModel.getCourse().getCourseId();
-
-        coursesUsersModel = courseUsersRepository.save(coursesUsersModel);
 
         authUserClient.postSubscriptionUserInCourse(courseId, userId);
         return coursesUsersModel;
