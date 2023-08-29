@@ -1,6 +1,7 @@
 package com.ead.course.services.impl;
 
 import com.ead.course.models.CourseModel;
+import com.ead.course.models.CoursesUsersModel;
 import com.ead.course.models.LessonModel;
 import com.ead.course.models.ModuleModel;
 import com.ead.course.repositories.CourseRepository;
@@ -51,6 +52,11 @@ public class CourseServiceImpl implements CourseService {
             }
             moduleRepository.deleteAll(moduleModelList);
         }
+
+        List<CoursesUsersModel> coursesUsersModelList = courseUsersRepository.findAllCoursesUsersModelIntoCourse(courseModel.getCourseId());
+        if (!coursesUsersModelList.isEmpty()) {
+            courseUsersRepository.deleteAll(coursesUsersModelList);
+        }
         courseRepository.delete(courseModel);
     }
 
@@ -68,5 +74,4 @@ public class CourseServiceImpl implements CourseService {
     public Page<CourseModel> getCourses(Specification<CourseModel> courseSpecification, Pageable pageable) {
         return courseRepository.findAll(courseSpecification, pageable);
     }
-
 }
