@@ -24,4 +24,6 @@ public interface UserService {
 
     Page<UserModel> getUsers(Specification<UserModel> userSpecification, Pageable pageable);
 
+    void deleteUser(UserModel userModel);
+
 }
