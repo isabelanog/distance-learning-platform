@@ -11,4 +11,8 @@ public interface UserCoursesService {
 
     boolean isUserSubscribedInCourse(UserModel userModel, UUID courseId);
 
+    boolean hasRelationshipUserAndCourse(UUID courseId);
+
+    void deleteUserCourseByCourseId(UUID courseId);
+
 }

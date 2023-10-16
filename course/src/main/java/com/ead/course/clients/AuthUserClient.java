@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 @Log4j2
@@ -36,7 +38,7 @@ public class AuthUserClient {
         List<UserDto> userDtoList = null;
         ResponseEntity<ResponsePageDto<UserDto>> responseEntity = null;
 
-        String url = REQUEST_URL_AUTH_USER + utilService.createURLGetCoursesByUser(courseId, pageable);
+        String url = REQUEST_URL_AUTH_USER + utilService.createURLGetUsersByCourse(courseId, pageable);
 
         log.debug("Request URL : {} ", url);
         log.info("Request URL : {} ", url);
@@ -52,12 +54,12 @@ public class AuthUserClient {
             log.debug("Number of elements in Response: {} ", userDtoList.size());
 
         } catch (HttpStatusCodeException e) {
-            log.error("Error request /users {} ", e.getMessage());
+            log.error("Error request /courses {} ", e.getMessage());
         }
 
-        log.info("Ending request /users userId {} ", courseId);
+        log.info("Ending request /courses courseId {} ", courseId);
 
-        return responseEntity.getBody();
+        return new PageImpl<>(userDtoList);
     }
 
     public ResponseEntity<UserDto> getUserById(UUID userId) {
@@ -73,5 +75,10 @@ public class AuthUserClient {
         courseUserDto.setCourseId(courseId);
         courseUserDto.setUserId(userId);
         restTemplate.postForObject(url, courseUserDto, String.class);
+    }
+
+    public void deleteCourseInAuthUser(UUID courseId) {
+        String url = REQUEST_URL_AUTH_USER + "/users/courses/" + courseId ;
+        restTemplate.exchange(url, HttpMethod.DELETE, null, String.class);
     }
 }

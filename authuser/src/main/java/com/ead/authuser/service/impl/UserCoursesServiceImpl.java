@@ -7,6 +7,7 @@ import com.ead.authuser.service.UserCoursesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.UUID;
 
 @Service
@@ -23,5 +24,15 @@ public class UserCoursesServiceImpl implements UserCoursesService {
     @Override
     public boolean isUserSubscribedInCourse(UserModel userModel, UUID courseId) {
         return userCoursesRepository.existsByUserAndCourseId(userModel, courseId);
+    }
+
+    @Override
+    public boolean hasRelationshipUserAndCourse(UUID courseId) {
+        return userCoursesRepository.existsByCourseId(courseId);
+    }
+    @Transactional
+    @Override
+    public void deleteUserCourseByCourseId(UUID courseId) {
+        userCoursesRepository.deleteAllByCourseId(courseId);
     }
 }
