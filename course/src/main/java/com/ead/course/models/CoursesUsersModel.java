@@ -1,6 +1,5 @@
 package com.ead.course.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,6 +32,5 @@ public class CoursesUsersModel implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "course_id")
-    @JsonIgnore
     private CourseModel course;
 }
