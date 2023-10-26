@@ -1,3 +1,7 @@
+/*
+This controller class represents the relationship between course <-> user
+ */
+
 package com.ead.course.controllers;
 
 import com.ead.course.clients.AuthUserClient;
@@ -38,19 +42,19 @@ public class CourseUsersController {
     CourseUsersService courseUsersService;
 
     @GetMapping("/courses/{courseId}/users")
-    public ResponseEntity<Object> getUsersByCourseId(@PageableDefault(page = 0, size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
+    public ResponseEntity<Object> getUsersSubscribedInCourseByCourseId(@PageableDefault(page = 0, size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
                                                           @PathVariable(value = "courseId") UUID courseId) {
 
-        Optional<CourseModel> courseModelOptional = courseService.getCourseById(courseId);
+        Optional<CourseModel> course = courseService.getCourseById(courseId);
 
-        if (courseModelOptional.isEmpty()) {
+        if (course.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
         }
-        return ResponseEntity.status(HttpStatus.OK).body(authUserClient.getUsersByCourse(courseId, pageable));
+        return ResponseEntity.status(HttpStatus.OK).body(authUserClient.getUsersSubscribedInCourseByCourseId(courseId, pageable));
     }
 
     @PostMapping("/courses/{courseId}/users/subscription")
-    public ResponseEntity<Object> subscribeUserInCourse(@PathVariable UUID courseId,
+    public ResponseEntity<Object> saveSubscriptionUserInCourse(@PathVariable UUID courseId,
                                                         @RequestBody @Valid SubscriptionDto subscriptionDto) {
         UUID userId = subscriptionDto.getUserId();
         ResponseEntity<UserDto> userResponse;
@@ -58,18 +62,18 @@ public class CourseUsersController {
         Optional<CourseModel> course = courseService.getCourseById(courseId);
 
         if (course.isEmpty()) {
-            return ResponseHandler.generateResponse("Course not found", HttpStatus.NOT_FOUND, null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
         }
 
-        if (courseUsersService.isUserSubscribedToCourse(course.get(), subscriptionDto.getUserId())) {
-            return ResponseHandler.generateResponse("User is already subscribed", HttpStatus.CONFLICT, null);
+        if (courseUsersService.isUserSubscribedToCourse(course.get(), userId)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("This user is already subscribed");
         }
 
         try {
             userResponse = authUserClient.getUserById(userId);
 
             if (userResponse.getBody().getUserStatus().equals(UserStatus.BLOCKED)) {
-                return ResponseHandler.generateResponse("User " + userId + "  is blocked", HttpStatus.CONFLICT, null);
+                return ResponseHandler.generateResponse("User blocked", HttpStatus.CONFLICT, null);
             }
 
         } catch (HttpStatusCodeException e) {
