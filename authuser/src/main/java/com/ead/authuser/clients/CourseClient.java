@@ -1,7 +1,11 @@
+/*
+The purpose of this class is send data to Course microservice
+ */
 package com.ead.authuser.clients;
 
 import com.ead.authuser.dtos.CourseDto;
 import com.ead.authuser.dtos.ResponsePageDto;
+import com.ead.authuser.dtos.UserCourseDto;
 import com.ead.authuser.service.UtilService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +33,7 @@ public class CourseClient {
 
     @Value("${ead.api.url.course}")
     String REQUEST_URL_COURSE;
-    public Page<CourseDto> getCoursesByUser(UUID userId, Pageable pageable) {
+    public Page<CourseDto> getEnrolledCoursesForUserByUserId(UUID userId, Pageable pageable) {
 
         List<CourseDto> courseDtoList = null;
         ResponseEntity<ResponsePageDto<CourseDto>> responseEntity = null;
@@ -56,4 +60,5 @@ public class CourseClient {
 
         return responseEntity.getBody();
     }
+
 }

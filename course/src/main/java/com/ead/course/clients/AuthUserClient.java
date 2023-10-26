@@ -1,3 +1,6 @@
+/*
+The purpose of this class is send data to AuthUser microservice
+ */
 package com.ead.course.clients;
 
 import com.ead.course.dtos.CourseUserDto;
@@ -15,6 +18,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpStatusCodeException;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
@@ -33,7 +37,7 @@ public class AuthUserClient {
     @Value("${ead.api.url.authuser}")
     String REQUEST_URL_AUTH_USER;
 
-    public Page<UserDto> getUsersByCourse(UUID courseId, Pageable pageable) {
+    public Page<UserDto> getUsersSubscribedInCourseByCourseId(UUID courseId, Pageable pageable) {
 
         List<UserDto> userDtoList = null;
         ResponseEntity<ResponsePageDto<UserDto>> responseEntity = null;
@@ -67,14 +71,19 @@ public class AuthUserClient {
         return restTemplate.exchange(url, HttpMethod.GET, null, UserDto.class);
     }
 
-    public void postSubscriptionUserInCourse(UUID courseId, UUID userId) {
+    public void sendUserSubscription(UUID courseId, UUID userId) {
 
         String url = REQUEST_URL_AUTH_USER + "/users/" + userId + "/courses/subscription";
 
         var courseUserDto = new CourseUserDto();
         courseUserDto.setCourseId(courseId);
         courseUserDto.setUserId(userId);
-        restTemplate.postForObject(url, courseUserDto, String.class);
+        try {
+            restTemplate.postForObject(url, courseUserDto, String.class);
+        } catch (Exception e) {
+            log.error("Error in send user subscription to Course Microservice");
+            throw new RestClientException(e.getMessage());
+        }
     }
 
     public void deleteCourseInAuthUser(UUID courseId) {
