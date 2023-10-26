@@ -1,5 +1,5 @@
 /*
-The purpose of this class is send data to Course microservice
+The purpose of this class is sent data to Course microservice
  */
 package com.ead.authuser.clients;
 

@@ -1,5 +1,5 @@
 /*
-The purpose of this class is send data to AuthUser microservice
+The purpose of this class is sent data to AuthUser microservice
  */
 package com.ead.course.clients;
 
@@ -22,7 +22,6 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 
 @Log4j2

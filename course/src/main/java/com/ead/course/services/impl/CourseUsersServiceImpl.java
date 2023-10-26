@@ -38,7 +38,8 @@ public class CourseUsersServiceImpl implements CourseUsersService {
         UUID userId = coursesUsersModel.getUserId();
         UUID courseId = coursesUsersModel.getCourse().getCourseId();
 
-        authUserClient.postSubscriptionUserInCourse(courseId, userId);
+        authUserClient.sendUserSubscription(courseId, userId);
+
         return coursesUsersModel;
     }
 }

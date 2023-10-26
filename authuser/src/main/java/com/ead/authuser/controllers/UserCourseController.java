@@ -1,3 +1,7 @@
+/*
+This controller class represents the relationship between user <-> course
+ */
+
 package com.ead.authuser.controllers;
 
 import com.ead.authuser.dtos.CourseDto;
@@ -36,34 +40,34 @@ public class UserCourseController {
     UserCoursesService userCoursesService;
 
     @GetMapping("/users/{userId}/courses")
-    public ResponseEntity<Page<CourseDto>> getCoursesByUser(@PageableDefault(page = 0, size = 10, sort = "courseId",
+    public ResponseEntity<Page<CourseDto>> getEnrolledCoursesForUserByUserId(@PageableDefault(page = 0, size = 10, sort = "courseId",
             direction = Sort.Direction.ASC) Pageable pageable,
                                                             @PathVariable(value = "userId") UUID userId) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(courseClient.getCoursesByUser(userId, pageable));
+        return ResponseEntity.status(HttpStatus.OK).body(courseClient.getEnrolledCoursesForUserByUserId(userId, pageable));
     }
 
     @PostMapping("/users/{userId}/courses/subscription")
-    public ResponseEntity<Object> subscribeUserInCourse(@PathVariable(value = "userId") UUID userId,
+    public ResponseEntity<Object> saveSubscriptionUserInCourse(@PathVariable(value = "userId") UUID userId,
                                                         @RequestBody @Valid UserCourseDto userCourseDto) {
 
-        Optional<UserModel> userModelOptional = userService.getUserById(userId);
+        Optional<UserModel> user = userService.getUserById(userId);
 
-        if (userModelOptional.isEmpty()) {
-            log.warn("User not found");
+        if (user.isEmpty()) {
+            log.error("User not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         }
 
         UUID courseId = userCourseDto.getCourseId();
 
-        if (userCoursesService.isUserSubscribedInCourse(userModelOptional.get(), courseId)) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("User " + userId
-                    + " is already subscribed in course " + courseId);
+        if (userCoursesService.isUserSubscribedInCourse(user.get(), courseId)) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User already subscribed in course");
         }
 
-        UserCoursesModel userCoursesModel = userCoursesService.addUserToCourse(userModelOptional.get().convertToUserCourseModel(courseId));
+        UserCoursesModel userCoursesModel = userCoursesService.saveSubscription(user.get().convertToUserCourseModel(courseId));
 
-        log.info("Instructor created successfully");
+        log.info("User successfully subscribed in course {} ", courseId);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(userCoursesModel);
     }
 

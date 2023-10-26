@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public interface UserCoursesService {
 
-    UserCoursesModel addUserToCourse(UserCoursesModel userCoursesModel);
+    UserCoursesModel saveSubscription(UserCoursesModel userCoursesModel);
 
     boolean isUserSubscribedInCourse(UserModel userModel, UUID courseId);
 

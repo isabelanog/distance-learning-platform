@@ -1,6 +1,5 @@
 package com.ead.authuser.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,7 +33,6 @@ public class UserCoursesModel implements Serializable {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
-    @JsonIgnore
     private UserModel user;
 
 }

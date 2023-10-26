@@ -1,5 +1,6 @@
 package com.ead.authuser.service.impl;
 
+import com.ead.authuser.clients.CourseClient;
 import com.ead.authuser.models.UserCoursesModel;
 import com.ead.authuser.models.UserModel;
 import com.ead.authuser.repositories.UserCoursesRepository;
@@ -15,9 +16,11 @@ public class UserCoursesServiceImpl implements UserCoursesService {
 
     @Autowired
     UserCoursesRepository userCoursesRepository;
+    @Autowired
+    CourseClient courseClient;
 
     @Override
-    public UserCoursesModel addUserToCourse(UserCoursesModel userCoursesModel) {
+    public UserCoursesModel saveSubscription(UserCoursesModel userCoursesModel) {
         return userCoursesRepository.save(userCoursesModel);
     }
 
@@ -35,4 +38,6 @@ public class UserCoursesServiceImpl implements UserCoursesService {
     public void deleteUserCourseByCourseId(UUID courseId) {
         userCoursesRepository.deleteAllByCourseId(courseId);
     }
+
+
 }
