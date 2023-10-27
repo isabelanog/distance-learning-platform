@@ -70,13 +70,13 @@ public class UserController {
 
     @DeleteMapping("/{userId}")
     public ResponseEntity<Object> deleteUser(@PathVariable(value = "userId") UUID userId) {
-        Optional<UserModel> optionalUserModel = userService.getUserById(userId);
+        Optional<UserModel> user = userService.getUserById(userId);
 
-        if (optionalUserModel.isEmpty()) {
+        if (user.isEmpty()) {
             logger.warn("User not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         } else {
-            userService.delete(optionalUserModel.get());
+            userService.deleteUser(user.get());
             logger.info("User {} deleted successfully", userId);
             return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully");
         }

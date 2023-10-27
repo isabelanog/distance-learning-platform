@@ -11,5 +11,8 @@ public interface CourseUsersService {
     CoursesUsersModel addUserToCourse(CoursesUsersModel coursesUsersModel);
 
     CoursesUsersModel saveAndSendUserSubscriptionInCourseToAuthUserMicroservice(CoursesUsersModel coursesUsersModel);
+    boolean getCourseUserByUserId(UUID userId);
+
+    void deleteCourseUserByUserId(UUID userId);
 
 }

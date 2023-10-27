@@ -61,4 +61,8 @@ public class CourseClient {
         return responseEntity.getBody();
     }
 
+    public void deleteUserInCourseMicroservice(UUID userId) {
+        String url = REQUEST_URL_COURSE + "/courses/users/" + userId;
+        restTemplate.postForObject(url, HttpMethod.DELETE, String.class);
+    }
 }
