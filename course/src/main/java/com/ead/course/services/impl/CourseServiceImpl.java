@@ -59,7 +59,7 @@ public class CourseServiceImpl implements CourseService {
             moduleRepository.deleteAll(modules);
         }
 
-        List<CoursesUsersModel> coursesUsersModelList = courseUsersRepository.findAllCoursesUsersModelIntoCourse(courseId);
+        List<CoursesUsersModel> coursesUsersModelList = courseUsersRepository.getAllByCourse_CourseId(courseId);
         if (!coursesUsersModelList.isEmpty()) {
             courseUsersRepository.deleteAll(coursesUsersModelList);
             hasUserSubscribedInCourse = true;
