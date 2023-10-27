@@ -42,7 +42,7 @@ public class CourseUsersController {
     CourseUsersService courseUsersService;
 
     @GetMapping("/courses/{courseId}/users")
-    public ResponseEntity<Object> getUsersSubscribedInCourseByCourseId(@PageableDefault(page = 0, size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
+    public ResponseEntity<Object> getUsersSubscribedInCourseByCourseId(@PageableDefault(size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
                                                           @PathVariable(value = "courseId") UUID courseId) {
 
         Optional<CourseModel> course = courseService.getCourseById(courseId);

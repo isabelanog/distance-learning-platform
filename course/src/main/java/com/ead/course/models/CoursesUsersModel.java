@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.UUID;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -21,8 +21,7 @@ public class CoursesUsersModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Type(type = "uuid-char")
     private UUID id;
 
@@ -33,4 +32,28 @@ public class CoursesUsersModel implements Serializable {
     @ManyToOne
     @JoinColumn(name = "course_id")
     private CourseModel course;
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public UUID getUserId() {
+        return userId;
+    }
+
+    public void setUserId(UUID userId) {
+        this.userId = userId;
+    }
+
+    public CourseModel getCourse() {
+        return course;
+    }
+
+    public void setCourse(CourseModel course) {
+        this.course = course;
+    }
 }

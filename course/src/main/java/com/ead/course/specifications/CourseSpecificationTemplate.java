@@ -16,13 +16,15 @@ import javax.persistence.criteria.Root;
 import java.util.Collection;
 import java.util.UUID;
 
-public class SpecificationTemplate {
+public class CourseSpecificationTemplate {
     @And({
             @Spec(path = "courseLevel", spec = Equal.class),
             @Spec(path = "courseStatus", spec = Equal.class),
             @Spec(path = "name", spec = Like.class)
     })
-    public interface CourseSpecification extends Specification<CourseModel> {}
+    public interface CourseSpecification extends Specification<CourseModel> {
+
+    }
     @Spec(path = "title", spec = Like.class)
     public interface ModuleSpecification extends Specification<ModuleModel> {}
     @Spec(path = "title", spec = Like.class)
@@ -57,7 +59,7 @@ public class SpecificationTemplate {
     public static Specification<CourseModel> getCoursesByUserId(final UUID userId) {
         return (root, query, criteriaBuilder) -> {
             query.distinct(true);
-            Join<CourseModel, CoursesUsersModel> modelJoin = root.join("coursesUsersModels");
+            Join<CourseModel, CoursesUsersModel> modelJoin = root.join("courseUser");
             return criteriaBuilder.equal(modelJoin.get("userId"), userId);
         };
     }

@@ -3,7 +3,7 @@ package com.ead.authuser.controllers;
 import com.ead.authuser.dtos.UserDto;
 import com.ead.authuser.models.UserModel;
 import com.ead.authuser.service.UserService;
-import com.ead.authuser.specification.SpecificationTemplate;
+import com.ead.authuser.specification.UserSpecificationTemplate;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import org.apache.logging.log4j.LogManager;
@@ -36,13 +36,13 @@ public class UserController {
     UserService userService;
 
     @GetMapping
-    public ResponseEntity<Page<UserModel>> getUsers(SpecificationTemplate.UserSpecification userSpecification,
+    public ResponseEntity<Page<UserModel>> getUsers(UserSpecificationTemplate.UserSpecification userSpecification,
                                                     @PageableDefault(page = 0, size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
                                                     @RequestParam(required = false) UUID courseId) {
         Page<UserModel> users;
 
         if (courseId != null) {
-            users = userService.getUsers(SpecificationTemplate.getUsersByCourseId(courseId).and(userSpecification), pageable);
+            users = userService.getUsers(UserSpecificationTemplate.getUsersByCourseId(courseId).and(userSpecification), pageable);
         } else {
             users = userService.getUsers(userSpecification, pageable);
         }

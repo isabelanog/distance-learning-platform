@@ -3,7 +3,8 @@ package com.ead.course.controllers;
 import com.ead.course.dtos.CourseDto;
 import com.ead.course.models.CourseModel;
 import com.ead.course.services.CourseService;
-import com.ead.course.specifications.SpecificationTemplate;
+import com.ead.course.services.CourseUsersService;
+import com.ead.course.specifications.CourseSpecificationTemplate;
 import com.ead.course.validation.CourseValidator;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +31,8 @@ public class CourseController {
 
     @Autowired
     CourseService courseService;
+    @Autowired
+    CourseUsersService courseUsersService;
 
     @Autowired
     CourseValidator courseValidator;
@@ -56,12 +59,12 @@ public class CourseController {
     @DeleteMapping("/{courseId}")
     public ResponseEntity<Object> deleteCourse(@PathVariable(value = "courseId") UUID courseId) {
 
-        Optional<CourseModel> courseModelOptional = courseService.getCourseById(courseId);
+        Optional<CourseModel> course = courseService.getCourseById(courseId);
 
-        if (courseModelOptional.isEmpty()) {
+        if (course.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
         }
-        courseService.deleteCourse(courseModelOptional.get());
+        courseService.deleteCourse(course.get());
 
         log.info("Course {} deleted", courseId);
         return ResponseEntity.status(HttpStatus.OK).body("Course deleted successfully");
@@ -90,13 +93,16 @@ public class CourseController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<CourseModel>> getCourses(SpecificationTemplate.CourseSpecification courseSpecification,
-                                                        @PageableDefault(page = 0, size = 10, sort = "courseId",
+    public ResponseEntity<Page<CourseModel>> getCourses(CourseSpecificationTemplate.CourseSpecification courseSpecification,
+                                                        @PageableDefault(sort = "courseId",
                                                                 direction = Sort.Direction.ASC) Pageable pageable,
                                                         @RequestParam(required = false) UUID userId) {
+
         if (userId != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(courseService.getCourses(
-                    SpecificationTemplate.getCoursesByUserId(userId).and(courseSpecification), pageable));
+
+            Page<CourseModel> courses = courseService.getCourses(CourseSpecificationTemplate.getCoursesByUserId(userId).and(courseSpecification), pageable);
+
+            return ResponseEntity.status(HttpStatus.OK).body(courses);
         }
         return ResponseEntity.status(HttpStatus.OK).body(courseService.getCourses(courseSpecification, pageable));
     }

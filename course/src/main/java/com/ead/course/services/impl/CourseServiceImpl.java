@@ -41,32 +41,33 @@ public class CourseServiceImpl implements CourseService {
 
     @Transactional
     @Override
-    public void deleteCourse(CourseModel courseModel) {
-        boolean deleteCourseUserInAuthUser = false;
+    public void deleteCourse(CourseModel course) {
+        boolean hasUserSubscribedInCourse = false;
+        UUID courseId = course.getCourseId();
 
-        List<ModuleModel> moduleModelList = moduleRepository.findAllModulesIntoCourse(courseModel.getCourseId());
+        List<ModuleModel> modules = moduleRepository.findAllModulesIntoCourse(courseId);
 
-        if (!moduleModelList.isEmpty()) {
-            for (ModuleModel module : moduleModelList) {
+        if (!modules.isEmpty()) {
+            for (ModuleModel module : modules) {
 
-                List<LessonModel> lessonModelList = lessonRepository.findAllLessonsIntoModule(module.getModuleId());
+                List<LessonModel> lessons = lessonRepository.findAllLessonsIntoModule(module.getModuleId());
 
-                if (!lessonModelList.isEmpty()) {
-                    lessonRepository.deleteAll(lessonModelList);
+                if (!lessons.isEmpty()) {
+                    lessonRepository.deleteAll(lessons);
                 }
             }
-            moduleRepository.deleteAll(moduleModelList);
+            moduleRepository.deleteAll(modules);
         }
 
-        List<CoursesUsersModel> coursesUsersModelList = courseUsersRepository.findAllCoursesUsersModelIntoCourse(courseModel.getCourseId());
+        List<CoursesUsersModel> coursesUsersModelList = courseUsersRepository.findAllCoursesUsersModelIntoCourse(courseId);
         if (!coursesUsersModelList.isEmpty()) {
             courseUsersRepository.deleteAll(coursesUsersModelList);
-            deleteCourseUserInAuthUser = true;
+            hasUserSubscribedInCourse = true;
         }
-        courseRepository.delete(courseModel);
+        courseRepository.delete(course);
 
-        if (deleteCourseUserInAuthUser) {
-            authUserClient.deleteCourseInAuthUser(courseModel.getCourseId());
+        if (hasUserSubscribedInCourse) {
+            authUserClient.deleteCourseInAuthUser(courseId);
         }
     }
 

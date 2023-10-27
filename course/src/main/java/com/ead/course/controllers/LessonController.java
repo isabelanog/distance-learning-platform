@@ -5,7 +5,7 @@ import com.ead.course.models.LessonModel;
 import com.ead.course.models.ModuleModel;
 import com.ead.course.services.LessonService;
 import com.ead.course.services.ModuleService;
-import com.ead.course.specifications.SpecificationTemplate;
+import com.ead.course.specifications.CourseSpecificationTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -85,11 +84,11 @@ public class LessonController {
 
     @GetMapping("/modules/{moduleId}/lessons")
     public ResponseEntity<Page<LessonModel>> getAllLessons(@PathVariable(value = "moduleId") UUID moduleId,
-                                                           SpecificationTemplate.LessonSpecification lessonSpecification,
+                                                           CourseSpecificationTemplate.LessonSpecification lessonSpecification,
                                                            @PageableDefault(page = 0, size = 10, sort = "lessonId",
                                                                    direction = Sort.Direction.ASC) Pageable pageable) {
 
-        return ResponseEntity.status(HttpStatus.OK).body(lessonService.findAllLessonsIntoModule(SpecificationTemplate.lessonByModuleIdSpecification(moduleId).and(lessonSpecification), pageable));
+        return ResponseEntity.status(HttpStatus.OK).body(lessonService.findAllLessonsIntoModule(CourseSpecificationTemplate.lessonByModuleIdSpecification(moduleId).and(lessonSpecification), pageable));
 
     }
 

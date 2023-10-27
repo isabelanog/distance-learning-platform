@@ -11,7 +11,7 @@ import org.springframework.data.jpa.domain.Specification;
 import javax.persistence.criteria.Join;
 import java.util.UUID;
 
-public class SpecificationTemplate {
+public class UserSpecificationTemplate {
     @And({
         @Spec(path = "userType", spec = Equal.class),
         @Spec(path = "userStatus", spec = Equal.class),

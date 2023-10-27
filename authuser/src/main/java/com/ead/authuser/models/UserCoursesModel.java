@@ -13,7 +13,6 @@ import java.util.UUID;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "USERS_COURSES")
@@ -35,4 +34,27 @@ public class UserCoursesModel implements Serializable {
     @JoinColumn(name = "user_id")
     private UserModel user;
 
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public UUID getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(UUID courseId) {
+        this.courseId = courseId;
+    }
+
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
 }

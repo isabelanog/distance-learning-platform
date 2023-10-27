@@ -40,7 +40,7 @@ public class UserCourseController {
     UserCoursesService userCoursesService;
 
     @GetMapping("/users/{userId}/courses")
-    public ResponseEntity<Page<CourseDto>> getEnrolledCoursesForUserByUserId(@PageableDefault(page = 0, size = 10, sort = "courseId",
+    public ResponseEntity<Page<CourseDto>> getEnrolledCoursesForUserByUserId(@PageableDefault(sort = "courseId",
             direction = Sort.Direction.ASC) Pageable pageable,
                                                             @PathVariable(value = "userId") UUID userId) {
 
@@ -72,12 +72,14 @@ public class UserCourseController {
     }
 
     @DeleteMapping("/users/courses/{courseId}")
-    public ResponseEntity<Object> deleteUserCourseByCourseId(@PathVariable(value = "courseId") UUID courseId) {
+    public ResponseEntity<Object> deleteCourseByCourseId(@PathVariable(value = "courseId") UUID courseId) {
 
-        if (!userCoursesService.hasRelationshipUserAndCourse(courseId)) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("UserCourse not found");
+        if (!userCoursesService.hasUserSubscribedInCourse(courseId)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Not found");
         }
+
         userCoursesService.deleteUserCourseByCourseId(courseId);
+
         return ResponseEntity.status(HttpStatus.OK).body("UserCourse deleted successfully");
     }
 

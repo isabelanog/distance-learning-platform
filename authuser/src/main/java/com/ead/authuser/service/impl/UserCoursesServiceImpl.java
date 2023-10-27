@@ -30,7 +30,7 @@ public class UserCoursesServiceImpl implements UserCoursesService {
     }
 
     @Override
-    public boolean hasRelationshipUserAndCourse(UUID courseId) {
+    public boolean hasUserSubscribedInCourse(UUID courseId) {
         return userCoursesRepository.existsByCourseId(courseId);
     }
     @Transactional
