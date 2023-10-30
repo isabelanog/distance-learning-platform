@@ -3,7 +3,7 @@ package com.ead.course.controllers;
 import com.ead.course.dtos.CourseDto;
 import com.ead.course.models.CourseModel;
 import com.ead.course.services.CourseService;
-import com.ead.course.services.CourseUsersService;
+import com.ead.course.services.UserService;
 import com.ead.course.specifications.CourseSpecificationTemplate;
 import com.ead.course.validation.CourseValidator;
 import lombok.extern.log4j.Log4j2;
@@ -31,8 +31,9 @@ public class CourseController {
 
     @Autowired
     CourseService courseService;
+
     @Autowired
-    CourseUsersService courseUsersService;
+    UserService userService;
 
     @Autowired
     CourseValidator courseValidator;
@@ -97,13 +98,7 @@ public class CourseController {
                                                         @PageableDefault(sort = "courseId",
                                                                 direction = Sort.Direction.ASC) Pageable pageable,
                                                         @RequestParam(required = false) UUID userId) {
-
-        if (userId != null) {
-
-            Page<CourseModel> courses = courseService.getCourses(CourseSpecificationTemplate.getCoursesByUserId(userId).and(courseSpecification), pageable);
-
-            return ResponseEntity.status(HttpStatus.OK).body(courses);
-        }
+    //TODO: create new specification
         return ResponseEntity.status(HttpStatus.OK).body(courseService.getCourses(courseSpecification, pageable));
     }
 

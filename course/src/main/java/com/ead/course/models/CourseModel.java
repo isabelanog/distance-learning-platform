@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -61,23 +60,6 @@ public class CourseModel implements Serializable {
     @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
     @Fetch(FetchMode.SUBSELECT)
     private Set<ModuleModel> modules;
-
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @OneToMany(mappedBy = "course", fetch = FetchType.EAGER)
-    private Set<CoursesUsersModel> courseUser;
-
-
-    public CoursesUsersModel convertToCoursesUsersModel(UUID userId) {
-        return new CoursesUsersModel(null, userId, this);
-    }
-
-    public Set<CoursesUsersModel> getCourseUser() {
-        return courseUser;
-    }
-
-    public void setCourseUser(Set<CoursesUsersModel> courseUser) {
-        this.courseUser = courseUser;
-    }
 
     public UUID getCourseId() {
         return courseId;

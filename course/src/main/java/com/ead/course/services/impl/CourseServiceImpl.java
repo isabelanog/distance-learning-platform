@@ -1,12 +1,10 @@
 package com.ead.course.services.impl;
 
-import com.ead.course.clients.AuthUserClient;
 import com.ead.course.models.CourseModel;
-import com.ead.course.models.CoursesUsersModel;
 import com.ead.course.models.LessonModel;
 import com.ead.course.models.ModuleModel;
 import com.ead.course.repositories.CourseRepository;
-import com.ead.course.repositories.CourseUsersRepository;
+import com.ead.course.repositories.UserRepository;
 import com.ead.course.repositories.LessonRepository;
 import com.ead.course.repositories.ModuleRepository;
 import com.ead.course.services.CourseService;
@@ -34,15 +32,11 @@ public class CourseServiceImpl implements CourseService {
     LessonRepository lessonRepository;
 
     @Autowired
-    CourseUsersRepository courseUsersRepository;
-
-    @Autowired
-    AuthUserClient authUserClient;
+    UserRepository userRepository;
 
     @Transactional
     @Override
     public void deleteCourse(CourseModel course) {
-        boolean hasUserSubscribedInCourse = false;
         UUID courseId = course.getCourseId();
 
         List<ModuleModel> modules = moduleRepository.findAllModulesIntoCourse(courseId);
@@ -58,17 +52,7 @@ public class CourseServiceImpl implements CourseService {
             }
             moduleRepository.deleteAll(modules);
         }
-
-        List<CoursesUsersModel> coursesUsersModelList = courseUsersRepository.getAllByCourse_CourseId(courseId);
-        if (!coursesUsersModelList.isEmpty()) {
-            courseUsersRepository.deleteAll(coursesUsersModelList);
-            hasUserSubscribedInCourse = true;
-        }
         courseRepository.delete(course);
-
-        if (hasUserSubscribedInCourse) {
-            authUserClient.deleteCourseInAuthUser(courseId);
-        }
     }
 
     @Override

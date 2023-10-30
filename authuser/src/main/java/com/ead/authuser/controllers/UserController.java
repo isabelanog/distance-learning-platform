@@ -37,16 +37,8 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<Page<UserModel>> getUsers(UserSpecificationTemplate.UserSpecification userSpecification,
-                                                    @PageableDefault(page = 0, size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
-                                                    @RequestParam(required = false) UUID courseId) {
-        Page<UserModel> users;
-
-        if (courseId != null) {
-            users = userService.getUsers(UserSpecificationTemplate.getUsersByCourseId(courseId).and(userSpecification), pageable);
-        } else {
-            users = userService.getUsers(userSpecification, pageable);
-        }
-
+                                                    @PageableDefault(sort = "userId", direction = Sort.Direction.ASC) Pageable pageable) {
+        Page<UserModel> users = userService.getUsers(userSpecification, pageable);
         if (!users.isEmpty()) {
             for (UserModel user : users.toList()) {
                 user.add(linkTo(methodOn(UserController.class).getUserById(user.getUserId())).withSelfRel());
@@ -137,9 +129,9 @@ public class UserController {
 
     @PutMapping("/{userId}/image")
     public ResponseEntity<Object> updateUserImage(@PathVariable(value = "userId") UUID userId,
-                                              @RequestBody
-                                              @Validated(UserDto.UserView.ImagePut.class)
-                                              @JsonView(UserDto.UserView.ImagePut.class) UserDto userDto) {
+                                                  @RequestBody
+                                                  @Validated(UserDto.UserView.ImagePut.class)
+                                                  @JsonView(UserDto.UserView.ImagePut.class) UserDto userDto) {
 
         Optional<UserModel> optionalUserModel = userService.getUserById(userId);
 
