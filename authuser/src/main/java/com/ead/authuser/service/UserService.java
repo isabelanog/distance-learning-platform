@@ -14,9 +14,9 @@ public interface UserService {
     List<UserModel> findAll();
     Optional<UserModel> getUserById(UUID userId);
 
-    void delete(UserModel optionalUserModel);
+    void delete(UserModel user);
 
-    void save(UserModel userModel);
+    void save(UserModel user);
 
     boolean existsByUsername(String username);
 
@@ -24,6 +24,6 @@ public interface UserService {
 
     Page<UserModel> getUsers(Specification<UserModel> userSpecification, Pageable pageable);
 
-    void deleteUser(UserModel userModel);
+    void deleteUser(UserModel user);
 
 }

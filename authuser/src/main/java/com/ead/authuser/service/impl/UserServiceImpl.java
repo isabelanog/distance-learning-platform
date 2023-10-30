@@ -39,13 +39,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(UserModel optionalUserModel) {
-        userRepository.delete(optionalUserModel);
+    public void delete(UserModel user) {
+        userRepository.delete(user);
     }
 
     @Override
-    public void save(UserModel userModel) {
-        userRepository.save(userModel);
+    public void save(UserModel user) {
+        userRepository.save(user);
     }
 
     @Override
@@ -68,10 +68,10 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(UserModel user) {
         boolean hasUserSubscribedInCourse = false;
         UUID userId = user.getUserId();
-        List<UserCoursesModel> userCoursesModelList = userCoursesRepository.getAllByUser_UserId(userId);
+        List<UserCoursesModel> userCourses = userCoursesRepository.getAllByUser_UserId(userId);
 
-        if (!userCoursesModelList.isEmpty()) {
-            userCoursesRepository.deleteAll(userCoursesModelList);
+        if (!userCourses.isEmpty()) {
+            userCoursesRepository.deleteAll(userCourses);
             hasUserSubscribedInCourse = true;
         }
         userRepository.delete(user);
