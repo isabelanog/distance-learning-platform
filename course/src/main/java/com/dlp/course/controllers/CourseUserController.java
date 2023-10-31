@@ -6,12 +6,16 @@ package com.dlp.course.controllers;
 
 import com.dlp.course.dtos.SubscriptionDto;
 import com.dlp.course.models.CourseModel;
+import com.dlp.course.models.UserModel;
 import com.dlp.course.services.CourseService;
 import com.dlp.course.services.UserService;
+import com.dlp.course.specifications.CourseSpecificationTemplate;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +37,8 @@ public class CourseUserController {
     UserService userService;
 
     @GetMapping("/courses/{courseId}/users")
-    public ResponseEntity<Object> getUsersSubscribedInCourseByCourseId(@PageableDefault(size = 10, sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
+    public ResponseEntity<Object> getUsersSubscribedInCourseByCourseId(CourseSpecificationTemplate.UserSpecification userSpecification,
+                                                                       @PageableDefault(sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
                                                                        @PathVariable(value = "courseId") UUID courseId) {
 
         Optional<CourseModel> course = courseService.getCourseById(courseId);
@@ -41,7 +46,10 @@ public class CourseUserController {
         if (course.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
         }
-        return ResponseEntity.status(HttpStatus.OK).body("");
+        Specification<UserModel> usersByCourseIdSpecification = CourseSpecificationTemplate.getUsersByCourseIdSpecification(courseId).and(userSpecification);
+        Page<UserModel> users = userService.getUsers(usersByCourseIdSpecification, pageable);
+
+        return ResponseEntity.status(HttpStatus.OK).body(users);
     }
 
     @PostMapping("/courses/{courseId}/users/subscription")

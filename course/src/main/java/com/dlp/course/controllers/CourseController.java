@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,21 @@ public class CourseController {
     @Autowired
     CourseValidator courseValidator;
 
+    @GetMapping
+    public ResponseEntity<Page<CourseModel>> getCourses(CourseSpecificationTemplate.CourseSpecification courseSpecification,
+                                                        @PageableDefault(sort = "courseId", direction = Sort.Direction.ASC) Pageable pageable,
+                                                        @RequestParam(required = false) UUID userId) {
+        if (userId != null) {
+
+            Specification<CourseModel> courseModelSpecification = CourseSpecificationTemplate.getCoursesByUserIdSpecification(userId).and(courseSpecification);
+            Page<CourseModel> courses = courseService.getCourses(courseModelSpecification, pageable);
+
+            return ResponseEntity.status(HttpStatus.OK).body(courses);
+
+        } else {
+            return ResponseEntity.status(HttpStatus.OK).body(courseService.getCourses(courseSpecification, pageable));
+        }
+    }
     @PostMapping
     public ResponseEntity<Object> createCourse(@RequestBody CourseDto courseDto, Errors errors) {
 
@@ -91,15 +107,6 @@ public class CourseController {
         courseService.createCourse(courseModel);
 
         return ResponseEntity.status(HttpStatus.OK).body("Course updated successfully");
-    }
-
-    @GetMapping
-    public ResponseEntity<Page<CourseModel>> getCourses(CourseSpecificationTemplate.CourseSpecification courseSpecification,
-                                                        @PageableDefault(sort = "courseId",
-                                                                direction = Sort.Direction.ASC) Pageable pageable,
-                                                        @RequestParam(required = false) UUID userId) {
-    //TODO: create new specification
-        return ResponseEntity.status(HttpStatus.OK).body(courseService.getCourses(courseSpecification, pageable));
     }
 
     @GetMapping("/{courseId}")
