@@ -20,6 +20,8 @@ spring:
     properties:
       hibernate:
         show_sql: true
+  rabbitmq:
+    addresses: amqps://xlcwbsal:8_vWUtzx_a3Z8AoXfLcI_LBvVwaLFh8Z@moose.rmq.cloudamqp.com/xlcwbsal
 logging:
   level:
     com.dlp: TRACE
