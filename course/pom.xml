@@ -8,7 +8,7 @@
         <version>2.5.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>com.ead</groupId>
+    <groupId>com.dlp</groupId>
     <artifactId>course</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>course</name>

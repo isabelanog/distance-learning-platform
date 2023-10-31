@@ -1,13 +1,13 @@
 server:
   port: 8082
   servlet:
-    context-path: '/ead-course/'
+    context-path: '/dlp-course/'
 
 spring:
   application:
-    name: ead-course-service
+    name: dlp-course-service
   datasource:
-    url: jdbc:mysql://localhost:3306/ead-course
+    url: jdbc:mysql://localhost:3306/dlp-course-sync
     username: root
     password: root
   jpa:
@@ -22,13 +22,13 @@ spring:
         show_sql: true
 logging:
   level:
-    com.ead: TRACE
+    com.dlp: TRACE
     root: INFO
     prg.springframework.web: DEBUG
-ead:
+dlp:
   api:
     url:
-      authuser: 'http://ead-authuser-service/ead-authuser'
+      authuser: 'http://dlp-authuser-service/dlp-authuser'
 eureka:
   client:
     service-url:

@@ -2,18 +2,18 @@ server:
   port: 8080
 spring:
   application:
-    name: ead-api-gateway
+    name: dlp-api-gateway
   cloud:
     gateway:
       routes:
         - id: authuser-service
-          uri: lb://EAD-AUTHUSER-SERVICE
+          uri: lb://dlp-AUTHUSER-SERVICE
           predicates:
-            - Path=/ead-authuser/**
+            - Path=/dlp-authuser/**
         - id: course-service
-          uri: lb://EAD-COURSE-SERVICE
+          uri: lb://dlp-COURSE-SERVICE
           predicates:
-            - Path=/ead-course/**
+            - Path=/dlp-course/**
 eureka:
   client:
     service-url:
