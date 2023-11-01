@@ -1,6 +1,9 @@
 package com.dlp.authuser.service.impl;
 
 import com.dlp.authuser.clients.CourseClient;
+import com.dlp.authuser.dtos.UserEventDto;
+import com.dlp.authuser.enums.ActionType;
+import com.dlp.authuser.publishers.UserEventPublisher;
 import com.dlp.authuser.repositories.UserRepository;
 import com.dlp.authuser.models.UserModel;
 import com.dlp.authuser.service.UserService;
@@ -24,6 +27,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     CourseClient courseClient;
 
+    @Autowired
+    UserEventPublisher userEventPublisher;
+
     @Override
     public List<UserModel> findAll() {
         return userRepository.findAll();
@@ -40,8 +46,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void save(UserModel user) {
-        userRepository.save(user);
+    public UserModel save(UserModel user) {
+        return userRepository.save(user);
     }
 
     @Override
@@ -63,5 +69,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(UserModel user) {
         userRepository.delete(user);
+    }
+    @Transactional
+    @Override
+    public UserModel saveUserAndPublishEvent(UserModel user) {
+
+        user = save(user); //save in database
+        UserEventDto userEventDto = user.convertToUserEventDto();
+        userEventPublisher.publishUserEvent(userEventDto, ActionType.CREATE);
+
+        return user;
     }
 }

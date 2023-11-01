@@ -33,6 +33,9 @@ dlp:
   api:
     url:
       course: 'http://dlp-course-service/dlp-course'
+  broker:
+    exchange:
+      userEvent: dlp.user.event
 eureka:
   client:
     service-url:

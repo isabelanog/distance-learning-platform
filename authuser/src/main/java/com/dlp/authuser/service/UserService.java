@@ -16,7 +16,7 @@ public interface UserService {
 
     void delete(UserModel user);
 
-    void save(UserModel user);
+    UserModel save(UserModel user);
 
     boolean existsByUsername(String username);
 
@@ -25,5 +25,7 @@ public interface UserService {
     Page<UserModel> getUsers(Specification<UserModel> userSpecification, Pageable pageable);
 
     void deleteUser(UserModel user);
+
+    UserModel saveUserAndPublishEvent(UserModel user);
 
 }

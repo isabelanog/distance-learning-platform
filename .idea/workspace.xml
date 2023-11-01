@@ -5,8 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cc17b24-bcba-4a18-8cbd-60e9f28dcf74" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/ead/course/controllers/CourseUsersController.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/ead/course/controllers/CourseUsersController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/configs/RabbitMqConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/configs/RabbitMqConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/controllers/AuthenticationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/models/UserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/models/UserModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +26,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -31,10 +40,13 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="mavenHome" value="Use Maven wrapper" />
-        <option name="useMavenConfig" value="true" />
       </MavenGeneralSettings>
     </option>
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2TklY8DLXUKYiJ2Y89QBu6lAtBx" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -49,12 +61,16 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/me/Documents/Personal/Cursos/API Restful com Spring boot/workshop&quot;,
+    &quot;last_directory_selection&quot;: &quot;/home/me/Documents/Personal/Cursos/Decoder Project/authuser/src/main/java/com/dlp/authuser&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/me/Documents/Personal/Cursos/Decoder Project/service-registry&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;147603311881c1cd1c930fe0d0dd8fb4&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -79,7 +95,22 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.CourseApplication">
+  <component name="RunManager" selected="Spring Boot.CourseApplication (1)">
+    <configuration name="ServiceRegistryApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="service-registry" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.dlp.serviceregistry.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.dlp.serviceregistry" />
+      <option name="MAIN_CLASS_NAME" value="com.dlp.serviceregistry.ServiceRegistryApplicationTests" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="LiferayDockerServerConfiguration" factoryName="Liferay Docker Server">
       <option name="passParentEnvironments" value="true" />
       <option name="workspaceLocation" value="$PROJECT_DIR$" />
@@ -96,8 +127,8 @@
       <option name="vmParameters" value="-Xmx2560m -XX:MaxMetaspaceSize=768m -XX:MetaspaceSize=768m" />
       <envs>
         <env name="PATH" value="$USER_HOME$/.jdks/openjdk-18.0.2.1/bin:$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/bin:$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/var/lib/snapd/snap/bin:$USER_HOME$/bin" />
-        <env name="INVOCATION_ID" value="b979f910f71b4a99b5494d935aa83e96" />
-        <env name="XAUTHORITY" value="/run/user/1000/.mutter-Xwaylandauth.V8Q291" />
+        <env name="INVOCATION_ID" value="5ec54be2b8804c67b3a4a32b995ec23e" />
+        <env name="XAUTHORITY" value="/run/user/1000/.mutter-Xwaylandauth.XRJVD2" />
         <env name="HISTCONTROL" value="ignoredups" />
         <env name="XMODIFIERS" value="@im=ibus" />
         <env name="GDMSESSION" value="gnome" />
@@ -106,14 +137,14 @@
         <env name="SNAP_INSTANCE_KEY" value="" />
         <env name="DBUS_SESSION_BUS_ADDRESS" value="unix:path=/run/user/1000/bus" />
         <env name="SNAP_USER_COMMON" value="$USER_HOME$/snap/intellij-idea-ultimate/common" />
-        <env name="SNAP_REVISION" value="442" />
+        <env name="SNAP_REVISION" value="455" />
         <env name="XDG_CURRENT_DESKTOP" value="GNOME" />
-        <env name="JOURNAL_STREAM" value="8:50305" />
+        <env name="JOURNAL_STREAM" value="8:45973" />
         <env name="MAIL" value="/var/spool/mail/me" />
         <env name="USERNAME" value="me" />
-        <env name="SESSION_MANAGER" value="local/unix:@/tmp/.ICE-unix/3195,unix/unix:/tmp/.ICE-unix/3195" />
+        <env name="SESSION_MANAGER" value="local/unix:@/tmp/.ICE-unix/3523,unix/unix:/tmp/.ICE-unix/3523" />
         <env name="LOGNAME" value="me" />
-        <env name="MANAGERPID" value="3047" />
+        <env name="MANAGERPID" value="3354" />
         <env name="PWD" value="$USER_HOME$" />
         <env name="INFOPATH" value="$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/share/info:" />
         <env name="S_COLORS" value="auto" />
@@ -127,7 +158,7 @@
         <env name="SSH_ASKPASS" value="/usr/libexec/openssh/gnome-ssh-askpass" />
         <env name="DEBUGINFOD_URLS" value="https://debuginfod.fedoraproject.org/ " />
         <env name="SNAP_ARCH" value="amd64" />
-        <env name="SYSTEMD_EXEC_PID" value="3225" />
+        <env name="SYSTEMD_EXEC_PID" value="3555" />
         <env name="SNAP_LIBRARY_PATH" value="/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void" />
         <env name="GNOME_SETUP_DISPLAY" value=":1" />
         <env name="XDG_SESSION_DESKTOP" value="gnome" />
@@ -141,23 +172,23 @@
         <env name="LANG" value="en_US.UTF-8" />
         <env name="HOMEBREW_PREFIX" value="$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew" />
         <env name="XDG_SESSION_TYPE" value="wayland" />
-        <env name="SNAP_USER_DATA" value="$USER_HOME$/snap/intellij-idea-ultimate/442" />
+        <env name="SNAP_USER_DATA" value="$USER_HOME$/snap/intellij-idea-ultimate/455" />
         <env name="DISPLAY" value=":0" />
         <env name="SNAP_REEXEC" value="" />
         <env name="WAYLAND_DISPLAY" value="wayland-0" />
         <env name="which_declare" value="typeset -f" />
         <env name="HOMEBREW_REPOSITORY" value="$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/Homebrew" />
-        <env name="SNAP_VERSION" value="2023.1.4" />
+        <env name="SNAP_VERSION" value="2023.2.3" />
         <env name="XDG_SESSION_CLASS" value="user" />
-        <env name="SNAP_DATA" value="/var/snap/intellij-idea-ultimate/442" />
+        <env name="SNAP_DATA" value="/var/snap/intellij-idea-ultimate/455" />
         <env name="GDM_LANG" value="en_US.UTF-8" />
         <env name="DESKTOP_SESSION" value="gnome" />
-        <env name="SNAP" value="/snap/intellij-idea-ultimate/442" />
+        <env name="SNAP" value="/snap/intellij-idea-ultimate/455" />
         <env name="USER" value="me" />
-        <env name="DESKTOP_STARTUP_ID" value="gnome-shell/IntelliJ IDEA Ultimate Edition/3225-2-nuc10-i7-c2c10_TIME1301823" />
+        <env name="DESKTOP_STARTUP_ID" value="gnome-shell/IntelliJ IDEA Ultimate Edition/3555-3-nuc10-i7-c2c10_TIME9905701" />
         <env name="SNAP_REAL_HOME" value="$USER_HOME$" />
         <env name="XDG_MENU_PREFIX" value="gnome-" />
-        <env name="GIO_LAUNCHED_DESKTOP_FILE_PID" value="8369" />
+        <env name="GIO_LAUNCHED_DESKTOP_FILE_PID" value="14352" />
         <env name="GJS_DEBUG_OUTPUT" value="stderr" />
         <env name="SSH_AUTH_SOCK" value="/run/user/1000/keyring/ssh" />
         <env name="EDITOR" value="/usr/bin/nano" />
@@ -170,9 +201,23 @@
       <module name="notification" />
       <method v="2" />
     </configuration>
+    <configuration name="AuthUserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="authuser" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.dlp.authuser.AuthUserApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AuthuserApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="authuser" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.ead.authuser.AuthuserApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CourseApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="course" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.dlp.course.CourseApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -191,6 +236,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ServiceRegistryApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="service-registry" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.dlp.serviceregistry.ServiceRegistryApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.ServiceRegistryApplicationTests" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -217,6 +274,9 @@
       <workItem from="1692363691404" duration="42000" />
       <workItem from="1692364172238" duration="12701000" />
       <workItem from="1692625114018" duration="11576000" />
+      <workItem from="1698847383513" duration="1074000" />
+      <workItem from="1698848482093" duration="2299000" />
+      <workItem from="1698850868198" duration="318000" />
     </task>
     <servers />
   </component>
