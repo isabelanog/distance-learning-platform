@@ -5,16 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6cc17b24-bcba-4a18-8cbd-60e9f28dcf74" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/configs/RabbitMqConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/configs/RabbitMqConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/controllers/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/models/UserModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/models/UserModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/resources/application.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/publishers/UserEventPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/publishers/UserEventPublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,7 +273,7 @@
       <workItem from="1692625114018" duration="11576000" />
       <workItem from="1698847383513" duration="1074000" />
       <workItem from="1698848482093" duration="2299000" />
-      <workItem from="1698850868198" duration="318000" />
+      <workItem from="1698850868198" duration="3039000" />
     </task>
     <servers />
   </component>

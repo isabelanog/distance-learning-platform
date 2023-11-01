@@ -17,7 +17,7 @@ public class RabbitMqConfig {
     @Autowired
     CachingConnectionFactory cachingConnectionFactory;
 
-    @Value(value = "${dlp.broker.exchange.user.event}")
+    @Value(value = "${dlp.broker.exchange.userEvent}")
     private String exchangeUserEvent;
 
     @Bean

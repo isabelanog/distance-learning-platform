@@ -31,6 +31,12 @@ dlp:
   api:
     url:
       authuser: 'http://dlp-authuser-service/dlp-authuser'
+  broker:
+    exchange:
+      userEventExchange: dlp.user.event
+    queue:
+      userEventQueue:
+        name: dlp.user.event.ms.course
 eureka:
   client:
     service-url:

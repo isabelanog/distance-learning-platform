@@ -13,7 +13,7 @@ public class UserEventPublisher {
     @Autowired
     RabbitTemplate rabbitTemplate;
 
-    @Value(value = "${dlp.broker.exchange.user.event}")
+    @Value(value = "${dlp.broker.exchange.userEvent}")
     private String exchangeUserEvent;
     public void publishUserEvent(UserEventDto userEventDto, ActionType actionType) {
         userEventDto.setActionType(actionType.toString());

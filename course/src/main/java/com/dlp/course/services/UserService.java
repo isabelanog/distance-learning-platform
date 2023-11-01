@@ -10,4 +10,5 @@ public interface UserService {
 
     Page<UserModel> getUsers(Specification<UserModel> userSpecification, Pageable pageable);
 
+    UserModel save(UserModel userModel);
 }
