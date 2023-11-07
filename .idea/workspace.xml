@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6cc17b24-bcba-4a18-8cbd-60e9f28dcf74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/controllers/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/controllers/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/exceptions/ErrorDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/ErrorDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/exceptions/RestResponseEntityExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/exceptions/RestResponseEntityExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/dtos/CourseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/dtos/CourseDto.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,10 +76,11 @@
       <recent name="$PROJECT_DIR$/authuser/src/main/java/com/ead/authuser/enums" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.dlp.course.exceptions" />
+      <recent name="com.dlp.course.dtos" />
       <recent name="com.ead.course.config" />
       <recent name="com.ead.course.dtos" />
       <recent name="com.ead.course.services.impl" />
-      <recent name="com.ead.course.services" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -88,7 +90,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.AuthUserApplication">
+  <component name="RunManager" selected="Spring Boot.CourseApplication (1)">
     <configuration name="ServiceRegistryApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="service-registry" />
       <extension name="coverage">
@@ -270,7 +272,7 @@
       <workItem from="1698847383513" duration="1074000" />
       <workItem from="1698848482093" duration="2299000" />
       <workItem from="1698850868198" duration="3722000" />
-      <workItem from="1699386626678" duration="6609000" />
+      <workItem from="1699386626678" duration="7675000" />
     </task>
     <servers />
   </component>

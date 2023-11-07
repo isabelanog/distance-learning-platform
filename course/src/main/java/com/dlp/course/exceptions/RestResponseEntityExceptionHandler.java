@@ -1,6 +1,6 @@
-package com.dlp.authuser.exceptions;
+package com.dlp.course.exceptions;
 
-import com.dlp.authuser.dtos.ErrorDto;
+import com.dlp.course.dtos.ErrorDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

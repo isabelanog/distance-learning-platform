@@ -10,21 +10,21 @@ import java.util.UUID;
 
 @Data
 public class CourseDto {
-    @NotBlank
+    @NotBlank(message = "Name cannot be blank")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Description cannot be blank")
     private String description;
 
     private String imageUrl;
 
-    @NotNull
+    @NotNull(message = "Status cannot be null")
     private CourseStatus courseStatus;
 
-    @NotNull
+    @NotNull(message = "User id cannot be null")
     private UUID userInstructorId;
 
-    @NotNull
+    @NotNull(message = "Course level cannot be null")
     private CourseLevel courseLevel;
 
 }
