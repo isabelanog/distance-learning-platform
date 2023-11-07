@@ -27,19 +27,19 @@ public class UserDto {
     private UUID userId;
 
     @NotBlank(groups = UserView.RegistrationPost.class)
-    @Size(min = 4, max = 50, groups = UserView.RegistrationPost.class)
+    @Size(min = 4, max = 50, groups = UserView.RegistrationPost.class, message = "Username size must be between 4 and 50")
     @UsernameConstraint(groups = UserView.RegistrationPost.class)
     @JsonView(UserView.RegistrationPost.class)
     private String username;
 
-    @NotBlank(groups = UserView.RegistrationPost.class)
+    @NotBlank(groups = UserView.RegistrationPost.class, message = "E-mail cannot be blank")
     @Email(groups = UserView.RegistrationPost.class)
-    @Size(min = 4, max = 50)
+    @Size(min = 4, max = 50, message = "E-mail size must be between 4 and 50")
     @JsonView(UserView.RegistrationPost.class)
     private String email;
 
     @NotBlank(groups = {UserView.RegistrationPost.class, UserView.PasswordPut.class})
-    @Size(min = 4, max = 20, groups = {UserView.RegistrationPost.class, UserView.PasswordPut.class})
+    @Size(min = 4, max = 20, groups = {UserView.RegistrationPost.class, UserView.PasswordPut.class}, message = "Password size must be between 4 and 50")
     @JsonView({UserView.RegistrationPost.class, UserView.PasswordPut.class})
     private String password;
 
@@ -54,7 +54,7 @@ public class UserDto {
     @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class})
     private String phoneNumber;
 
-    @CPF(groups = {UserView.RegistrationPost.class, UserView.UserPut.class})
+    @CPF(groups = {UserView.RegistrationPost.class, UserView.UserPut.class}, message = "Invalid CPF")
     @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class})
     private String cpf;
 
