@@ -6,12 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="6cc17b24-bcba-4a18-8cbd-60e9f28dcf74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/configs/RabbitMqConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/configs/RabbitMqConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/controllers/InstructorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/controllers/InstructorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/controllers/UserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/publishers/UserEventPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/publishers/UserEventPublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/consumers/UserConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/consumers/UserConsumer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +94,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.CourseApplication (1)">
+  <component name="RunManager" selected="Spring Boot.AuthUserApplication">
     <configuration name="ServiceRegistryApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="service-registry" />
       <extension name="coverage">
@@ -124,8 +126,8 @@
       <option name="vmParameters" value="-Xmx2560m -XX:MaxMetaspaceSize=768m -XX:MetaspaceSize=768m" />
       <envs>
         <env name="PATH" value="$USER_HOME$/.jdks/openjdk-18.0.2.1/bin:$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/bin:$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/var/lib/snapd/snap/bin:$USER_HOME$/bin" />
-        <env name="INVOCATION_ID" value="5ec54be2b8804c67b3a4a32b995ec23e" />
-        <env name="XAUTHORITY" value="/run/user/1000/.mutter-Xwaylandauth.XRJVD2" />
+        <env name="INVOCATION_ID" value="8c4fab0794c145e4b7d4d689543d3e04" />
+        <env name="XAUTHORITY" value="/run/user/1000/.mutter-Xwaylandauth.LZQND2" />
         <env name="HISTCONTROL" value="ignoredups" />
         <env name="XMODIFIERS" value="@im=ibus" />
         <env name="GDMSESSION" value="gnome" />
@@ -273,7 +275,8 @@
       <workItem from="1692625114018" duration="11576000" />
       <workItem from="1698847383513" duration="1074000" />
       <workItem from="1698848482093" duration="2299000" />
-      <workItem from="1698850868198" duration="3039000" />
+      <workItem from="1698850868198" duration="3722000" />
+      <workItem from="1699386626678" duration="3437000" />
     </task>
     <servers />
   </component>

@@ -37,7 +37,7 @@ public class InstructorController {
         instructor.setUserType(UserType.INSTRUCTOR);
         instructor.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-        userService.save(instructor);
+        userService.updateUser(instructor);
 
         return ResponseEntity.status(HttpStatus.OK).body(instructor);
     }

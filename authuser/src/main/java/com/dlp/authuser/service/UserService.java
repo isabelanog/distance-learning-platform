@@ -27,5 +27,6 @@ public interface UserService {
     void deleteUser(UserModel user);
 
     UserModel saveUserAndPublishEvent(UserModel user);
-
+    UserModel updateUser(UserModel user);
+    UserModel updatePassword(UserModel user);
 }

@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 import java.util.Objects;
 import java.util.UUID;
 
-@Data //nao precisa criar os getters, setters and constructors
+@Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
 
@@ -53,6 +53,7 @@ public class UserDto {
 
     @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class})
     private String phoneNumber;
+
     @CPF(groups = {UserView.RegistrationPost.class, UserView.UserPut.class})
     @JsonView({UserView.RegistrationPost.class, UserView.UserPut.class})
     private String cpf;

@@ -41,13 +41,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(UserModel user) {
-        userRepository.delete(user);
-    }
-
-    @Override
     public UserModel save(UserModel user) {
-        return userRepository.save(user);
+        return userRepository.save(user); //save in database
     }
 
     @Override
@@ -64,20 +59,41 @@ public class UserServiceImpl implements UserService {
     public Page<UserModel> getUsers(Specification<UserModel> specification, Pageable pageable) {
         return userRepository.findAll(specification, pageable);
     }
-
     @Transactional
     @Override
-    public void deleteUser(UserModel user) {
+    public void delete(UserModel user) {
         userRepository.delete(user);
     }
     @Transactional
     @Override
+    public void deleteUser(UserModel user) {
+        delete(user);
+        UserEventDto userEventDto = user.convertToUserEventDto();
+        userEventPublisher.publishUserEvent(userEventDto, ActionType.DELETE);
+    }
+
+
+    @Transactional
+    @Override
     public UserModel saveUserAndPublishEvent(UserModel user) {
 
-        user = save(user); //save in database
+        user = save(user);
         UserEventDto userEventDto = user.convertToUserEventDto();
         userEventPublisher.publishUserEvent(userEventDto, ActionType.CREATE);
 
         return user;
+    }
+
+    @Override
+    public UserModel updateUser(UserModel user) {
+        user = save(user);
+        UserEventDto userEventDto = user.convertToUserEventDto();
+        userEventPublisher.publishUserEvent(userEventDto, ActionType.UPDATE);
+        return user;
+    }
+
+    @Override
+    public UserModel updatePassword(UserModel user) {
+        return save(user);
     }
 }

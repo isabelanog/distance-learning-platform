@@ -83,7 +83,7 @@ public class UserController {
         Optional<UserModel> optionalUserModel = userService.getUserById(userId);
 
         if (optionalUserModel.isEmpty()) {
-            logger.warn("User not found");
+            logger.error("User not found");
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         } else {
 
@@ -93,7 +93,7 @@ public class UserController {
             userModel.setCpf(userDto.getCpf());
             userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-            userService.save(userModel);
+            userService.updateUser(userModel);
             logger.info("User {} updated successfully", userId);
 
             return ResponseEntity.status(HttpStatus.OK).body(userModel);
@@ -120,7 +120,7 @@ public class UserController {
             userModel.setPassword(userDto.getPassword());
             userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-            userService.save(userModel);
+            userService.updatePassword(userModel);
             logger.info("Password for user {} updated successfully", userId);
 
             return ResponseEntity.status(HttpStatus.OK).body("Password updated successfully");
@@ -144,7 +144,7 @@ public class UserController {
             userModel.setImageUrl(userDto.getImageUrl());
             userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-            userService.save(userModel);
+            userService.updateUser(userModel);
             logger.info("Image for user {} updated successfully", userId);
             return ResponseEntity.status(HttpStatus.OK).body(userModel);
         }
