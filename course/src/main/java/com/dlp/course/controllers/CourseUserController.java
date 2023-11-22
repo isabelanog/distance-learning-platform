@@ -5,6 +5,7 @@ This controller class represents the relationship between course <-> user
 package com.dlp.course.controllers;
 
 import com.dlp.course.dtos.SubscriptionDto;
+import com.dlp.course.enums.UserStatus;
 import com.dlp.course.models.CourseModel;
 import com.dlp.course.models.UserModel;
 import com.dlp.course.services.CourseService;
@@ -61,11 +62,20 @@ public class CourseUserController {
         if (course.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Course not found");
         }
+        UUID userId = subscriptionDto.getUserId();
 
-        //TODO: verifications using State Transfer
-
-        return ResponseEntity.status(HttpStatus.CREATED).body("");
-
+        if (courseService.isUserSubscribedInCourse(courseId, userId)) {
+            log.error("User already subscribed in course");
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User already subscribed in course");
+        }
+        Optional<UserModel> user = userService.getUserById(userId);
+        if (user.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+        if (user.get().getUserStatus().equals(UserStatus.BLOCKED.toString())) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User blocked");
+        }
+        courseService.saveUserSubscription(course.get().getCourseId(), user.get().getUserId());
+        return ResponseEntity.status(HttpStatus.CREATED).body("User subscribed successfully");
     }
-
 }

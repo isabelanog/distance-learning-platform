@@ -1,12 +1,16 @@
 package com.dlp.course.validation;
 
 import com.dlp.course.dtos.CourseDto;
+import com.dlp.course.enums.UserType;
+import com.dlp.course.models.UserModel;
+import com.dlp.course.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
+import java.util.Optional;
 import java.util.UUID;
 @Component
 public class CourseValidator implements Validator {
@@ -14,6 +18,9 @@ public class CourseValidator implements Validator {
     @Autowired
     @Qualifier("defaultValidator")
     private Validator validator;
+
+    @Autowired
+    UserService userService;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -30,19 +37,15 @@ public class CourseValidator implements Validator {
         }
     }
 
-    private void validateUserInstructor(UUID userInstructorId, Errors errors) {
+    private void validateUserInstructor(UUID userId, Errors errors) {
 
-//        ResponseEntity<UserDto> response;
-//        try {
-//            response = authUserClient.getUserById(userInstructorId);
-//
-//            if (response.getBody().getUserType().equals(UserType.STUDENT)) {
-//                errors.rejectValue("userInstructorId", "userInstructorError", "User must be INSTRUCTOR or ADMIN");
-//            }
-//        } catch (HttpStatusCodeException e) {
-//            if (e.getStatusCode().equals(HttpStatus.NOT_FOUND)) {
-//                errors.rejectValue("userInstructorId", "userInstructorError", "Instructor not found");
-//            }
-//        }
+        Optional<UserModel> user = userService.getUserById(userId);
+
+        if (user.isEmpty()) {
+            errors.rejectValue("userInstructorId", "userInstructorError", "Instructor not found");
+        }
+        if (user.get().getUserType().equals(UserType.STUDENT.toString())) {
+            errors.rejectValue("userInstructorId", "userInstructorError", "User must be INSTRUCTOR or ADMIN");
+        }
     }
 }

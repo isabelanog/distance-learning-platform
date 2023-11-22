@@ -64,8 +64,8 @@ public class CourseModel implements Serializable {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "COURSES_USERS",
-            joinColumns = @JoinColumn(name = "course_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
+            joinColumns = @JoinColumn(name = "course_id", referencedColumnName = "courseId"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "userId"))
     private Set<UserModel> users;
 
     public UUID getCourseId() {

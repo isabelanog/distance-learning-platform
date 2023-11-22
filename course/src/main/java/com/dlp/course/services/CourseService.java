@@ -17,4 +17,9 @@ public interface CourseService {
     Optional<CourseModel> getCourseById(UUID courseId);
 
     Page<CourseModel> getCourses(Specification<CourseModel> courseSpecification, Pageable pageable);
+
+    boolean isUserSubscribedInCourse(UUID courseId, UUID userId);
+
+    void saveUserSubscription(UUID courseId, UUID userId);
+
 }

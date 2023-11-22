@@ -24,6 +24,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+
 @Log4j2
 @RestController
 @RequestMapping("/courses")
@@ -38,7 +40,25 @@ public class CourseController {
 
     @Autowired
     CourseValidator courseValidator;
+    @PostMapping
+    public ResponseEntity<Object> postCourse(@RequestBody CourseDto courseDto, Errors errors) {
 
+        courseValidator.validate(courseDto, errors);
+
+        if (errors.hasErrors()) {
+
+            return ResponseEntity.badRequest().body(errors.getAllErrors());
+        }
+
+        var courseModel = new CourseModel();
+        BeanUtils.copyProperties(courseDto, courseModel);
+        courseModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
+        courseModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
+
+        courseService.createCourse(courseModel);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(courseModel);
+    }
     @GetMapping
     public ResponseEntity<Page<CourseModel>> getCourses(CourseSpecificationTemplate.CourseSpecification courseSpecification,
                                                         @PageableDefault(sort = "courseId", direction = Sort.Direction.ASC) Pageable pageable,
@@ -54,24 +74,7 @@ public class CourseController {
             return ResponseEntity.status(HttpStatus.OK).body(courseService.getCourses(courseSpecification, pageable));
         }
     }
-    @PostMapping
-    public ResponseEntity<Object> createCourse(@RequestBody CourseDto courseDto, Errors errors) {
 
-        courseValidator.validate(courseDto, errors);
-
-        if (errors.hasErrors()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors.getAllErrors());
-        }
-
-        var courseModel = new CourseModel();
-        BeanUtils.copyProperties(courseDto, courseModel);
-        courseModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
-        courseModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
-
-        courseService.createCourse(courseModel);
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(courseModel);
-    }
 
     @DeleteMapping("/{courseId}")
     public ResponseEntity<Object> deleteCourse(@PathVariable(value = "courseId") UUID courseId) {

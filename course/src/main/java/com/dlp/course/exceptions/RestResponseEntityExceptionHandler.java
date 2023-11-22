@@ -4,6 +4,7 @@ import com.dlp.course.dtos.ErrorDto;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
@@ -25,6 +26,13 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
                 .map(fieldError -> fieldError.getDefaultMessage())
                 .collect(Collectors.toList());
         ErrorDto errorDto = new ErrorDto(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), errorList);
+        return handleExceptionInternal(ex, errorDto, headers, errorDto.getStatus(), request);
+    }
+    @Override
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
+                                                                  HttpHeaders headers, HttpStatus status, WebRequest request) {
+        String localizedMessage = ex.getMostSpecificCause().getLocalizedMessage();
+        ErrorDto errorDto = new ErrorDto(HttpStatus.BAD_REQUEST, ex.getMostSpecificCause().toString(), localizedMessage);
         return handleExceptionInternal(ex, errorDto, headers, errorDto.getStatus(), request);
     }
 }

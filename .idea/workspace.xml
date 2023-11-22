@@ -6,9 +6,19 @@
   <component name="ChangeListManager">
     <list default="true" id="6cc17b24-bcba-4a18-8cbd-60e9f28dcf74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/exceptions/ErrorDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/ErrorDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/exceptions/RestResponseEntityExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/exceptions/RestResponseEntityExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/CourseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/CourseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/UserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/controllers/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/controllers/CourseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/controllers/CourseUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/controllers/CourseUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/dtos/CourseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/dtos/CourseDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/exceptions/RestResponseEntityExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/exceptions/RestResponseEntityExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/models/CourseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/models/CourseModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/repositories/CourseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/repositories/CourseRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/CourseService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/CourseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/CourseServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/validation/CourseValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/validation/CourseValidator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,6 +80,9 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/course/src/main/java/com/ead/course/enums" />
@@ -122,8 +135,8 @@
       <option name="vmParameters" value="-Xmx2560m -XX:MaxMetaspaceSize=768m -XX:MetaspaceSize=768m" />
       <envs>
         <env name="PATH" value="$USER_HOME$/.jdks/openjdk-18.0.2.1/bin:$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/bin:$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/var/lib/snapd/snap/bin:$USER_HOME$/bin" />
-        <env name="INVOCATION_ID" value="8c4fab0794c145e4b7d4d689543d3e04" />
-        <env name="XAUTHORITY" value="/run/user/1000/.mutter-Xwaylandauth.LZQND2" />
+        <env name="INVOCATION_ID" value="0749fa69b8a743ff83ede739d45511ba" />
+        <env name="XAUTHORITY" value="/run/user/1000/.mutter-Xwaylandauth.3EPHE2" />
         <env name="HISTCONTROL" value="ignoredups" />
         <env name="XMODIFIERS" value="@im=ibus" />
         <env name="GDMSESSION" value="gnome" />
@@ -132,14 +145,14 @@
         <env name="SNAP_INSTANCE_KEY" value="" />
         <env name="DBUS_SESSION_BUS_ADDRESS" value="unix:path=/run/user/1000/bus" />
         <env name="SNAP_USER_COMMON" value="$USER_HOME$/snap/intellij-idea-ultimate/common" />
-        <env name="SNAP_REVISION" value="455" />
+        <env name="SNAP_REVISION" value="462" />
         <env name="XDG_CURRENT_DESKTOP" value="GNOME" />
-        <env name="JOURNAL_STREAM" value="8:45973" />
+        <env name="JOURNAL_STREAM" value="8:65759" />
         <env name="MAIL" value="/var/spool/mail/me" />
         <env name="USERNAME" value="me" />
-        <env name="SESSION_MANAGER" value="local/unix:@/tmp/.ICE-unix/3523,unix/unix:/tmp/.ICE-unix/3523" />
+        <env name="SESSION_MANAGER" value="local/unix:@/tmp/.ICE-unix/3006,unix/unix:/tmp/.ICE-unix/3006" />
         <env name="LOGNAME" value="me" />
-        <env name="MANAGERPID" value="3354" />
+        <env name="MANAGERPID" value="2843" />
         <env name="PWD" value="$USER_HOME$" />
         <env name="INFOPATH" value="$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/share/info:" />
         <env name="S_COLORS" value="auto" />
@@ -153,7 +166,7 @@
         <env name="SSH_ASKPASS" value="/usr/libexec/openssh/gnome-ssh-askpass" />
         <env name="DEBUGINFOD_URLS" value="https://debuginfod.fedoraproject.org/ " />
         <env name="SNAP_ARCH" value="amd64" />
-        <env name="SYSTEMD_EXEC_PID" value="3555" />
+        <env name="SYSTEMD_EXEC_PID" value="3037" />
         <env name="SNAP_LIBRARY_PATH" value="/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void" />
         <env name="GNOME_SETUP_DISPLAY" value=":1" />
         <env name="XDG_SESSION_DESKTOP" value="gnome" />
@@ -167,23 +180,23 @@
         <env name="LANG" value="en_US.UTF-8" />
         <env name="HOMEBREW_PREFIX" value="$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew" />
         <env name="XDG_SESSION_TYPE" value="wayland" />
-        <env name="SNAP_USER_DATA" value="$USER_HOME$/snap/intellij-idea-ultimate/455" />
+        <env name="SNAP_USER_DATA" value="$USER_HOME$/snap/intellij-idea-ultimate/462" />
         <env name="DISPLAY" value=":0" />
         <env name="SNAP_REEXEC" value="" />
         <env name="WAYLAND_DISPLAY" value="wayland-0" />
         <env name="which_declare" value="typeset -f" />
         <env name="HOMEBREW_REPOSITORY" value="$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/Homebrew" />
-        <env name="SNAP_VERSION" value="2023.2.3" />
+        <env name="SNAP_VERSION" value="2023.2.5" />
         <env name="XDG_SESSION_CLASS" value="user" />
-        <env name="SNAP_DATA" value="/var/snap/intellij-idea-ultimate/455" />
+        <env name="SNAP_DATA" value="/var/snap/intellij-idea-ultimate/462" />
         <env name="GDM_LANG" value="en_US.UTF-8" />
         <env name="DESKTOP_SESSION" value="gnome" />
-        <env name="SNAP" value="/snap/intellij-idea-ultimate/455" />
+        <env name="SNAP" value="/snap/intellij-idea-ultimate/462" />
         <env name="USER" value="me" />
-        <env name="DESKTOP_STARTUP_ID" value="gnome-shell/IntelliJ IDEA Ultimate Edition/3555-3-nuc10-i7-c2c10_TIME9905701" />
+        <env name="DESKTOP_STARTUP_ID" value="gnome-shell/IntelliJ IDEA Ultimate Edition/3037-2-nuc10-i7-c2c10_TIME10594709" />
         <env name="SNAP_REAL_HOME" value="$USER_HOME$" />
         <env name="XDG_MENU_PREFIX" value="gnome-" />
-        <env name="GIO_LAUNCHED_DESKTOP_FILE_PID" value="14352" />
+        <env name="GIO_LAUNCHED_DESKTOP_FILE_PID" value="15774" />
         <env name="GJS_DEBUG_OUTPUT" value="stderr" />
         <env name="SSH_AUTH_SOCK" value="/run/user/1000/keyring/ssh" />
         <env name="EDITOR" value="/usr/bin/nano" />
@@ -272,7 +285,10 @@
       <workItem from="1698847383513" duration="1074000" />
       <workItem from="1698848482093" duration="2299000" />
       <workItem from="1698850868198" duration="3722000" />
-      <workItem from="1699386626678" duration="7675000" />
+      <workItem from="1699386626678" duration="10071000" />
+      <workItem from="1699532505299" duration="15813000" />
+      <workItem from="1700501087922" duration="6844000" />
+      <workItem from="1700662451093" duration="3214000" />
     </task>
     <servers />
   </component>
@@ -298,6 +314,15 @@
           <line>34</line>
           <option name="timeStamp" value="20" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/course/src/main/java/com/dlp/course/controllers/CourseUserController.java</url>
+          <line>78</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.sql.SQLException" package="java.sql" />
+          <option name="timeStamp" value="26" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
     <watches-manager>
