@@ -16,4 +16,13 @@ public interface CourseRepository extends JpaRepository<CourseModel, UUID>, JpaS
     @Modifying
     @Query(value = "INSERT INTO courses_users (course_id, user_id) VALUES ( :courseId, :userId)", nativeQuery = true)
     void subscribeUser(@Param("courseId") String courseId, @Param("userId") String userId);
+
+    @Modifying
+    @Query(value = "DELETE FROM courses_users where course_id = :courseId", nativeQuery = true)
+    void deleteCourseUserByCourseId(@Param("courseId") String courseId);
+
+    @Modifying
+    @Query(value = "DELETE FROM courses_users where user_id = :userId", nativeQuery = true)
+    void deleteCourseUserByUserId(@Param("userId") String userId);
+
 }

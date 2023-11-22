@@ -6,19 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6cc17b24-bcba-4a18-8cbd-60e9f28dcf74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/CourseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/CourseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/UserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/dtos/UserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/controllers/CourseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/controllers/CourseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/controllers/CourseUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/controllers/CourseUserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/dtos/CourseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/dtos/CourseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/exceptions/RestResponseEntityExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/exceptions/RestResponseEntityExceptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/models/CourseModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/models/CourseModel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/repositories/CourseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/repositories/CourseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/CourseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/CourseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/CourseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/CourseServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/validation/CourseValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/validation/CourseValidator.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -288,7 +278,7 @@
       <workItem from="1699386626678" duration="10071000" />
       <workItem from="1699532505299" duration="15813000" />
       <workItem from="1700501087922" duration="6844000" />
-      <workItem from="1700662451093" duration="3214000" />
+      <workItem from="1700662451093" duration="5725000" />
     </task>
     <servers />
   </component>
@@ -313,11 +303,6 @@
           <url>file://$PROJECT_DIR$/course/src/main/java/com/ead/course/clients/CourseClient.java</url>
           <line>34</line>
           <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/course/src/main/java/com/dlp/course/controllers/CourseUserController.java</url>
-          <line>78</line>
-          <option name="timeStamp" value="25" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.sql.SQLException" package="java.sql" />
