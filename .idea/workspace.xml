@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6cc17b24-bcba-4a18-8cbd-60e9f28dcf74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authuser/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/clients/CourseClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/clients/CourseClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/authuser/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/resources/application.yaml" afterDir="false" />
     </list>
@@ -93,7 +92,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.CourseApplication (1)">
+  <component name="RunManager" selected="Spring Boot.AuthUserApplication">
     <configuration name="ServiceRegistryApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="service-registry" />
       <extension name="coverage">
@@ -279,7 +278,7 @@
       <workItem from="1699532505299" duration="15813000" />
       <workItem from="1700501087922" duration="6844000" />
       <workItem from="1700662451093" duration="8160000" />
-      <workItem from="1700758513800" duration="2192000" />
+      <workItem from="1700758513800" duration="4216000" />
     </task>
     <servers />
   </component>
@@ -312,12 +311,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/clients/CourseClient.java</url>
-          <line>52</line>
+          <line>53</line>
           <option name="timeStamp" value="28" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/clients/CourseClient.java</url>
-          <line>69</line>
+          <line>76</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">

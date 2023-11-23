@@ -6,7 +6,7 @@ package com.dlp.authuser.clients;
 import com.dlp.authuser.dtos.CourseDto;
 import com.dlp.authuser.dtos.ResponsePageDto;
 import com.dlp.authuser.service.UtilService;
-import io.github.resilience4j.retry.annotation.Retry;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,7 +36,8 @@ public class CourseClient {
     @Value("${dlp.api.url.course}")
     String REQUEST_URL_COURSE;
 
-    @Retry(name = "retryInstance", fallbackMethod = "retryFallback")
+    //@Retry(name = "retryInstance", fallbackMethod = "retryFallback")
+    @CircuitBreaker(name = "circuitBreakInstance")
     public Page<CourseDto> getEnrolledCoursesForUserByUserId(UUID userId, Pageable pageable) {
 
         List<CourseDto> courseDtoList = null;
@@ -65,8 +66,14 @@ public class CourseClient {
         return responseEntity.getBody();
     }
 
+    public Page<CourseDto> circuitBreakerFallback(UUID userId, Pageable pageable, Throwable throwable) {
+        log.error("Error in circuit breaker fallback {}", throwable.toString());
+        List<CourseDto> courseDtoList = new ArrayList<>();
+        return new PageImpl<>(courseDtoList);
+    }
+
     public Page<CourseDto> retryFallback(UUID userId, Pageable pageable, Throwable throwable) {
-        log.error("Error in fallback {}", throwable.toString());
+        log.error("Error in retry fallback {}", throwable.toString());
         List<CourseDto> courseDtoList = new ArrayList<>();
         return new PageImpl<>(courseDtoList);
     }
