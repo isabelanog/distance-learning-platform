@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6cc17b24-bcba-4a18-8cbd-60e9f28dcf74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/repositories/CourseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/repositories/CourseRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/CourseServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/CourseServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/course/src/main/java/com/dlp/course/services/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/clients/CourseClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/clients/CourseClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authuser/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/authuser/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -183,10 +183,10 @@
         <env name="DESKTOP_SESSION" value="gnome" />
         <env name="SNAP" value="/snap/intellij-idea-ultimate/462" />
         <env name="USER" value="me" />
-        <env name="DESKTOP_STARTUP_ID" value="gnome-shell/IntelliJ IDEA Ultimate Edition/3037-2-nuc10-i7-c2c10_TIME10594709" />
+        <env name="DESKTOP_STARTUP_ID" value="gnome-shell/IntelliJ IDEA Ultimate Edition/3037-10-nuc10-i7-c2c10_TIME44575813" />
         <env name="SNAP_REAL_HOME" value="$USER_HOME$" />
         <env name="XDG_MENU_PREFIX" value="gnome-" />
-        <env name="GIO_LAUNCHED_DESKTOP_FILE_PID" value="15774" />
+        <env name="GIO_LAUNCHED_DESKTOP_FILE_PID" value="76819" />
         <env name="GJS_DEBUG_OUTPUT" value="stderr" />
         <env name="SSH_AUTH_SOCK" value="/run/user/1000/keyring/ssh" />
         <env name="EDITOR" value="/usr/bin/nano" />
@@ -278,7 +278,8 @@
       <workItem from="1699386626678" duration="10071000" />
       <workItem from="1699532505299" duration="15813000" />
       <workItem from="1700501087922" duration="6844000" />
-      <workItem from="1700662451093" duration="5725000" />
+      <workItem from="1700662451093" duration="8160000" />
+      <workItem from="1700758513800" duration="2192000" />
     </task>
     <servers />
   </component>
@@ -303,6 +304,21 @@
           <url>file://$PROJECT_DIR$/course/src/main/java/com/ead/course/clients/CourseClient.java</url>
           <line>34</line>
           <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/course/src/main/java/com/dlp/course/controllers/CourseController.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/clients/CourseClient.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="28" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/authuser/src/main/java/com/dlp/authuser/clients/CourseClient.java</url>
+          <line>69</line>
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.sql.SQLException" package="java.sql" />

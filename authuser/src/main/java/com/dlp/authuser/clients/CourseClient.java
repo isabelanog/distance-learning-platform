@@ -6,11 +6,13 @@ package com.dlp.authuser.clients;
 import com.dlp.authuser.dtos.CourseDto;
 import com.dlp.authuser.dtos.ResponsePageDto;
 import com.dlp.authuser.service.UtilService;
+import io.github.resilience4j.retry.annotation.Retry;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 @Log4j2
@@ -32,6 +35,8 @@ public class CourseClient {
 
     @Value("${dlp.api.url.course}")
     String REQUEST_URL_COURSE;
+
+    @Retry(name = "retryInstance", fallbackMethod = "retryFallback")
     public Page<CourseDto> getEnrolledCoursesForUserByUserId(UUID userId, Pageable pageable) {
 
         List<CourseDto> courseDtoList = null;
@@ -58,5 +63,11 @@ public class CourseClient {
         log.info("Ending request /courses userId {} ", userId);
 
         return responseEntity.getBody();
+    }
+
+    public Page<CourseDto> retryFallback(UUID userId, Pageable pageable, Throwable throwable) {
+        log.error("Error in fallback {}", throwable.toString());
+        List<CourseDto> courseDtoList = new ArrayList<>();
+        return new PageImpl<>(courseDtoList);
     }
 }
