@@ -1,0 +1,61 @@
+
+server:
+  port: 8084
+  servlet:
+    context-path: '/dlp-notification/'
+
+spring:
+  application:
+    name: dlp-notification-service
+
+  config:
+    import: 'optional:configserver:'
+
+  cloud:
+    config:
+      discovery:
+        service-id: dlp-config-server
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/dlp-notification-async
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQL5Dialect
+      id.new_generator_mappings: true
+      jdbc:
+        lob.non-contextual-creation: true
+    properties:
+      hibernate:
+        show_sql: true
+  output:
+    ansi:
+      enabled: always
+
+  rabbitmq:
+    addresses: amqps://xlcwbsal:8_vWUtzx_a3Z8AoXfLcI_LBvVwaLFh8Z@moose.rmq.cloudamqp.com/xlcwbsal
+
+logging:
+  level:
+    com.dlp: TRACE
+    root: INFO
+    prg.springframework.web: DEBUG
+    org.hibernate: INFO
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include:
+          - refresh
+          - health
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: 'http://localhost:8761/eureka'
+  instance:
+    localhost
+

@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="6cc17b24-bcba-4a18-8cbd-60e9f28dcf74" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/notification/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification/src/main/java/com/ead/notification/NotificationApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/notification/src/main/java/com/ead/notification/NotificationApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notification/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/notification/src/main/resources/application.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -90,7 +93,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.AuthUserApplication">
+  <component name="RunManager" selected="Spring Boot.NotificationApplication">
     <configuration name="ServiceRegistryApplicationTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="service-registry" />
       <extension name="coverage">
@@ -121,7 +124,7 @@
       <option name="passParentEnvironments" value="true" />
       <option name="vmParameters" value="-Xmx2560m -XX:MaxMetaspaceSize=768m -XX:MetaspaceSize=768m" />
       <envs>
-        <env name="PATH" value="$USER_HOME$/.jdks/openjdk-18.0.2.1/bin:$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/bin:$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/var/lib/snapd/snap/bin:$USER_HOME$/bin" />
+        <env name="PATH" value="$USER_HOME$/.jdks/openjdk-18.0.2.1/bin:$PROJECT_DIR$/../../../../../../linuxbrew/.linuxbrew/bin:$PROJECT_DIR$/../../../../../../linuxbrew/.linuxbrew/sbin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/var/lib/snapd/snap/bin:$USER_HOME$/bin" />
         <env name="INVOCATION_ID" value="0749fa69b8a743ff83ede739d45511ba" />
         <env name="XAUTHORITY" value="/run/user/1000/.mutter-Xwaylandauth.3EPHE2" />
         <env name="HISTCONTROL" value="ignoredups" />
@@ -141,14 +144,14 @@
         <env name="LOGNAME" value="me" />
         <env name="MANAGERPID" value="2843" />
         <env name="PWD" value="$USER_HOME$" />
-        <env name="INFOPATH" value="$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/share/info:" />
+        <env name="INFOPATH" value="$USER_HOME$/linuxbrew/.linuxbrew/share/info:" />
         <env name="S_COLORS" value="auto" />
         <env name="GJS_DEBUG_TOPICS" value="JS ERROR;JS LOG" />
         <env name="LESSOPEN" value="||/usr/bin/lesspipe.sh %s" />
         <env name="SHELL" value="/usr/bin/zsh" />
         <env name="GIO_LAUNCHED_DESKTOP_FILE" value="/var/lib/snapd/desktop/applications/intellij-idea-ultimate_intellij-idea-ultimate.desktop" />
         <env name="OLDPWD" value="$USER_HOME$" />
-        <env name="HOMEBREW_CELLAR" value="$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/Cellar" />
+        <env name="HOMEBREW_CELLAR" value="$USER_HOME$/linuxbrew/.linuxbrew/Cellar" />
         <env name="BAMF_DESKTOP_FILE_HINT" value="/var/lib/snapd/desktop/applications/intellij-idea-ultimate_intellij-idea-ultimate.desktop" />
         <env name="SSH_ASKPASS" value="/usr/libexec/openssh/gnome-ssh-askpass" />
         <env name="DEBUGINFOD_URLS" value="https://debuginfod.fedoraproject.org/ " />
@@ -159,20 +162,20 @@
         <env name="XDG_SESSION_DESKTOP" value="gnome" />
         <env name="SHLVL" value="0" />
         <env name="SNAP_NAME" value="intellij-idea-ultimate" />
-        <env name="MANPATH" value="$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/share/man::" />
+        <env name="MANPATH" value="$USER_HOME$/linuxbrew/.linuxbrew/share/man::" />
         <env name="QT_IM_MODULE" value="ibus" />
         <env name="HISTSIZE" value="1000" />
         <env name="JAVA_HOME" value="$USER_HOME$/.jdks/openjdk-18.0.2.1" />
         <env name="SNAP_INSTANCE_NAME" value="intellij-idea-ultimate" />
         <env name="LANG" value="en_US.UTF-8" />
-        <env name="HOMEBREW_PREFIX" value="$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew" />
+        <env name="HOMEBREW_PREFIX" value="$USER_HOME$/linuxbrew/.linuxbrew" />
         <env name="XDG_SESSION_TYPE" value="wayland" />
         <env name="SNAP_USER_DATA" value="$USER_HOME$/snap/intellij-idea-ultimate/462" />
         <env name="DISPLAY" value=":0" />
         <env name="SNAP_REEXEC" value="" />
         <env name="WAYLAND_DISPLAY" value="wayland-0" />
         <env name="which_declare" value="typeset -f" />
-        <env name="HOMEBREW_REPOSITORY" value="$PROJECT_DIR$/../../../../../linuxbrew/.linuxbrew/Homebrew" />
+        <env name="HOMEBREW_REPOSITORY" value="$USER_HOME$/linuxbrew/.linuxbrew/Homebrew" />
         <env name="SNAP_VERSION" value="2023.2.5" />
         <env name="XDG_SESSION_CLASS" value="user" />
         <env name="SNAP_DATA" value="/var/snap/intellij-idea-ultimate/462" />
@@ -210,7 +213,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CourseApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+    <configuration name="CourseApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="course" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.dlp.course.CourseApplication" />
       <method v="2">
@@ -240,6 +243,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.CourseApplication (1)" />
         <item itemvalue="JUnit.ServiceRegistryApplicationTests" />
       </list>
     </recent_temporary>
