@@ -1,67 +1,67 @@
-server:
-  port: 8087
-  servlet:
-    context-path: '/dlp-authuser/'
+#server:
+#  port: 8087
+#  servlet:
+#    context-path: '/dlp-authuser/'
 spring:
   application:
     name: dlp-authuser-service
   config:
-    import: 'optional:configserver:'
+    import: 'configserver:'
   cloud:
     config:
       discovery:
         service-id: dlp-config-server
-
-  datasource:
-    url: jdbc:mysql://localhost:3306/dlp-authuser-async
-    username: root
-    password: root
-  jpa:
-    hibernate:
-      ddl-auto: update
-      dialect: org.hibernate.dialect.MySQL5Dialect
-      id.new_generator_mappings: true
-      jdbc:
-        lob.non-contextual-creation: true
-    properties:
-      hibernate:
-        show_sql: true
-  output:
-    ansi:
-      enabled: always
-  rabbitmq:
-    addresses: amqps://xlcwbsal:8_vWUtzx_a3Z8AoXfLcI_LBvVwaLFh8Z@moose.rmq.cloudamqp.com/xlcwbsal
-logging:
-  level:
-    com.dlp: TRACE
-    root: INFO
-    prg.springframework.web: DEBUG
-dlp:
-  api:
-    url:
-      course: 'http://dlp-course-service/dlp-course'
-  broker:
-    exchange:
-      userEvent: dlp.user.event
-eureka:
-  client:
-    service-url:
-      defaultZone: 'http://localhost:8761/eureka'
-  instance:
-    hostname: localhost
-resilience4j:
-  circuitbreaker:
-    instances:
-      circuitBreakInstance:
-        sliding-window-size: 30
-        permitted-number-of-calls-in-half-open-state: 2
-        sliding-window-type: TIME_BASED
-        minimum-number-of-calls: 2
-        wait-duration-in-open-state:
-          30s
-        failure-rate-threshold: 80
-  retry:
-    instances:
-      retryInstance:
-        maxRetryAttempts: 3
-        waitDuration: 5s
+#
+#  datasource:
+#    url: jdbc:mysql://localhost:3306/dlp-authuser-async
+#    username: root
+#    password: root
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#      dialect: org.hibernate.dialect.MySQL5Dialect
+#      id.new_generator_mappings: true
+#      jdbc:
+#        lob.non-contextual-creation: true
+#    properties:
+#      hibernate:
+#        show_sql: true
+#  output:
+#    ansi:
+#      enabled: always
+#  rabbitmq:
+#    addresses: amqps://xlcwbsal:8_vWUtzx_a3Z8AoXfLcI_LBvVwaLFh8Z@moose.rmq.cloudamqp.com/xlcwbsal
+#logging:
+#  level:
+#    com.dlp: TRACE
+#    root: INFO
+#    prg.springframework.web: DEBUG
+#dlp:
+#  api:
+#    url:
+#      course: 'http://dlp-course-service/dlp-course'
+#  broker:
+#    exchange:
+#      userEvent: dlp.user.event
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: 'http://localhost:8761/eureka'
+#  instance:
+#    hostname: localhost
+#resilience4j:
+#  circuitbreaker:
+#    instances:
+#      circuitBreakInstance:
+#        sliding-window-size: 30
+#        permitted-number-of-calls-in-half-open-state: 2
+#        sliding-window-type: TIME_BASED
+#        minimum-number-of-calls: 2
+#        wait-duration-in-open-state:
+#          30s
+#        failure-rate-threshold: 80
+#  retry:
+#    instances:
+#      retryInstance:
+#        maxRetryAttempts: 3
+#        waitDuration: 5s
