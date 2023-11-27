@@ -5,6 +5,13 @@ server:
 spring:
   application:
     name: dlp-authuser-service
+  config:
+    import: 'optional:configserver:'
+  cloud:
+    config:
+      discovery:
+        service-id: dlp-config-server
+
   datasource:
     url: jdbc:mysql://localhost:3306/dlp-authuser-async
     username: root
