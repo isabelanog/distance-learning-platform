@@ -1,4 +1,4 @@
-package com.dlp.notification.dto;
+package com.dlp.course.dtos;
 
 import java.util.UUID;
 

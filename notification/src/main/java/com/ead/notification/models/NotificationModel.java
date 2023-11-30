@@ -1,8 +1,8 @@
-package com.ead.notification.models;
+package com.dlp.notification.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.ead.notification.enums.NotificationStatus;
+import com.dlp.notification.enums.NotificationStatus;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;

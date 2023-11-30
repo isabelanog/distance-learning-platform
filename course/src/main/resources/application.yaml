@@ -1,51 +1,59 @@
-#server:
-#  port: 8082
-#  servlet:
-#    context-path: '/dlp-course/'
-#
+server:
+  port: 8082
+  servlet:
+    context-path: '/dlp-course/'
+
 spring:
   application:
     name: dlp-course-service
   config:
-    import: 'configserver:'
+    import: 'optional:configserver:'
   cloud:
     config:
       discovery:
         service-id: dlp-config-server
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/dlp-course-async
-#    username: root
-#    password: root
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#      dialect: org.hibernate.dialect.MySQL5Dialect
-#      id.new_generator_mappings: true
-#      jdbc:
-#        lob.non-contextual-creation: true
-#    properties:
-#      hibernate:
-#        show_sql: true
-#  rabbitmq:
-#    addresses: amqps://xlcwbsal:8_vWUtzx_a3Z8AoXfLcI_LBvVwaLFh8Z@moose.rmq.cloudamqp.com/xlcwbsal
-#logging:
-#  level:
-#    com.dlp: TRACE
-#    root: INFO
-#    prg.springframework.web: DEBUG
-#dlp:
-#  api:
-#    url:
-#      authuser: 'http://dlp-authuser-service/dlp-authuser'
-#  broker:
-#    exchange:
-#      userEventExchange: dlp.user.event
-#    queue:
-#      userEventQueue:
-#        name: dlp.user.event.ms.course
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: 'http://localhost:8761/eureka'
-#  instance:
-#    hostname: localhost
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/dlp-course-async
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+      dialect: org.hibernate.dialect.MySQL5Dialect
+      id.new_generator_mappings: true
+      jdbc:
+        lob.non-contextual-creation: true
+    properties:
+      hibernate:
+        show_sql: true
+  rabbitmq:
+    addresses: amqps://xlcwbsal:8_vWUtzx_a3Z8AoXfLcI_LBvVwaLFh8Z@moose.rmq.cloudamqp.com/xlcwbsal
+
+logging:
+  level:
+    com.dlp: TRACE
+    root: INFO
+    prg.springframework.web: DEBUG
+
+dlp:
+  api:
+    url:
+      authuser: 'http://dlp-authuser-service/dlp-authuser'
+  broker:
+    exchange:
+      userEventExchange: dlp.user.event
+      notificationCommandExchange: dlp.notificationcommand
+    queue:
+      userEventQueue:
+        name: dlp.user.event.ms.course
+    key:
+      notificationCommandKey: ms.notification
+
+eureka:
+  client:
+    service-url:
+      defaultZone: 'http://localhost:8761/eureka'
+  instance:
+    hostname: localhost

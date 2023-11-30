@@ -1,8 +1,8 @@
-package com.ead.notification.services.impl;
+package com.dlp.notification.services.impl;
 
-import com.ead.notification.models.NotificationModel;
-import com.ead.notification.repositories.NotificationRepository;
-import com.ead.notification.services.NotificationService;
+import com.dlp.notification.models.NotificationModel;
+import com.dlp.notification.repositories.NotificationRepository;
+import com.dlp.notification.services.NotificationService;
 import org.springframework.stereotype.Service;
 
 @Service

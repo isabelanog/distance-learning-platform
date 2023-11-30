@@ -1,9 +1,9 @@
-package com.ead.notification.consumers;
+package com.dlp.notification.consumers;
 
-import com.ead.notification.dto.NotificationCommandDto;
-import com.ead.notification.enums.NotificationStatus;
-import com.ead.notification.models.NotificationModel;
-import com.ead.notification.services.NotificationService;
+import com.dlp.notification.dto.NotificationCommandDto;
+import com.dlp.notification.enums.NotificationStatus;
+import com.dlp.notification.models.NotificationModel;
+import com.dlp.notification.services.NotificationService;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;

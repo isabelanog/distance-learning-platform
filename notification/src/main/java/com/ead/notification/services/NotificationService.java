@@ -1,6 +1,6 @@
-package com.ead.notification.services;
+package com.dlp.notification.services;
 
-import com.ead.notification.models.NotificationModel;
+import com.dlp.notification.models.NotificationModel;
 
 public interface NotificationService {
     NotificationModel saveNotification(NotificationModel notificationModel);

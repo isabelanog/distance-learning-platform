@@ -1,6 +1,6 @@
-package com.ead.notification.repositories;
+package com.dlp.notification.repositories;
 
-import com.ead.notification.models.NotificationModel;
+import com.dlp.notification.models.NotificationModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

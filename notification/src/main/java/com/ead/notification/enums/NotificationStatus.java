@@ -1,4 +1,4 @@
-package com.ead.notification.enums;
+package com.dlp.notification.enums;
 
 public enum NotificationStatus {
     CREATED,
