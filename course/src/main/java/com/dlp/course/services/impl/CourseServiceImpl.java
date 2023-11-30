@@ -103,7 +103,7 @@ public class CourseServiceImpl implements CourseService {
         try {
             var notificationCommandDto = new NotificationCommandDto();
             notificationCommandDto.setTitle("Welcome to " + course.getName() + " course");
-            notificationCommandDto.setMessage(user.getFullName() + " you wew subscribed successfully!");
+            notificationCommandDto.setMessage(user.getFullName() + " you are subscribed successfully!");
             notificationCommandDto.setUserId(user.getUserId());
 
             notificationCommandPublisher.publishNotificationCommand(notificationCommandDto);
