@@ -1,13 +1,17 @@
 package com.dlp.course.services.impl;
 
+import com.dlp.course.dtos.NotificationCommandDto;
 import com.dlp.course.models.LessonModel;
 import com.dlp.course.models.ModuleModel;
+import com.dlp.course.models.UserModel;
+import com.dlp.course.publishers.NotificationCommandPublisher;
 import com.dlp.course.repositories.CourseRepository;
 import com.dlp.course.repositories.ModuleRepository;
 import com.dlp.course.services.CourseService;
 import com.dlp.course.models.CourseModel;
 import com.dlp.course.repositories.UserRepository;
 import com.dlp.course.repositories.LessonRepository;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,7 +22,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-
+@Log4j2
 @Service
 public class CourseServiceImpl implements CourseService {
 
@@ -33,6 +37,9 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    NotificationCommandPublisher notificationCommandPublisher;
 
     @Transactional
     @Override
@@ -85,5 +92,23 @@ public class CourseServiceImpl implements CourseService {
     public void saveUserSubscription(UUID courseId, UUID userId) {
 
         courseRepository.subscribeUser(courseId.toString(), userId.toString());
+    }
+
+    @Transactional
+    @Override
+    public void saveUserSubscriptionAndSendNotification(CourseModel course, UserModel user) {
+
+        saveUserSubscription(course.getCourseId(), user.getUserId());
+
+        try {
+            var notificationCommandDto = new NotificationCommandDto();
+            notificationCommandDto.setTitle("Welcome to " + course.getName() + " course");
+            notificationCommandDto.setMessage(user.getFullName() + " you wew subscribed successfully!");
+            notificationCommandDto.setUserId(user.getUserId());
+
+            notificationCommandPublisher.publishNotificationCommand(notificationCommandDto);
+        } catch (Exception e) {
+            log.error("Error to send notification");
+        }
     }
 }

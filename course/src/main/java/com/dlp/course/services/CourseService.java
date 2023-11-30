@@ -1,6 +1,7 @@
 package com.dlp.course.services;
 
 import com.dlp.course.models.CourseModel;
+import com.dlp.course.models.UserModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -21,5 +22,5 @@ public interface CourseService {
     boolean isUserSubscribedInCourse(UUID courseId, UUID userId);
 
     void saveUserSubscription(UUID courseId, UUID userId);
-
+    void saveUserSubscriptionAndSendNotification(CourseModel course, UserModel user);
 }
