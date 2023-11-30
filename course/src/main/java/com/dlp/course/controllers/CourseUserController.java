@@ -66,7 +66,7 @@ public class CourseUserController {
 
         if (courseService.isUserSubscribedInCourse(courseId, userId)) {
             log.error("User already subscribed in course");
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("This user is already subscribed to the course " + course.get().getName());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("User already subscribed in course");
         }
         Optional<UserModel> user = userService.getUserById(userId);
         if (user.isEmpty()) {
@@ -75,9 +75,7 @@ public class CourseUserController {
         if (user.get().getUserStatus().equals(UserStatus.BLOCKED.toString())) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("User blocked");
         }
-
-        courseService.saveUserSubscriptionAndSendNotification(course.get(), user.get());
-
+        courseService.saveUserSubscription(course.get().getCourseId(), user.get().getUserId());
         return ResponseEntity.status(HttpStatus.CREATED).body("User subscribed successfully");
     }
 }
