@@ -8,7 +8,7 @@ spring:
     name: dlp-notification-service
 
   config:
-    import: 'optional:configserver:'
+    import: 'configserver:'
 
   cloud:
     config:
