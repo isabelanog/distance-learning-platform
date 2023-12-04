@@ -46,6 +46,9 @@ public class NotificationModel implements Serializable {
         this.notificationId = notificationId;
     }
 
+    public NotificationModel() {
+    }
+
     public UUID getUserId() {
         return userId;
     }
