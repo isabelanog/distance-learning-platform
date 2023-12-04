@@ -1,12 +1,18 @@
 package com.dlp.notification.dto;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class NotificationCommandDto {
+public class NotificationCommandDto implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private String title;
     private String message;
     private UUID userId;
+
+    public NotificationCommandDto() {
+    }
 
     public String getTitle() {
         return title;
