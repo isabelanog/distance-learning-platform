@@ -22,6 +22,7 @@ public class NotificationModel implements Serializable {
     private UUID notificationId;
 
     @Column(nullable = false)
+    @Type(type = "uuid-char")
     private UUID userId;
 
     @Column(nullable = false, length = 150)
