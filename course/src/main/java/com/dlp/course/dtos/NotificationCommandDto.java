@@ -3,7 +3,7 @@ package com.dlp.course.dtos;
 import java.io.Serializable;
 import java.util.UUID;
 
-public class NotificationCommandDto implements Serializable {
+public class NotificationCommandDto {
 
     private static final long serialVersionUID = 1L;
 
