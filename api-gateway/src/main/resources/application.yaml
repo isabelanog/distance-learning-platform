@@ -18,9 +18,13 @@ spring:
           uri: lb://DLP-NOTIFICATION-SERVICE
           predicates:
             - Path=/dlp-notification/**
+dlp:
+  serviceRegistry:
+    username: serviceregistry
+    password: 'dlp123sr'
 eureka:
   client:
     service-url:
-      defaultZone: 'http://localhost:8761/eureka'
+      defaultZone: 'http://${dlp.serviceRegistry.username}:${dlp.serviceRegistry.password}@localhost:8761/eureka'
   instance:
     hostname: localhost
