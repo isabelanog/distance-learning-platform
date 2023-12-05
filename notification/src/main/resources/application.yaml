@@ -9,3 +9,5 @@ spring:
     config:
       discovery:
         service-id: dlp-config-server
+      username: configserver
+      password: dlp123cs
