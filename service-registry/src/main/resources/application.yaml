@@ -3,7 +3,15 @@ server:
 spring:
   application:
     name: dlp-service-registry
+
+dlp:
+  serviceRegistry:
+    username: serviceregistry
+    password: 'dlp123sr'
+
 eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
+    service-url:
+      defaultZone: 'http://${dlp.serviceRegistry.username}:${dlp.serviceRegistry.password}@localhost:8761/eureka'
