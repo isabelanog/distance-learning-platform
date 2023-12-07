@@ -1,7 +1,9 @@
 package com.dlp.authuser.configs.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +17,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
+    @Autowired
+    AuthenticationEntryPointImpl authenticationEntryPoint;
+
     private static final String[] AUTH_WHITE_LIST = {
             "/auth/**"
     };
@@ -23,21 +30,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
 
         httpSecurity.httpBasic()
+                .authenticationEntryPoint(authenticationEntryPoint)
                 .and()
-                .authorizeRequests().antMatchers(AUTH_WHITE_LIST).permitAll().anyRequest().authenticated()
+                .authorizeRequests().antMatchers(AUTH_WHITE_LIST).permitAll()
+                .antMatchers(HttpMethod.GET, "/users/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
                 .formLogin();
     }
-
     @Override
-    protected void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
-        authenticationManagerBuilder.inMemoryAuthentication()
-                .withUser("admin")
-                .password(passwordEncoder().encode("123456"))
-                .roles("ADMIN");
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
