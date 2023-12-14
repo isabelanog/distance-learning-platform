@@ -63,7 +63,7 @@ public class LessonController {
     }
 
     @PutMapping("/modules/{moduleId}/lessons/{lessonId}")
-    public ResponseEntity<Object> uptadeLesson(@PathVariable(value = "moduleId") UUID moduleId,
+    public ResponseEntity<Object> updateLesson(@PathVariable(value = "moduleId") UUID moduleId,
                                                @PathVariable(value = "lessonId") UUID lessonId,
                                                @RequestBody @Valid LessonDto lessonDto) {
 
