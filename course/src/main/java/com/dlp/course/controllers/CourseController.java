@@ -16,6 +16,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,7 +25,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Log4j2
 @RestController
@@ -40,6 +40,7 @@ public class CourseController {
 
     @Autowired
     CourseValidator courseValidator;
+    @PreAuthorize("hasAnyRole('INSTRUCTOR')")
     @PostMapping
     public ResponseEntity<Object> postCourse(@RequestBody CourseDto courseDto, Errors errors) {
 
@@ -75,7 +76,7 @@ public class CourseController {
         }
     }
 
-
+    @PreAuthorize("hasAnyRole('INSTRUCTOR')")
     @DeleteMapping("/{courseId}")
     public ResponseEntity<Object> deleteCourse(@PathVariable(value = "courseId") UUID courseId) {
 
@@ -89,7 +90,7 @@ public class CourseController {
         log.info("Course {} deleted", courseId);
         return ResponseEntity.status(HttpStatus.OK).body("Course deleted successfully");
     }
-
+    @PreAuthorize("hasAnyRole('INSTRUCTOR')")
     @PutMapping("/{courseId}")
     public ResponseEntity<Object> updateCourse(@PathVariable(value = "courseId") UUID courseId,
                                                @RequestBody @Valid CourseDto courseDto) {
@@ -111,7 +112,7 @@ public class CourseController {
 
         return ResponseEntity.status(HttpStatus.OK).body("Course updated successfully");
     }
-
+    @PreAuthorize("hasAnyRole('STUDENT')")
     @GetMapping("/{courseId}")
     public ResponseEntity<Object> getCourseById(@PathVariable(value = "courseId") UUID courseId) {
 
