@@ -23,7 +23,7 @@ public class UserDetailsImpl implements UserDetails {
     public static UserDetailsImpl build(UUID userId, String roles) {
 
         List<GrantedAuthority> authorities = Arrays.stream(roles.split(","))
-                .map(role -> new SimpleGrantedAuthority(roles)).collect(Collectors.toList());
+                .map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
         return new UserDetailsImpl(userId, authorities);
     }
