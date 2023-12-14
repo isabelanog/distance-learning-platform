@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class JwtProvider {
 
-    @Value("${dlp.notification.jwtSecret}")
+    @Value("${dlp.auth.jwtSecret}")
     private String jwtSecret;
 
     Logger log = LogManager.getLogger(JwtProvider.class);
