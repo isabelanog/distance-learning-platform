@@ -15,4 +15,7 @@ public interface UserRepository extends JpaRepository<UserModel, UUID>, JpaSpeci
     @EntityGraph(attributePaths = "roles", type = EntityGraph.EntityGraphType.FETCH)
     Optional<UserModel> getUserModelByUsername(String username);
 
+    @EntityGraph(attributePaths = "roles", type = EntityGraph.EntityGraphType.FETCH)
+    Optional<UserModel> getUserModelByUserId(UUID userId);
+
 }

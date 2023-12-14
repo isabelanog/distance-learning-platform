@@ -14,6 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.UUID;
+
 /*
 * This class has goal to implement a customized filter to validate JWT
 */
@@ -34,8 +36,9 @@ public class AuthenticationJwtFilter extends OncePerRequestFilter {
             String jwtStr = getTokenHeader(httpServletRequest);
 
             if (jwtStr != null && jwtProvider.validateJwt(jwtStr)) {
-                String username = jwtProvider.getUsernameByJwt(jwtStr);
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+                String userId = jwtProvider.getJwtSubject(jwtStr);
+                UserDetails userDetails = userDetailsService.loadUserByUserId(UUID.fromString(userId));
 
                 UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                         userDetails, null, userDetails.getAuthorities()
