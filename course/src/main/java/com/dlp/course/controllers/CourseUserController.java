@@ -20,6 +20,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -36,7 +37,7 @@ public class CourseUserController {
 
     @Autowired
     UserService userService;
-
+    @PreAuthorize("hasAnyRole('INSTRUCTOR')")
     @GetMapping("/courses/{courseId}/users")
     public ResponseEntity<Object> getUsersSubscribedInCourseByCourseId(CourseSpecificationTemplate.UserSpecification userSpecification,
                                                                        @PageableDefault(sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
@@ -52,7 +53,7 @@ public class CourseUserController {
 
         return ResponseEntity.status(HttpStatus.OK).body(users);
     }
-
+    @PreAuthorize("hasAnyRole('STUDENT')")
     @PostMapping("/courses/{courseId}/users/subscription")
     public ResponseEntity<Object> saveUserSubscriptionInCourse(@PathVariable UUID courseId,
                                                                @RequestBody @Valid SubscriptionDto subscriptionDto) {

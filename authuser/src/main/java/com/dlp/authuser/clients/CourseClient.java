@@ -14,10 +14,11 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
@@ -38,28 +39,29 @@ public class CourseClient {
 
     //@Retry(name = "retryInstance", fallbackMethod = "retryFallback")
     @CircuitBreaker(name = "circuitBreakInstance")
-    public Page<CourseDto> getEnrolledCoursesForUserByUserId(UUID userId, Pageable pageable) {
+    public Page<CourseDto> getEnrolledCoursesForUserByUserId(UUID userId, Pageable pageable, String token) {
 
         List<CourseDto> courseDtoList = null;
         ResponseEntity<ResponsePageDto<CourseDto>> responseEntity = null;
 
         String url = REQUEST_URL_COURSE + utilService.createURLGetCoursesByUser(userId, pageable);
 
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", token);
+        HttpEntity<String> requestEntity = new HttpEntity<String>("parameters", headers);
+
         log.debug("Request URL : {} ", url);
         log.info("Request URL : {} ", url);
 
-        try {
-            ParameterizedTypeReference<ResponsePageDto<CourseDto>> responseType = new ParameterizedTypeReference<ResponsePageDto<CourseDto>>(){};
+        ParameterizedTypeReference<ResponsePageDto<CourseDto>> responseType = new ParameterizedTypeReference<ResponsePageDto<CourseDto>>() {
+        };
 
-            responseEntity = restTemplate.exchange(url, HttpMethod.GET, null, responseType);
+        responseEntity = restTemplate.exchange(url, HttpMethod.GET, requestEntity, responseType);
 
-            courseDtoList = responseEntity.getBody().getContent();
+        courseDtoList = responseEntity.getBody().getContent();
 
-            log.debug("Number of elements in Response: {} ", courseDtoList.size());
+        log.debug("Number of elements in Response: {} ", courseDtoList.size());
 
-        } catch (HttpStatusCodeException e) {
-            log.error("Error request /courses {} ", e.getMessage());
-        }
 
         log.info("Ending request /courses userId {} ", userId);
 
