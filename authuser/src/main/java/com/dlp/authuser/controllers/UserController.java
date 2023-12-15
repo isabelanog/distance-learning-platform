@@ -46,7 +46,7 @@ public class UserController {
     @Autowired
     AuthenticationCurrentUserService authenticationCurrentUserService;
 
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('INSTRUCTOR')")
     @GetMapping
     public ResponseEntity<Page<UserModel>> getUsers(UserSpecificationTemplate.UserSpecification userSpecification,
                                                     @PageableDefault(sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,

@@ -1,11 +1,13 @@
 package com.dlp.course.validation;
 
+import com.dlp.course.config.security.AuthenticationCurrentUserService;
 import com.dlp.course.dtos.CourseDto;
 import com.dlp.course.enums.UserType;
 import com.dlp.course.models.UserModel;
 import com.dlp.course.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -21,6 +23,8 @@ public class CourseValidator implements Validator {
 
     @Autowired
     UserService userService;
+    @Autowired
+    AuthenticationCurrentUserService authenticationCurrentUserService;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -37,15 +41,21 @@ public class CourseValidator implements Validator {
         }
     }
 
-    private void validateUserInstructor(UUID userId, Errors errors) {
+    private void validateUserInstructor(UUID userInstructorId, Errors errors) {
 
-        Optional<UserModel> user = userService.getUserById(userId);
+        UUID currentUserId = authenticationCurrentUserService.getCurrentUser().getUserId();
 
-        if (user.isEmpty()) {
-            errors.rejectValue("userInstructorId", "userInstructorError", "Instructor not found");
-        }
-        if (user.get().getUserType().equals(UserType.STUDENT.toString())) {
-            errors.rejectValue("userInstructorId", "userInstructorError", "User must be INSTRUCTOR or ADMIN");
+        if (currentUserId.equals(userInstructorId)) {
+            Optional<UserModel> user = userService.getUserById(userInstructorId);
+
+            if (user.isEmpty()) {
+                errors.rejectValue("userInstructorId", "userInstructorError", "Instructor not found");
+            }
+            if (user.get().getUserType().equals(UserType.STUDENT.toString())) {
+                errors.rejectValue("userInstructorId", "userInstructorError", "User must be INSTRUCTOR or ADMIN");
+            }
+        } else {
+            throw new AccessDeniedException("Forbidden");
         }
     }
 }
