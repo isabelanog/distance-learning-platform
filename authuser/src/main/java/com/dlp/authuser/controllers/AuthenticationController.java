@@ -57,15 +57,16 @@ public class AuthenticationController {
                                                @Validated(UserDto.UserView.RegistrationPost.class)
                                                @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto) {
 
-        if (userService.existsByUsername(userDto.getUsername())) {
-            logger.error("Error. Username is already taken.");
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Error. Username is already taken.");
+        if (userService.isUsernameAlreadyTaken(userDto.getUsername())) {
+            logger.error("{} is already taken.", userDto.getUsername());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(userDto.getUsername() + " is already taken.");
         }
 
-        if (userService.existsByEmail(userDto.getEmail())) {
-            logger.error("Error. Email is already taken.");
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Error. Email is already taken.");
+        if (userService.isEmailAlreadyTaken(userDto.getEmail())) {
+            logger.error("{}  already taken.", userDto.getEmail());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(userDto.getEmail() + " is already taken.");
         }
+
         RoleModel role = roleService.getRole(RoleType.ROLE_STUDENT).orElseThrow( () -> new RuntimeException("Role not found"));
 
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
@@ -102,12 +103,12 @@ public class AuthenticationController {
                                                     @Validated(UserDto.UserView.RegistrationPost.class)
                                                     @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto) {
 
-        if (userService.existsByUsername(userDto.getUsername())) {
+        if (userService.isUsernameAlreadyTaken(userDto.getUsername())) {
             logger.error("{} is already taken.", userDto.getUsername());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(userDto.getUsername() + " is already taken.");
         }
 
-        if (userService.existsByEmail(userDto.getEmail())) {
+        if (userService.isEmailAlreadyTaken(userDto.getEmail())) {
             logger.error("{}  already taken.", userDto.getEmail());
             return ResponseEntity.status(HttpStatus.CONFLICT).body(userDto.getEmail() + " is already taken.");
         }

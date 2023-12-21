@@ -18,9 +18,9 @@ public interface UserService {
 
     UserModel save(UserModel user);
 
-    boolean existsByUsername(String username);
+    boolean isUsernameAlreadyTaken(String username);
 
-    boolean existsByEmail(String email);
+    boolean isEmailAlreadyTaken(String email);
 
     Page<UserModel> getUsers(Specification<UserModel> userSpecification, Pageable pageable);
 

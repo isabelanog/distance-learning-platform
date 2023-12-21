@@ -46,12 +46,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean existsByUsername(String username) {
+    public boolean isUsernameAlreadyTaken(String username) {
         return userRepository.existsByUsername(username);
     }
 
     @Override
-    public boolean existsByEmail(String email) {
+    public boolean isEmailAlreadyTaken(String email) {
         return userRepository.existsByEmail(email);
     }
 
