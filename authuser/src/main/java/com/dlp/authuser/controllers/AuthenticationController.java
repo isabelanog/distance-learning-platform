@@ -39,10 +39,13 @@ public class AuthenticationController {
 
     @Autowired
     UserService userService;
+
     @Autowired
     RoleService roleService;
+
     @Autowired
     PasswordEncoder passwordEncoder;
+
     @Autowired
     JwtProvider jwtProvider;
 
@@ -93,5 +96,37 @@ public class AuthenticationController {
         String jwt = jwtProvider.jwtGenerator(authentication);
 
         return ResponseEntity.ok(new JwtDto(jwt));
+    }
+    @PostMapping("/signup/admin/user")
+    public ResponseEntity<Object> registerUserAdmin(@RequestBody
+                                                    @Validated(UserDto.UserView.RegistrationPost.class)
+                                                    @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto) {
+
+        if (userService.existsByUsername(userDto.getUsername())) {
+            logger.error("{} is already taken.", userDto.getUsername());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(userDto.getUsername() + " is already taken.");
+        }
+
+        if (userService.existsByEmail(userDto.getEmail())) {
+            logger.error("{}  already taken.", userDto.getEmail());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(userDto.getEmail() + " is already taken.");
+        }
+        RoleModel role = roleService.getRole(RoleType.ROLE_ADMIN).orElseThrow( () -> new RuntimeException("Role not found"));
+
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+
+        var userModel = new UserModel();
+        BeanUtils.copyProperties(userDto, userModel);
+        userModel.setUserStatus(UserStatus.ACTIVE);
+        userModel.setUserType(UserType.ADMIN);
+        userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
+        userModel.setLastUpdateDate(LocalDateTime.now(ZoneId.of("UTC")));
+        userModel.getRoles().add(role);
+
+        UserModel user = userService.saveUserAndPublishEvent(userModel);
+
+        logger.info("User admin {} created successfully", userModel.getUserId());
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 }
