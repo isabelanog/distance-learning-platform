@@ -2,4 +2,4 @@ spring:
   profiles:
     active: dev
   application:
-    name: dlp-notification-hex-service-dev
+    name: dlp-notification-hex-service
