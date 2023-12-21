@@ -53,7 +53,7 @@ public class AuthenticationController {
     AuthenticationManager authenticationManager;
 
     @PostMapping("/signup")
-    public ResponseEntity<Object> registerUser(@RequestBody
+    public ResponseEntity<Object> registerUserStudent(@RequestBody
                                                @Validated(UserDto.UserView.RegistrationPost.class)
                                                @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto) {
 
