@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: dlp-notification-hex-service
   config:
     import: 'configserver:'
   cloud:
@@ -6,4 +8,4 @@ spring:
       discovery:
         service-id: dlp-config-server
       username: configserver
-      password: 'dlp123cs'
+      password: dlp123cs
