@@ -37,7 +37,7 @@ public class UserNotificationController {
                                                                              Authentication authentication) {
 
         PageInfo pageInfo = new PageInfo();
-        BeanUtils.copyProperties(pageInfo, pageInfo);
+        BeanUtils.copyProperties(pageable, pageInfo);
         List<NotificationDomain> notificationDomainList = notificationServicePort.getNotificationsByUserId(userId, pageInfo);
 
         return ResponseEntity.status(HttpStatus.OK).body(new PageImpl<NotificationDomain>(notificationDomainList, pageable, notificationDomainList.size()));
