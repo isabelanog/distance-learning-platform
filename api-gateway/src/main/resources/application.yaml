@@ -18,6 +18,10 @@ spring:
           uri: lb://DLP-NOTIFICATION-SERVICE
           predicates:
             - Path=/dlp-notification/**
+        - id: notification-hex-service
+          uri: lb://DLP-NOTIFICATION-HEX-SERVICE
+          predicates:
+            - Path=/dlp-notification-hex/**
 dlp:
   serviceRegistry:
     username: serviceregistry
