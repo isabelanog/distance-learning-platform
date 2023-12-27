@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -95,6 +96,7 @@ public class AuthenticationController {
 
         return ResponseEntity.ok(new JwtDto(jwt));
     }
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/signup/admin/user")
     public ResponseEntity<Object> registerUserAdmin(@RequestBody
                                                     @Validated(UserDto.UserView.RegistrationPost.class)
