@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -34,37 +33,35 @@ import java.time.ZoneId;
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/auth")
 public class AuthenticationController {
-
     Logger logger = LogManager.getLogger(AuthenticationController.class);
+    private final UserService userService;
+    private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtProvider jwtProvider;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    UserService userService;
-
-    @Autowired
-    RoleService roleService;
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Autowired
-    JwtProvider jwtProvider;
-
-    @Autowired
-    AuthenticationManager authenticationManager;
+    public AuthenticationController(UserService userService, RoleService roleService, PasswordEncoder passwordEncoder,
+                                    JwtProvider jwtProvider, AuthenticationManager authenticationManager) {
+        this.userService = userService;
+        this.roleService = roleService;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtProvider = jwtProvider;
+        this.authenticationManager = authenticationManager;
+    }
 
     @PostMapping("/signup")
-    public ResponseEntity<Object> registerUserStudent(@RequestBody
+    public ResponseEntity<Object> registerStudent(@RequestBody
                                                @Validated(UserDto.UserView.RegistrationPost.class)
                                                @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto) {
 
         if (userService.isUsernameAlreadyTaken(userDto.getUsername())) {
-            logger.error("{} is already taken.", userDto.getUsername());
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(userDto.getUsername() + " is already taken.");
+            logger.error("{} username is already taken.", userDto.getUsername());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(userDto.getUsername() + " username is already taken.");
         }
 
         if (userService.isEmailAlreadyTaken(userDto.getEmail())) {
-            logger.error("{}  already taken.", userDto.getEmail());
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(userDto.getEmail() + " is already taken.");
+            logger.error("{} email is already taken.", userDto.getEmail());
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(userDto.getEmail() + " email is already taken.");
         }
 
         RoleModel role = roleService.getRole(RoleType.ROLE_STUDENT).orElseThrow( () -> new RuntimeException("Role not found"));
