@@ -3,6 +3,8 @@ package com.dlp.authuser.controllers;
 import com.dlp.authuser.configs.security.AuthenticationCurrentUserService;
 import com.dlp.authuser.configs.security.UserDetailsImpl;
 import com.dlp.authuser.dtos.UserDto;
+import com.dlp.authuser.enums.RoleType;
+import com.dlp.authuser.models.RoleModel;
 import com.dlp.authuser.models.UserModel;
 import com.dlp.authuser.service.UserService;
 import com.dlp.authuser.specification.UserSpecificationTemplate;
@@ -11,7 +13,6 @@ import com.fasterxml.jackson.annotation.JsonView;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -22,12 +23,14 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
@@ -40,13 +43,17 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 public class UserController {
     Logger logger = LogManager.getLogger(AuthenticationController.class);
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    AuthenticationCurrentUserService authenticationCurrentUserService;
+    private final AuthenticationCurrentUserService authenticationCurrentUserService;
+    private final PasswordEncoder passwordEncoder;
+    public UserController(UserService userService, AuthenticationCurrentUserService authenticationCurrentUserService, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
+        this.authenticationCurrentUserService = authenticationCurrentUserService;
+        this.passwordEncoder = passwordEncoder;
+    }
 
-    @PreAuthorize("hasAnyRole('INSTRUCTOR')")
+    @PreAuthorize("hasAnyRole('STUDENT')")
     @GetMapping
     public ResponseEntity<Page<UserModel>> getUsers(UserSpecificationTemplate.UserSpecification userSpecification,
                                                     @PageableDefault(sort = "userId", direction = Sort.Direction.ASC) Pageable pageable,
@@ -83,7 +90,7 @@ public class UserController {
             throw new AccessDeniedException("Forbidden");
         }
     }
-
+    @PreAuthorize("hasAnyRole('INSTRUCTOR')")
     @DeleteMapping("/{userId}")
     public ResponseEntity<Object> deleteUser(@PathVariable(value = "userId") UUID userId) {
         Optional<UserModel> user = userService.getUserById(userId);
@@ -97,7 +104,7 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).body("User deleted successfully");
         }
     }
-
+    @PreAuthorize("hasAnyRole('INSTRUCTOR')")
     @PutMapping("/{userId}")
     public ResponseEntity<Object> updateUser(@PathVariable(value = "userId") UUID userId,
                                              @RequestBody
@@ -123,34 +130,53 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.OK).body(userModel);
         }
     }
-
+    @PreAuthorize("hasAnyRole('STUDENT', 'ADMIN')")
     @PutMapping("/{userId}/password")
     public ResponseEntity<Object> updatePassword(@PathVariable(value = "userId") UUID userId,
                                                  @RequestBody
                                                  @Validated(UserDto.UserView.PasswordPut.class)
                                                  @JsonView(UserDto.UserView.PasswordPut.class) UserDto userDto) {
 
-        Optional<UserModel> optionalUserModel = userService.getUserById(userId);
+        UUID currentUserId = authenticationCurrentUserService.getCurrentUser().getUserId();
+        boolean hasRoleAdmin = false;
 
-        if (optionalUserModel.isEmpty()) {
-            logger.warn("User not found");
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        if (userService.getUserById(currentUserId).isPresent()) {
+            Set<RoleModel> roles = userService.getUserById(currentUserId).get().getRoles();
+            for (RoleModel role : roles) {
+                if (role.getRoleType().equals(RoleType.ROLE_ADMIN)) {
+                    hasRoleAdmin = true;
+                    break;
+                }
+            }
         }
-        if (optionalUserModel.get().getPassword().equals(userDto.getOldPassword())) {
-            return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: mismatched old password!");
-        } else {
+        if (currentUserId.equals(userId) || hasRoleAdmin) {
+            Optional<UserModel> optionalUserModel = userService.getUserById(userId);
+            //userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+            if (optionalUserModel.isEmpty()) {
+                logger.warn("User not found");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            }
+            //TODO: FIX PASSWORD VERIFICATION
+            if (optionalUserModel.get().getPassword().equals(userDto.getOldPassword())) {
+                logger.info("Error: mismatched old password");
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("Error: mismatched old password");
+            } else {
 
-            var userModel = optionalUserModel.get();
-            userModel.setPassword(userDto.getPassword());
-            userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
+                var userModel = optionalUserModel.get();
+                userModel.setPassword(passwordEncoder.encode(userDto.getPassword()));
+                userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
 
-            userService.updatePassword(userModel);
-            logger.info("Password for user {} updated successfully", userId);
+                userService.updatePassword(userModel);
+                logger.info("Password updated successfully", userId);
 
-            return ResponseEntity.status(HttpStatus.OK).body("Password updated successfully");
+                return ResponseEntity.status(HttpStatus.OK).body("Password updated successfully");
+            }
+        }
+        else {
+            throw new AccessDeniedException("Forbidden");
         }
     }
-
+    @PreAuthorize("hasAnyRole('STUDENT', 'ADMIN')")
     @PutMapping("/{userId}/image")
     public ResponseEntity<Object> updateUserImage(@PathVariable(value = "userId") UUID userId,
                                                   @RequestBody
@@ -169,7 +195,7 @@ public class UserController {
             userModel.setCreationDate(LocalDateTime.now(ZoneId.of("UTC")));
 
             userService.updateUser(userModel);
-            logger.info("Image for user {} updated successfully", userId);
+            logger.info("Image updated successfully");
             return ResponseEntity.status(HttpStatus.OK).body(userModel);
         }
     }
