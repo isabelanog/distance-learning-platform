@@ -12,12 +12,9 @@ import java.util.UUID;
 
 public interface UserService {
 
-    List<UserModel> findAll();
     Optional<UserModel> getUserById(UUID userId);
 
     void delete(UserModel user);
-
-    UserModel save(UserModel user);
 
     boolean isUsernameAlreadyTaken(String username);
 

@@ -8,7 +8,6 @@ import com.dlp.authuser.publishers.UserEventPublisher;
 import com.dlp.authuser.repositories.UserRepository;
 import com.dlp.authuser.models.UserModel;
 import com.dlp.authuser.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -22,28 +21,18 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    CourseClient courseClient;
+    private final UserEventPublisher userEventPublisher;
 
-    @Autowired
-    UserEventPublisher userEventPublisher;
-
-    @Override
-    public List<UserModel> findAll() {
-        return userRepository.findAll();
+    public UserServiceImpl(UserRepository userRepository, CourseClient courseClient, UserEventPublisher userEventPublisher) {
+        this.userRepository = userRepository;
+        this.userEventPublisher = userEventPublisher;
     }
 
     @Override
     public Optional<UserModel> getUserById(UUID userId) {
         return userRepository.findById(userId);
-    }
-
-    @Override
-    public UserModel save(UserModel user) {
-        return userRepository.save(user); //save in database
     }
 
     @Override
@@ -78,7 +67,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserModel saveUserAndPublishEvent(UserModel user) {
 
-        user = save(user);
+        user = userRepository.save(user);
         UserEventDto userEventDto = user.convertToUserEventDto();
         userEventPublisher.publishUserEvent(userEventDto, ActionType.CREATE);
 
@@ -87,7 +76,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserModel updateUser(UserModel user) {
-        user = save(user);
+        user = userRepository.save(user);
         UserEventDto userEventDto = user.convertToUserEventDto();
         userEventPublisher.publishUserEvent(userEventDto, ActionType.UPDATE);
         return user;
@@ -95,7 +84,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserModel updatePassword(UserModel user) {
-        return save(user);
+        return userRepository.save(user);
     }
 
     @Override
