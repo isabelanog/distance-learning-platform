@@ -3,6 +3,7 @@ package com.dlp.authuser.service.impl;
 import com.dlp.authuser.clients.CourseClient;
 import com.dlp.authuser.dtos.UserEventDto;
 import com.dlp.authuser.enums.ActionType;
+import com.dlp.authuser.enums.UserType;
 import com.dlp.authuser.publishers.UserEventPublisher;
 import com.dlp.authuser.repositories.UserRepository;
 import com.dlp.authuser.models.UserModel;
@@ -95,5 +96,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserModel updatePassword(UserModel user) {
         return save(user);
+    }
+
+    @Override
+    public List<UserModel> getUserModelByUserType(UserType userType) {
+        return userRepository.getUserModelByUserType(userType);
     }
 }

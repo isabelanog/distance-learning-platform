@@ -1,5 +1,6 @@
 package com.dlp.authuser.service;
 
+import com.dlp.authuser.enums.UserType;
 import com.dlp.authuser.models.UserModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,4 +30,6 @@ public interface UserService {
     UserModel saveUserAndPublishEvent(UserModel user);
     UserModel updateUser(UserModel user);
     UserModel updatePassword(UserModel user);
+
+    List<UserModel> getUserModelByUserType(UserType userType);
 }

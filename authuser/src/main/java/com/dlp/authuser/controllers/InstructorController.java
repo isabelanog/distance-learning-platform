@@ -7,7 +7,6 @@ import com.dlp.authuser.service.UserService;
 import com.dlp.authuser.dtos.InstructorDto;
 import com.dlp.authuser.enums.UserType;
 import com.dlp.authuser.models.UserModel;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -19,16 +18,29 @@ import java.time.ZoneId;
 import java.util.Optional;
 import java.util.UUID;
 
+
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/instructor")
 public class InstructorController {
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    RoleService roleService;
+    private final RoleService roleService;
+
+    public InstructorController(UserService userService, RoleService roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
+    }
+    @PreAuthorize("hasAnyRole('STUDENT')")
+    @GetMapping
+    public ResponseEntity<Object> getInstructors() {
+
+        if (userService.getUserModelByUserType(UserType.INSTRUCTOR).isEmpty()) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("There isn't instructors");
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(userService.getUserModelByUserType(UserType.INSTRUCTOR));
+    }
     @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/subscription")
     public ResponseEntity<Object> instructorSubscription(@RequestBody @Valid InstructorDto instructorDto) {
