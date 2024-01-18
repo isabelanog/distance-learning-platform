@@ -1,0 +1,17 @@
+FROM maven:3.8.4-openjdk-11 AS builder
+WORKDIR /app
+RUN wget https://github.com/jwilder/dockerize/releases/download/v0.6.1/dockerize-linux-amd64-v0.6.1.tar.gz \
+    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-v0.6.1.tar.gz \
+    && rm dockerize-linux-amd64-v0.6.1.tar.gz
+    
+COPY pom.xml . 
+RUN mvn dependency:go-offline
+RUN mvn package
+
+FROM adoptopenjdk:11-jre-hotspot
+WORKDIR /app
+COPY --from=builder /app/target/api-gateway-0.0.1-SNAPSHOT.jar app.jar
+EXPOSE 8761
+
+
+CMD ["dockerize", "-wait", "tcp://service-registry:8761", "-timeout", "60s", "java", "-jar", "app.jar"]

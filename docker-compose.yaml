@@ -1,0 +1,88 @@
+version: '2'
+networks:
+  app_network:
+    driver: bridge
+services:
+  dlp-database:
+    container_name: dlp-database
+    image: mysql:latest
+    cap_add:
+      - SYS_NICE
+    command: --authentication_policy=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_USER: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+    networks:
+      - app_network
+
+  service-registry:
+    build: ./service-registry
+    container_name: dlp-service-registry
+    hostname: service-registry
+    ports:
+      - "8761:8761" #port local machine : port inside container
+    environment:
+      - eureka.instance.hostname=service-registry
+      - eureka.client.serviceUrl.defaultZone=http://serviceregistry:dlp123sr@service-registry:8761/eureka
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://service-registry:8761"]
+        interval: 30s
+        timeout: 10s
+        retries: 5
+        start_period: 60s 
+    depends_on:
+      - dlp-database
+    networks:
+      - app_network
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: dlp-api-gateway
+    hostname: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      service-registry:
+        condition: service_started
+    environment:
+      - EUREKA_INSTANCE_HOSTNAME=api-gateway
+      - eureka.client.serviceUrl.defaultZone=http://serviceregistry:dlp123sr@service-registry:8761/eureka
+    networks:
+      - app_network
+    restart: on-failure
+  
+  config-server:
+    build: ./config-server
+    container_name: config-server
+    hostname: config-server
+    ports: 
+      - "8888:8888"
+    depends_on:
+      service-registry:
+        condition: service_started
+    environment:
+        - EUREKA_INSTANCE_HOSTNAME=config-server
+        - eureka.client.serviceUrl.defaultZone=http://serviceregistry:dlp123sr@service-registry:8761/eureka
+    networks:
+      - app_network
+    restart: on-failure
+  
+  authuser:
+    build: ./authuser
+    container_name: dlp-authuser
+    hostname: config-server
+    ports:
+      - "8087:8087"
+    depends_on:
+      service-registry:
+        condition: service_started
+    environment:
+        - EUREKA_INSTANCE_HOSTNAME=authuser
+        - eureka.client.serviceUrl.defaultZone=http://serviceregistry:dlp123sr@service-registry:8761/eureka
+    networks:
+      - app_network
+    restart: on-failure
