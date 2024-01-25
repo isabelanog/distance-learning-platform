@@ -1,27 +1,14 @@
-# Dockerfile for api-gateway
-
 FROM maven:3.8.4-openjdk-11 AS builder
-
 WORKDIR /app
 
-# Copy only the POM file to leverage Docker layer caching
-COPY pom.xml .
-
-# Download dependencies
+COPY pom.xml . 
 RUN mvn dependency:go-offline
-
-# Copy the source code and build the application
-COPY src/ src/
-RUN mvn package
-
-# Create a lightweight image with only the JAR file
+RUN mvn clean package -Dmaven.test.skip -Dmaven.main.skip -Dspring-boot.repackage.skip && rm -r target/
+COPY src ./src
+RUN mvn clean package  -Dmaven.test.skip
 FROM adoptopenjdk:11-jre-hotspot
-
 WORKDIR /app
-
 COPY --from=builder /app/target/service-registry-0.0.1-SNAPSHOT.jar app.jar
-
-EXPOSE 8080
-
-
+EXPOSE 8761
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 CMD [ " curl -f http://serviceregistry:dlp123sr@localhost:8761/actuator/health || exit 1" ]
 CMD ["java", "-jar", "app.jar"]
