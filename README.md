@@ -20,7 +20,7 @@ The project is structured as follows:
 - **notification**: Microservice handling asynchronous notifications.
 - **service-registry**: Eureka microservice for service discovery.
 - **api-gateway** : API Gateway for routing requests to the appropriate microservices.
-config-server: Configuration Server hosting configurations on GitHub.
+- **config-server**: Configuration Server hosting configurations on GitHub.
 ## Setup and Installation
 ### Prerequisites
 - Java 11 installed
