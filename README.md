@@ -28,10 +28,10 @@ config-server: Configuration Server hosting configurations on GitHub.
 - GitHub account for configuration server
 ### Steps
 Clone the Repository \
-`git clone git@github.com:isabelanog/distance-learning-platform.git` \
+`git clone git@github.com:isabelanog/distance-learning-platform.git` 
 
 Then, in the root repository run the follow command to build the Docker Images and starts the containers for each microservice \
-`docker compose up --build` \
+`docker compose up --build` 
 
 ## Access the services
 - **authuser** : 
@@ -40,4 +40,4 @@ Then, in the root repository run the follow command to build the Docker Images a
 ## Service Dependencies
 - **Eureka**: Service discovery at http://localhost:8761
 - **API Gateway** : Routing requests to microservices at http://localhost:8080
-- **Config Server**: Configuration server at http://localhost:8888.
+- **Config Server**: Configuration server at http://localhost:8888
