@@ -17,6 +17,8 @@
         <java.version>11</java.version>
         <spring-cloud.version>2020.0.4</spring-cloud.version>
         <log4j2.version>2.17.0</log4j2.version>
+        <spring-plugin-core.version>2.0.0.RELEASE</spring-plugin-core.version>
+        <springfox.version>3.0.0</springfox.version>
     </properties>
     <dependencies>
         <dependency>
@@ -102,7 +104,18 @@
             <artifactId>jaxb-runtime</artifactId>
             <version>3.0.2</version>
         </dependency>
+        <!-- API Documentation -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>3.0.0</version>
+        </dependency>
     </dependencies>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -112,7 +125,18 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            <!-- API Documentation -->
+            <!-- Fix wrong resolved `spring-plugin-core` dependency version for springfox -->
+            <dependency>
+                <groupId>org.springframework.plugin</groupId>
+                <artifactId>spring-plugin-core</artifactId>
+                <version>${spring-plugin-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-boot-starter</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
