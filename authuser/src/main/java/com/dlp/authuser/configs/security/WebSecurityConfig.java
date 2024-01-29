@@ -3,6 +3,7 @@ package com.dlp.authuser.configs.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -51,6 +52,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests().antMatchers(AUTH_WHITE_LIST).permitAll()
+                .antMatchers(HttpMethod.GET, "/v3/api-docs", "/swagger-ui/").permitAll()
+                .antMatchers(HttpMethod.GET, "/swagger-ui/*").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
