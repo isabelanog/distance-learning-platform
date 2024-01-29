@@ -9,3 +9,7 @@ spring:
         service-id: dlp-config-server
       username: configserver
       password: dlp123cs
+management:
+  endpoint:
+    health:
+      show-details: always
