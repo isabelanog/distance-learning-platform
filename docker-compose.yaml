@@ -1,0 +1,123 @@
+version: '2'
+networks:
+  app_network:
+    driver: bridge
+
+services:
+  dlp-database:
+    container_name: dlp-database
+    image: mysql:latest
+    cap_add:
+      - SYS_NICE
+    command: --authentication_policy=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_ROOT_USER: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init:/docker-entrypoint-initdb.d
+    networks:
+      - app_network
+
+  service-registry:
+    build: ./service-registry
+    container_name: dlp-service-registry
+    hostname: service-registry
+    ports:
+      - "8761:8761" #port local machine : port inside container
+    environment:
+      - eureka.instance.hostname=service-registry
+      - eureka.client.serviceUrl.defaultZone=http://serviceregistry:dlp123sr@service-registry:8761/eureka
+    networks:
+      - app_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://serviceregistry:dlp123sr@localhost:8761/actuator/health"]
+      interval: 30s
+      timeout: 30s
+      retries: 5
+      start_period: 30s
+
+  api-gateway:
+    build: ./api-gateway
+    container_name: dlp-api-gateway
+    hostname: api-gateway
+    ports:
+      - "8080:8080"
+    depends_on:
+      service-registry:
+        condition: service_healthy
+      
+    environment:
+      - EUREKA_INSTANCE_HOSTNAME=api-gateway
+      - eureka.client.serviceUrl.defaultZone=http://serviceregistry:dlp123sr@service-registry:8761/eureka
+    networks:
+      - app_network
+    restart: on-failure
+  
+  config-server:
+      build: ./config-server
+      container_name: config-server
+      hostname: config-server
+      ports: 
+        - "8888:8888"
+      depends_on:
+        service-registry:
+          condition: service_healthy
+      environment:
+          - EUREKA_INSTANCE_HOSTNAME=config-server
+          - eureka.client.serviceUrl.defaultZone=http://serviceregistry:dlp123sr@service-registry:8761/eureka
+      networks:
+        - app_network
+      restart: on-failure
+      healthcheck:
+        test: ["CMD", "curl", "-f", "http://configserver:dlp123cs@localhost:8888/actuator/health"]
+        interval: 30s
+        timeout: 30s
+        retries: 5
+        start_period: 30s
+
+  authuser:
+    build: ./authuser
+    container_name: dlp-authuser
+    ports:
+      - "8087:8087"
+    depends_on:
+        config-server:
+          condition: service_healthy
+    environment:
+        - eureka.client.serviceUrl.defaultZone=http://serviceregistry:dlp123sr@service-registry:8761/eureka
+        - SPRING.CLOUD.CONFIG.URI=http://config-server:8888
+        - SPRING_DATASOURCE_URL=jdbc:mysql://dlp-database:3306/authuser
+    networks:
+      - app_network
+  
+  course:
+    build: ./course
+    container_name: dlp-course
+    ports:
+      - "8082:8082"
+    depends_on:
+        config-server:
+          condition: service_healthy
+    environment:
+        - eureka.client.serviceUrl.defaultZone=http://serviceregistry:dlp123sr@service-registry:8761/eureka
+        - SPRING.CLOUD.CONFIG.URI=http://config-server:8888
+        - SPRING_DATASOURCE_URL=jdbc:mysql://dlp-database:3306/course
+    networks:
+      - app_network
+
+  notification:
+    build: ./notification
+    container_name: dlp-notification
+    ports:
+      - "8084:8084"
+    depends_on:
+        config-server:
+          condition: service_healthy
+    environment:
+        - eureka.client.serviceUrl.defaultZone=http://serviceregistry:dlp123sr@service-registry:8761/eureka
+        - SPRING.CLOUD.CONFIG.URI=http://config-server:8888
+        - SPRING_DATASOURCE_URL=jdbc:mysql://dlp-database:3306/notification
+    networks:
+      - app_network

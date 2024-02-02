@@ -2,8 +2,21 @@ server:
   port: 8761
 spring:
   application:
-    name: ead-service-registry
+    name: dlp-service-registry
+
+dlp:
+  serviceRegistry:
+    username: serviceregistry
+    password: 'dlp123sr'
 eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
+    service-url:
+      defaultZone: 'http://${dlp.serviceRegistry.username}:${dlp.serviceRegistry.password}@service-registry:8761/eureka'
+  instance:
+    hostname: service-registry
+management:
+  endpoint:
+    health:
+      show-details: always

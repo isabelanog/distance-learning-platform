@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: dlp-notification-service
+
+  config:
+    import: 'configserver:'
+
+  cloud:
+    config:
+      discovery:
+        service-id: dlp-config-server
+      username: configserver
+      password: dlp123cs

@@ -1,39 +1,11 @@
-server:
-  port: 8087
-  servlet:
-    context-path: '/ead-authuser/'
 spring:
   application:
-    name: ead-authuser-service
-  datasource:
-    url: jdbc:mysql://localhost:3306/ead-authuser
-    username: root
-    password: root
-  jpa:
-    hibernate:
-      ddl-auto: update
-      dialect: org.hibernate.dialect.MySQL5Dialect
-      id.new_generator_mappings: true
-      jdbc:
-        lob.non-contextual-creation: true
-    properties:
-      hibernate:
-        show_sql: true
-  output:
-    ansi:
-      enabled: always
-logging:
-  level:
-    com.ead: TRACE
-    root: INFO
-    prg.springframework.web: DEBUG
-ead:
-  api:
-    url:
-      course: 'http://ead-course-service/ead-course'
-eureka:
-  client:
-    service-url:
-      defaultZone: 'http://localhost:8761/eureka'
-  instance:
-    hostname: localhost
+    name: dlp-authuser-service
+  config:
+    import: 'configserver:'
+  cloud:
+    config:
+      discovery:
+        service-id: dlp-config-server
+      username: configserver
+      password: dlp123cs
