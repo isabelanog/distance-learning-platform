@@ -11,6 +11,7 @@ import com.dlp.course.models.UserModel;
 import com.dlp.course.services.CourseService;
 import com.dlp.course.services.UserService;
 import com.dlp.course.specifications.CourseSpecificationTemplate;
+import io.swagger.annotations.Api;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,6 +30,7 @@ import java.util.UUID;
 
 @Log4j2
 @RestController
+@Api(tags = "Course User")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class CourseUserController {
 

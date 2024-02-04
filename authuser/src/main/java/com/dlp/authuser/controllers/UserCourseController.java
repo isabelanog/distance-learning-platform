@@ -7,6 +7,7 @@ package com.dlp.authuser.controllers;
 import com.dlp.authuser.clients.CourseClient;
 import com.dlp.authuser.dtos.CourseDto;
 import com.dlp.authuser.service.UserService;
+import io.swagger.annotations.Api;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,7 @@ import java.util.UUID;
 @Log4j2
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
+@Api(tags = "User Course")
 public class UserCourseController {
 
     private final CourseClient courseClient;

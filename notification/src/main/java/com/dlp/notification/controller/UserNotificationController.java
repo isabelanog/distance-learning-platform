@@ -3,6 +3,7 @@ package com.dlp.notification.controller;
 import com.dlp.notification.dto.NotificationDto;
 import com.dlp.notification.models.NotificationModel;
 import com.dlp.notification.services.NotificationService;
+import io.swagger.annotations.Api;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
+@Api(tags = "User Notification")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class UserNotificationController {
     final NotificationService notificationService;

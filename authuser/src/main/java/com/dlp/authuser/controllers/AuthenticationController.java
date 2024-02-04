@@ -12,6 +12,8 @@ import com.dlp.authuser.dtos.UserDto;
 import com.dlp.authuser.enums.UserType;
 import com.dlp.authuser.models.UserModel;
 import com.fasterxml.jackson.annotation.JsonView;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.BeanUtils;
@@ -31,6 +33,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 
 @RestController
+@Api(tags = "Authentication")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/auth")
 public class AuthenticationController {
@@ -49,9 +52,8 @@ public class AuthenticationController {
         this.jwtProvider = jwtProvider;
         this.authenticationManager = authenticationManager;
     }
-
     @PostMapping("/signup")
-    public ResponseEntity<Object> registerStudent(@RequestBody
+    public ResponseEntity<Object> signup(@RequestBody
                                                @Validated(UserDto.UserView.RegistrationPost.class)
                                                @JsonView(UserDto.UserView.RegistrationPost.class) UserDto userDto) {
 
