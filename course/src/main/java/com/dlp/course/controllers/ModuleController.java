@@ -6,6 +6,7 @@ import com.dlp.course.models.CourseModel;
 import com.dlp.course.services.CourseService;
 import com.dlp.course.services.ModuleService;
 import com.dlp.course.specifications.CourseSpecificationTemplate;
+import io.swagger.annotations.Api;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +25,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
+@Api(tags = "Module")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class ModuleController {
 

@@ -6,6 +6,7 @@ import com.dlp.course.services.UserService;
 import com.dlp.course.validation.CourseValidator;
 import com.dlp.course.models.CourseModel;
 import com.dlp.course.specifications.CourseSpecificationTemplate;
+import io.swagger.annotations.Api;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ import java.util.UUID;
 
 @Log4j2
 @RestController
+@Api(tags = "Course")
 @RequestMapping("/courses")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class CourseController {

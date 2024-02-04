@@ -6,6 +6,7 @@ import com.dlp.course.dtos.LessonDto;
 import com.dlp.course.services.LessonService;
 import com.dlp.course.services.ModuleService;
 import com.dlp.course.specifications.CourseSpecificationTemplate;
+import io.swagger.annotations.Api;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,6 +25,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
+@Api(tags = "Lesson")
 @CrossOrigin(origins = "*", maxAge = 3600)
 public class LessonController {
 
