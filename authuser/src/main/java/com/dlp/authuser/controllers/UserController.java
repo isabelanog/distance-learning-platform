@@ -10,6 +10,8 @@ import com.dlp.authuser.service.UserService;
 import com.dlp.authuser.specification.UserSpecificationTemplate;
 import com.fasterxml.jackson.annotation.JsonView;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -35,11 +37,11 @@ import java.util.UUID;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
-
 @RestController
 @Log4j2
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/users")
+@Api(tags = "User")
 public class UserController {
     Logger logger = LogManager.getLogger(AuthenticationController.class);
 

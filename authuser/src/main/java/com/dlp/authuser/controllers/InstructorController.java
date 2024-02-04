@@ -7,6 +7,7 @@ import com.dlp.authuser.service.UserService;
 import com.dlp.authuser.dtos.InstructorDto;
 import com.dlp.authuser.enums.UserType;
 import com.dlp.authuser.models.UserModel;
+import io.swagger.annotations.Api;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,6 +21,7 @@ import java.util.UUID;
 
 
 @RestController
+@Api(tags = "Instructor")
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/instructor")
 public class InstructorController {
