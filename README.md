@@ -34,9 +34,9 @@ Then, in the root repository run the follow command to build the Docker Images a
 `docker compose up --build` 
 
 ## Access the services
-- **authuser** : 
-- **course**: 
-- **notification**: 
+- **authuser** : http://localhost:8087/dlp-authuser/swagger-ui.html#/
+- **course**: http://localhost:8082/dlp-course/swagger-ui.html
+- **notification**:  http://localhost:8084/dlp-notification/swagger-ui.html#/
 ## Service Dependencies
 - **Eureka**: Service discovery at http://localhost:8761
 - **API Gateway** : Routing requests to microservices at http://localhost:8080
